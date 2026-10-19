@@ -1,75 +1,77 @@
-# 实际使用、加载核实与逐步取得证据
+# Practical Use, Loading Checks, and Building Evidence Over Time
 
-用途：本 Skill 的使用与观察说明。初次接入、换环境、方法升级或复盘时按需阅读；日常工作沿主文和已有项目入口推进，不额外完成一轮方法验收。
+[English](05-usage-and-evaluation.md) | [简体中文](05-usage-and-evaluation.zh-CN.md)
 
-## 1. 区分四件事
+Purpose: guidance for using and observing this Skill. Read it as needed when adopting it, changing environments, upgrading the method, or reviewing experience. In everyday work, follow the main text and the existing project knowledge entry point; do not add another round of method acceptance checks.
 
-方法内容有依据；方法能迁移；宿主实际加载并能读取相关材料；使用后产生额外改善。这四件事互不替代。文件已复制不等于可发现，可发现不等于自动触发，触发不等于每项判断正确。
+## 1. Distinguish four things
 
-本 Skill 的默认描述覆盖工程计划、设计、实现、审核和接续。宿主通常先提供名称、描述与路径，参与者再按匹配结果或 AGENTS 等明确规则主动读取正文。规则驱动的自行读取不要求用户每次手动点名；清单可见也不能算全文已经进入上下文。具体机制以实际宿主和版本为准；仓库的接入说明和文件格式检查不代表当前环境已经接入。
+The method has supporting evidence; it transfers to other settings; the host actually loads it and can read the relevant materials; using it produces additional improvement. None of these establishes the others. Copying files does not establish discoverability; discoverability does not establish automatic triggering; triggering does not establish that every judgment is correct.
 
-## 2. 不依赖自觉的实际工作入口
+The Skill's default description covers engineering planning, design, implementation, review, and continuation. Hosts typically expose its name, description, and path first; participants then actively read the body based on a match or an explicit rule such as AGENTS. Reading it because a rule requires it does not require the user to invoke it manually every time. Visibility in a catalog does not establish that the full text is already in context. The exact mechanism depends on the actual host and version; this repository's adoption instructions and file-format checks do not establish that the current environment is configured to use it.
 
-项目约定中放简短导航，指向真实当前入口，并要求相关工程任务使用本方法；详细事实仍留在台账，不能把整个台账塞进启动指令。创建子任务时传递目标、共同约束、记录位置和工作基线；要求接收方在实际可访问材料上工作，而不是宣称所有子代理会自动继承。
+## 2. Provide a working entry point that does not rely on remembering
 
-技能发现、正文读取、参考资料读取与实际落实分别说明，按问题查看已有工具轨迹；无需每轮填写读取确认表。已有认识有效时复用，读取失败或上下文遗漏时补必要部分。不能把现在补读说成此前已经读取，也不能因正文读过就宣称判断正确。
+Place brief navigation in the project instructions, pointing to the actual current project knowledge entry point and requiring relevant engineering tasks to use the method. Keep detailed facts in the project ledger; do not put the entire ledger into startup instructions. When creating subtasks, pass the goal, shared constraints, record locations, and working baseline. Require recipients to work from materials they can actually access, rather than claiming all subagents automatically inherit them.
 
-## 3. 接入核实要看行为，不只问是否理解
+Distinguish Skill discovery, reading the main text, reading references, and applying the method. Inspect existing tool traces when relevant to a question; a reading confirmation form is not required every turn. Reuse understanding that remains valid, and read the necessary parts when loading fails or context is missing. Do not present material read now as having been read earlier, or claim that judgment was correct merely because the main text was read.
 
-在无业务写入的试用中，检查主文是否能被找到、按需资料是否可读、实际台账是否被用来定位到相关责任与消费者。显式调用成功后，再在新会话观察普通工程需求是否触发，以及无关任务是否避免展开全套内容。
+## 3. Check adoption through behavior, not just a claim of understanding
 
-宿主提供工具轨迹时检查实际读取；只有模型自述时，证据较弱。可使用无害的本地样例问题检查定位和范围判断，不引入秘密信息作为测试标记。每个实际使用角色或环境分别确认，不能把一个会话的成功推广到全部。
+In a trial that makes no business writes, check whether the main text can be found, references can be read as needed, and the actual project ledger is used to locate relevant responsibilities and consumers. After explicit invocation succeeds, observe in a new conversation whether an ordinary engineering request triggers the method and whether unrelated tasks avoid expanding the entire method.
 
-初次接入或发生加载问题时，在已有接入记录保存相关宿主、作用域、实际位置和未检查项即可，后续引用。不为普通任务另建接入报告，也不把格式检查写成行为验收。
+Inspect actual reads when the host provides tool traces; model self-report alone is weaker evidence. A harmless local sample task can test navigation and scope judgment; do not introduce secrets as test markers. Check each role or environment actually used, rather than generalizing one conversation's success to all of them.
 
-### 3.1 台账新建、绑定、读取与维护的最小验收
+During initial adoption or a loading problem, record the relevant host, scope, actual location, and unchecked items in the existing adoption record, then reference it. Do not create a separate adoption report for an ordinary task, or describe a format check as behavioral acceptance.
 
-以下是按需选用的观察情形，不是每次工作的前置关卡。实际核实状态由对应接入记录说明；需要试验时使用获准的现有材料或隔离副本，不为测试制造正式台账或真实业务写入。机制见[台账与时间线](03-ledger-and-timeline.md)第 2、8、9 节。
+### 3.1 Minimal checks for creating, binding, reading, and maintaining a ledger
 
-| 情形 | 最小观察 | 不通过的表现 |
+The following are observation scenarios to select as needed, not gates before every task. Record the actual verification status in the corresponding adoption record. When a trial is needed, use authorized existing materials or an isolated copy; do not create an official ledger or make real business writes just to test the mechanism. See sections 2, 8, and 9 of [Ledgers and Timelines](03-ledger-and-timeline.md) for the mechanism.
+
+| Scenario | Minimal observation | Signs of failure |
 |---|---|---|
-| 首次进入项目 | 有合适入口时实际找到并复用；无入口且具备试验写入授权时才建立、登记，并由接任上下文读到。另覆盖“绑定目标不可访问”：报告访问缺口，不另建正式入口 | 只按文件名判断没有台账；创建后未登记却称接入完成；失联即新建 |
-| 同一项目连续增加需求 | 连续给出两项同项目任务，后续任务复用相同项目入口；新增任务记录而不新增平行台账 | 按需求、执行者或会话重新建账；把临时副本升级为另一当前入口 |
-| 没有前任聊天的接续 | 新上下文只取得实际工作入口、项目与任务定位等交接信息，不带原聊天；定位已做、未验证、不能重复的动作与下一步，并核实有关基线 | 只复述方法；找错任务；把未验证写成完成；重复未知结果的动作 |
-| 重要认识改变 | 在隔离样本中提供能推翻原主张的事实，观察任务留痕、原说明的失效/争议提示及后续稳定更新；读者能找到依据。若实际并行使用，再检查共享合并是否覆盖彼此发现 | 只写任务过程，继续让错误当前说明无提示生效；把新提议直接转正；以旧快照覆盖 |
-| 不改变项目认识的局部修改 | 完成局部、低风险的隔离任务，仅在必要交付或任务位置保存结果；当前项目说明与长期时间线可不变 | 为“已维护”新增无用事件、重复索引或无关文档 |
+| First entering a project | Actually find and reuse a suitable existing entry point. Create and register one only if none exists and trial writes are authorized, then confirm a successor context can read it. Also cover an inaccessible binding target: report the access gap without creating another official entry point. | Concluding that no ledger exists based only on a filename; claiming adoption is complete after creation without registration; creating a replacement whenever a link is lost. |
+| Successive new requirements in the same project | Give two successive tasks for the same project. The later task reuses the same project entry point and adds a task record without creating a parallel ledger. | Creating a new ledger per requirement, executor, or conversation; promoting a temporary copy to another current entry point. |
+| Continuing without the predecessor's conversation | Give a fresh context only the working entry point, project and task locations, and other handoff information, without the original conversation. It locates completed work, unverified work, actions that must not be repeated, and the next step, and checks the relevant baseline. | Merely repeating the method; finding the wrong task; describing unverified work as complete; repeating actions whose outcome is unknown. |
+| An important understanding changes | In an isolated sample, provide facts that refute a previous claim. Observe the task record, the invalidation or dispute notice in the original explanation, and subsequent stable updates; readers can find the evidence. If parallel use actually occurs, also check that merging shared records does not overwrite each other's discoveries. | Recording only the task process while leaving an incorrect current explanation in force without a warning; treating a new proposal as accepted; overwriting with an old snapshot. |
+| A local change that does not alter project understanding | Complete a local, low-risk task in isolation and save its result only where delivery or task needs require it. The current project description and long-term timeline may remain unchanged. | Adding useless events, duplicate indexes, or unrelated documents just to show that records were maintained. |
 
-对实际使用的宿主、启动位置、作用域和角色分别说明：文件可读、入口已登记、实际读取、显式使用、隐式匹配及新会话是否核实。可用实际工具轨迹和文件差异检查；只有自述时证据较弱。未执行就写未执行；显式读取成功不能代替隐式触发或其他角色的验证。不要要求用户每次补充项目路径来掩盖绑定未成立。上述情形支持的是这次条件下的工作闭环，不是长期方法效果证明。
+For each host, starting location, scope, and role actually used, state which of these were checked: file readability, entry-point registration, actual reading, explicit use, implicit matching, and behavior in a new conversation. Actual tool traces and file differences can provide evidence; self-report alone is weaker. Say when something was not performed. Successful explicit reading does not establish implicit triggering or verification for other roles. Do not make users supply the project path every time to conceal a binding that was never established. These scenarios support the workflow under the conditions checked, not a claim of long-term method effectiveness.
 
-## 4. 用真实后续工作观察结果
+## 4. Observe results in real subsequent work
 
-在本来就要开展的修改中保留修改前影响预期、相关快照和后来发现。观察新接手者是否更快找到正确责任，是否漏掉重要入口，是否重复解释同一政策，是否出现无关修改，验证能否识别真正缺陷。
+During changes that would be made anyway, retain the expected impact before editing, relevant snapshots, and later discoveries. Observe whether a new participant finds the correct responsibility sooner, misses important entry points, repeats the same policy explanation, makes unrelated changes, or uses verification that can detect actual defects.
 
-观察建立、更新、阅读、调查、实现和复核的总负担，有实质问题时在已有任务记录留下例子。少读代码可能是定位更准，也可能是漏查；多读可能发现风险，也可能是重复。不要为量化方法再强制一份逐项工时表。
+Consider the total burden of creating, updating, reading, investigating, implementing, and reviewing. Leave concrete examples in existing task records when there is a substantive problem. Reading less code may mean more accurate navigation or missed checks; reading more may uncover risks or simply repeat work. Do not require another itemized timesheet merely to quantify the method.
 
-依赖方向、规则重复、未修改消费者、组合行为及后续修改质量，比目录数、函数数、测试数和文档字数更有区分力。允许多个合理方案。
+Dependency direction, duplicated rules, unchanged consumers, combined behavior, and the quality of later changes are more informative than counts of directories, functions, tests, or documentation words. Allow multiple reasonable solutions.
 
-愿意反馈时，可从已有记录概括一次具体经历：本来要做什么、方法影响了什么行动、观察到什么结果、希望保留或改掉什么。帮助、卡住、无明显效果和流程变重都值得报告；结果或加载状态未知就保留未知。反馈自愿，不作为使用、完成任务或交接的门槛，不自动上传任何项目记录。完整仓库的贡献说明提供案例入口，单独使用本包也无需额外建立反馈档案。
+If willing to give feedback, summarize one concrete experience from existing records: what you intended to do, which action the method influenced, what you observed, and what you would keep or change. Help, getting stuck, no obvious effect, and heavier process are all worth reporting; preserve uncertainty when the outcome or loading status is unknown. Feedback is voluntary, is not a condition of use, task completion, or handoff, and never automatically uploads project records. The full repository's contribution guide provides a case-reporting entry point. Using this package on its own does not require another feedback archive.
 
-## 5. 逐步分离贡献，不在初版建立庞大实验平台
+## 5. Separate contributions gradually; do not build a large experiment platform in the first version
 
-可在少量隔离任务中比较：原有方式、只加通用方法、只加准确项目记录、两者都有。不是每轮都要完整跑四组，而是明确改变了什么。必要需求、约束、源码与权限保持一致，不能只给一组关键业务事实。
+In a small number of isolated tasks, compare the existing approach, the general method alone, accurate project records alone, and both together. You need not run all four groups in every round; the aim is to be clear about what changed. Keep necessary requirements, constraints, source code, and permissions consistent. Do not give only one group crucial business facts.
 
-若要检验组织方式，比较相同事实的普通说明与可按责任/行为/证据展开的记录。若要检验方法文字，比较候选与长度相近的通用提醒。记录模型、工具预算和投入，避免把更多分析时间归功于方法。
+To test information organization, compare ordinary prose with records that expose the same facts through responsibilities, behavior, and evidence. To test the method's wording, compare the candidate with general reminders of similar length. Record the model, tool budget, and effort so that extra analysis time is not mistaken for the method's contribution.
 
-让新会话或未参与原设计的人接续，区分建立记录时的思考收益与读取记录的收益。公开历史修复可能已被模型见过，不单独当强迁移证明。
+Have a new conversation or someone who did not participate in the original design continue the work. Distinguish the benefit of thinking while creating records from the benefit of reading them. A model may already have seen public historical fixes; those alone are not strong evidence of transfer.
 
-## 6. 有区分力的少量观察
+## 6. A few observations that distinguish useful behavior
 
-表示变化后再规则变化：是否有合适落点，而不只是增加 parser/service 名称。
+A representation change followed by a rule change: does each have a suitable place to change, beyond merely adding names such as parser or service?
 
-共享事实改变：是否识别旧前提失效，追到未改入口、旧对象和实际消费者。
+A shared fact changes: does the participant recognize invalidated assumptions and trace unchanged entry points, existing objects, and actual consumers?
 
-不值得建框架的小任务：是否保持清楚而不增加无用层；后来变化时能否合理调整。
+A small task that does not warrant a framework: does the implementation remain clear without adding useless layers, and can it adapt reasonably to later changes?
 
-记录语义过期但路径仍正确：是否核实本次关键主张并纠正，而不是更有把握地走错。
+A record's meaning is stale while its path is still correct: are key claims checked and corrected for the current task, or does the record simply increase confidence in the wrong direction?
 
-中断恢复：是否能准确区分已实现与未验证、避免重复外部动作，并从已有结果继续。
+Resuming interrupted work: can participants distinguish implemented from unverified work, avoid repeating external actions, and continue from existing results?
 
-并行修改：是否发现同一共享约定的冲突，而不是把最后写入的记录当胜者。
+Parallel changes: are conflicts in a shared agreement detected, instead of letting the last-written record win?
 
-## 7. 允许失败与缩减
+## 7. Allow failure and reduction
 
-若记录更长但仍漏同一入口、层更多却变化仍广泛泄漏、台账与代码长期冲突，应修订或删除无效部分。候选与普通提醒没有可重复差异时，不能宣传额外增益。
+If records grow longer while the same entry point is still missed, more layers are added while changes still spread widely, or the ledger and code remain in conflict, revise or remove the ineffective parts. If the candidate has no repeatable advantage over ordinary reminders, do not advertise an additional benefit.
 
-一次成功仅支持该次条件；少量案例有助于发现表达和接入问题，不证明长期普遍有效。观察不应无限拖延使用，使用也不应取消纠正方法的责任。
+One success supports only its own conditions. A few cases help identify wording and adoption problems; they do not prove universal or long-term effectiveness. Observation should not delay use indefinitely, and use should not remove the responsibility to correct the method.

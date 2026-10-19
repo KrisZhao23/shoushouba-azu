@@ -1,209 +1,211 @@
-# 案例、证据与迁移边界
+# Cases, Evidence, and Limits of Transfer
 
-证据基线：早期研究稿 v0.1.0。候选修订日期：2026-10-17。本轮重新核实 Git 固定提交的 `read-cache.c` 相关定义及 `c8ad9d0` 差异；第 2—4 节其余案例保留 v0.1.0 的既有阅读记录，不冒称本轮全部重读。第 5 节官方承载入口定向复核，新增专题的原始依据见第 8 节。
+[English](06-case-evidence.md) | [简体中文](06-case-evidence.zh-CN.md)
 
-下文“本轮”若出现在保留的历史案例描述中，指 v0.1.0 的研究记录；本候选修订的新核实会明确写“本次修订”。区分维护者理由、源码/测试阅读、实践报告和迁移推断。未进行全库审计，未运行 Git、SQLite、Starlette 或使用方真实项目的测试。
+Evidence baseline: the early v0.1.0 research draft. Candidate revision date: 2026-10-17. This revision rechecked the relevant definitions in `read-cache.c` at the pinned Git commit and the `c8ad9d0` diff. The other cases in sections 2–4 retain the v0.1.0 reading records; they are not presented as having all been reread for this revision. The official host entry points in section 5 were checked specifically; original sources for the added topics are in section 8.
 
-这不是把所有开源项目的长处拼成一个架构。旧报告中的 Odoo、ERPNext、Temporal、Debezium 等仍可作为未来专题材料，但本轮没有重新核实其全部证据，不能借其名义为本版所有条目背书。v0.1.0 主要整理 Git 的具体变化链，并用不同性质的项目限制泛化；本次只修正链条中实际消费者定位等明确问题。
+Where retained historical case descriptions say "this round," they refer to the v0.1.0 research record. New checks for this candidate are explicitly called "this revision." Distinguish maintainers' reasons, source and test readings, practice reports, and inferences about transfer. No full-repository audit was performed, and no tests were run for Git, SQLite, Starlette, or users' actual projects.
 
-## 1. 深入案例：Git 的共享路径语义改变与 stash 回归
+The purpose is not to combine every open-source project's strengths into one architecture. Odoo, ERPNext, Temporal, Debezium, and other projects in the older report remain possible material for future topics, but their full evidence was not rechecked in this round and cannot endorse every item in this version by association. v0.1.0 mainly organized a concrete chain of Git changes and used projects of different kinds to constrain generalization. This revision corrects specific issues in that chain, such as the identification of actual consumers.
 
-### 阅读锚点与原目标
+## 1. Detailed Case: A Change in Git's Shared Path Semantics and a stash Regression
 
-固定源码锚点：`c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f`。它是历史研究对象，不是推荐安装的 Git 版本。
+### Reading anchors and the original goal
 
-维护者在 `6e773527b6` 的提交说明中解释：把稀疏范围以外的目录用目录条目表示，以转换完整索引；转换受当时的模式与状态限制，一些命令仍需要展开后的索引。源码变更还放宽了路径校验，以支持尾部分隔符的目录条目。[G1]
+Pinned source anchor: `c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f`. This is a historical research subject, not a recommended Git version to install.
 
-这里存在两种消费者：理解特殊目录表示的索引条目构造/加入位置，以及仍依赖公共路径校验原含义的普通使用者。这个区别不是目录结构所能直接表达的。
+The maintainer's message for `6e773527b6` explains converting a full index by representing directories outside the sparse scope as directory entries. The conversion was limited by the modes and states supported at the time, and some commands still needed an expanded index. The source change also relaxed path validation to support directory entries with trailing separators. [G1]
 
-### 实际变化与失败记录
+There are two kinds of consumers here: index-entry construction and insertion sites that understand the special directory representation, and ordinary callers that still rely on the original meaning of shared path validation. Directory structure alone does not express this distinction.
 
-`fc5e90b` 的作者说明指出，此前 `stash` 会忽略子仓库，相关放宽引入了回归；该提交添加一个预期失败测试。[G2]
+### Actual changes and the failure record
 
-随后 `2a1ae64` 引入内部结果分类，把普通合法、非法、带尾部分隔符目录区分开；此提交声明不打算改变外部行为。[G3]
+The author of `fc5e90b` explains that `stash` previously ignored nested repositories and that the relaxation introduced a regression. This commit adds a test expected to fail. [G2]
 
-最后 `c8ad9d0` 恢复公共校验的原含义，在条目构造和索引加入的相应校验位置接受特殊结果，并把回归测试改为预期成功。[G4]
+Next, `2a1ae64` introduces internal result categories for ordinary valid paths, invalid paths, and directories with trailing separators. The commit states that no external behavior change is intended. [G3]
 
-这三个修复链提交具有可读的父子关系：`fc5e90b → 2a1ae64 → c8ad9d0`。没有从页面可靠取得全部事件日期，因此本记录不补造精确日期；研究记录日期与历史事件时间不同。
+Finally, `c8ad9d0` restores the original meaning of public validation, accepts the special result at the relevant validation sites in entry construction and index insertion, and changes the regression test to expect success. [G4]
 
-### 从完整入口追到真实消费者
+These three commits have a readable parent–child chain: `fc5e90b → 2a1ae64 → c8ad9d0`. Exact dates for every event were not reliably obtained from the pages, so this record does not invent them. Research-record dates differ from historical event times.
 
-在固定锚点中，静态源码可以确认以下连接：
+### Tracing the complete entry path to actual consumers
 
-`stash` 获取未跟踪项目名称，交给保存未跟踪内容的逻辑；该逻辑启动 `update-index` 子进程，通过标准输入传递名称，并通过 `GIT_INDEX_FILE` 指定临时索引。[G5]
+Static source at the pinned anchor confirms the following connections:
 
-`update-index` 的标准输入路径进入 `update_one`；它取得文件状态后调用公共 `verify_path`。校验不接受时会忽略路径，否则继续处理；目录处理还有自己的分支。[G6]
+`stash` obtains names of untracked items and passes them to the logic that saves untracked content. That logic starts an `update-index` subprocess, passes the names through standard input, and selects a temporary index through `GIT_INDEX_FILE`. [G5]
 
-本次修订在固定源码与差异中复核：公共 `verify_path` 仅对 `PATH_OK` 返回真；`make_cache_entry` 和 `add_index_entry_with_check` 在相应校验处调用 `verify_path_internal`，仅拒绝 `PATH_INVALID`，因而可以接纳分类为 `PATH_DIR_WITH_SEP` 的路径。`make_transient_cache_entry` 仍调用公共 `verify_path`，不是这两处特殊接纳位置之一。[G4、G7]
+The standard-input path in `update-index` reaches `update_one`, which obtains file status and calls the public `verify_path`. A rejected path is ignored; otherwise processing continues. Directory handling has its own branch as well. [G6]
 
-这是对 v0.1.0 消费者定位的事实更正。`make_transient_cache_entry` 仅作为普通校验消费者的对照；本次没有追踪它的全部上游用途，也不将上述校验概括为所有加入/替换路径的完整检查。
+This revision checked the pinned source and diff: public `verify_path` returns true only for `PATH_OK`; `make_cache_entry` and `add_index_entry_with_check` call `verify_path_internal` at the relevant validation sites and reject only `PATH_INVALID`, so they can accept paths classified as `PATH_DIR_WITH_SEP`. `make_transient_cache_entry` still calls public `verify_path`; it is not one of those two sites that accept the special result. [G4, G7]
 
-因此，只查询 `stash` 的直接函数调用或只看 `read-cache.c` 的差异，会漏掉子进程、标准输入和环境指定索引串起的合作关系。本结论是基于所读源码路径的分析；目录遍历的所有文件系统分支没有穷举，实际错误输出没有运行复现。
+This is a factual correction to v0.1.0's consumer identification. `make_transient_cache_entry` is only a comparison case for ordinary validation consumers. Its complete upstream uses were not traced in this revision, and the checks described above are not presented as the complete validation of every insertion or replacement path.
 
-### 测试到底支持什么
+Consequently, inspecting only direct function calls from `stash`, or only the `read-cache.c` diff, misses cooperation through a subprocess, standard input, and an environment-selected index. This conclusion is an analysis of the source paths read. Not every filesystem branch of directory traversal was enumerated, and the actual error output was not reproduced by running it.
 
-`fc5e90b` 增加的测试在一个子目录初始化仓库，再执行 `stash -u`；固定锚点的 `t/t3905-stash-include-untracked.sh` 把此情形作为成功预期。[G2、G8]
+### What the tests actually support
 
-我阅读了断言文本，未执行。该新增测试主要检查这条命令能否成功结束，不能单独证明所有未跟踪内容、子仓库数据和恢复行为均正确。若本地进一步复现，值得补查保留内容和索引结果；这是验证建议，不是已有运行结果。
+The test added in `fc5e90b` initializes a repository inside a subdirectory, then runs `stash -u`. At the pinned anchor, `t/t3905-stash-include-untracked.sh` expects this scenario to succeed. [G2, G8]
 
-原引入提交还讨论了稀疏与完整表示的对照测试。[G1] 本轮没有重跑这些测试，也不能把公开合并修复当作全部平台上的验证结果。
+The assertion text was read, but the test was not run. The added test mainly checks whether this command completes successfully. On its own, it does not establish the correctness of all untracked content, nested-repository data, or restoration behavior. A further local reproduction could also check retained content and index results; that is a verification recommendation, not an existing runtime result.
 
-### 本版提炼的判断
+The original introducing commit also discusses comparisons between sparse and full representations. [G1] Those tests were not rerun in this round, and a publicly merged fix cannot be treated as validation on every platform.
 
-共享判断更宽容，不一定对旧消费者安全。增加局部能力时，需要辨认是能力扩展还是公共语义改变；对旧消费者维持旧含义，对理解特殊语义的位置显式提供能力，是本事件中的合适选择。
+### Judgment extracted for this version
 
-修复在原文件中完成，没有以新增模块或服务解决。由此不能推出“边界必须拆文件”，也不能推出“所有共享函数永远保持兼容”。旧消费者不存在、可整体同步迁移或旧语义本来错误时，需要不同选择。
+A shared check becoming more permissive is not necessarily safe for existing consumers. When adding a local capability, distinguish an extension in capability from a change in public semantics. Preserving the old meaning for ordinary consumers while explicitly providing the special capability where it is understood was a suitable choice in this case.
 
-若为这条行为建立台账，值得留下的是两类合法性含义、各自消费者、跨进程连接与回归证据，而不是所有调用图。时间线应保留放宽、发现回归、分类准备、恢复公共含义这几次认识变化；不能从最终实现倒推所有取舍最初就已想到。
+The fix stayed in the original file; it did not require new modules or services. It does not imply that boundaries must be split into separate files, or that every shared function must remain compatible forever. Different choices may be appropriate when old consumers no longer exist, all consumers can migrate together, or the old semantics were wrong.
 
-### 第一手阅读位置
+A project ledger for this behavior would usefully retain the two meanings of validity, their consumers, the cross-process connection, and regression evidence, rather than every call graph. Its timeline should preserve the changes in understanding: relaxation, discovery of the regression, preparation through classification, and restoration of the public meaning. Do not infer from the final implementation that all these tradeoffs were understood at the outset.
 
-- [G1：引入变化 6e773527b6](https://github.com/git/git/commit/6e773527b6)
-- [G2：回归测试 fc5e90b](https://github.com/git/git/commit/fc5e90b)
-- [G3：内部分类 2a1ae64](https://github.com/git/git/commit/2a1ae64)
-- [G4：恢复公共含义 c8ad9d0](https://github.com/git/git/commit/c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f)
-- [G5：固定版本 builtin/stash.c](https://raw.githubusercontent.com/git/git/c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f/builtin/stash.c)，重点 `get_untracked_files`、`save_untracked_files`。
-- [G6：固定版本 builtin/update-index.c](https://raw.githubusercontent.com/git/git/c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f/builtin/update-index.c)，重点标准输入分支、`update_one`、`process_directory`。
-- [G7：固定版本 read-cache.c](https://raw.githubusercontent.com/git/git/c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f/read-cache.c)，重点 `verify_path`、`verify_path_internal`、`make_cache_entry`、`add_index_entry_with_check`；对照 `make_transient_cache_entry` 仍走公共校验。
-- [G8：固定版本 t3905 测试](https://raw.githubusercontent.com/git/git/c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f/t/t3905-stash-include-untracked.sh)。
+### Primary reading locations
 
-## 2. SQLite：把整体保证写成有适用范围的义务（沿用 v0.1.0 记录）
+- [G1: Introducing change 6e773527b6](https://github.com/git/git/commit/6e773527b6)
+- [G2: Regression test fc5e90b](https://github.com/git/git/commit/fc5e90b)
+- [G3: Internal classification 2a1ae64](https://github.com/git/git/commit/2a1ae64)
+- [G4: Restoring public semantics c8ad9d0](https://github.com/git/git/commit/c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f)
+- [G5: Pinned builtin/stash.c](https://raw.githubusercontent.com/git/git/c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f/builtin/stash.c), focusing on `get_untracked_files` and `save_untracked_files`.
+- [G6: Pinned builtin/update-index.c](https://raw.githubusercontent.com/git/git/c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f/builtin/update-index.c), focusing on the standard-input branch, `update_one`, and `process_directory`.
+- [G7: Pinned read-cache.c](https://raw.githubusercontent.com/git/git/c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f/read-cache.c), focusing on `verify_path`, `verify_path_internal`, `make_cache_entry`, and `add_index_entry_with_check`; compare `make_transient_cache_entry`, which still uses public validation.
+- [G8: Pinned t3905 test](https://raw.githubusercontent.com/git/git/c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f/t/t3905-stash-include-untracked.sh).
 
-官方架构说明区分编译执行、B-tree、pager 与底层接口的责任。`version-3.47.2/src/pager.c` 开头把关键写入、同步、锁和恢复关系表达为不变量，并明确该段约束不适用于 WAL、MEMORY、OFF 等日志模式。[S1、S2]
+## 2. SQLite: Expressing Overall Guarantees as Obligations with Defined Scope (Retained v0.1.0 Record)
 
-官方测试说明介绍用替代 VFS 模拟崩溃，再检查完整性及事务完成或回滚，而不只检查函数返回值。[S3] 本轮仅阅读说明及上述源码注释，没有执行这些测试。
+The official architecture description separates responsibilities for compilation and execution, B-trees, the pager, and lower-level interfaces. The opening of `version-3.47.2/src/pager.c` expresses important relationships among writes, synchronization, locks, and recovery as invariants, and explicitly excludes journal modes such as WAL, MEMORY, and OFF from that set of constraints. [S1, S2]
 
-本版借鉴：记录重要承诺的承担关系、环境前提和对应证据。不能把数据库局部保证推广到外部系统效果，也不能把这些层和故障测试规模搬进每个小工具。
+The official testing description explains simulating crashes with a replacement VFS, then checking integrity and whether transactions complete or roll back, rather than checking only function return values. [S3] This round read the description and the source comments above; it did not execute those tests.
 
-- [S1：官方架构](https://www.sqlite.org/arch.html)
-- [S2：固定标签 pager.c](https://raw.githubusercontent.com/sqlite/sqlite/version-3.47.2/src/pager.c)
-- [S3：官方测试说明，Crash Testing](https://www.sqlite.org/testing.html)
+What this version borrows: record which responsibilities uphold important promises, their environmental assumptions, and the corresponding evidence. Do not extend a database's local guarantees to external-system effects, or transplant these layers and the scale of fault testing into every small tool.
 
-## 3. Starlette：用局部兼容修复限制过度设计（沿用 v0.1.0 记录）
+- [S1: Official architecture](https://www.sqlite.org/arch.html)
+- [S2: pager.c at a fixed tag](https://raw.githubusercontent.com/sqlite/sqlite/version-3.47.2/src/pager.c)
+- [S3: Official testing description, Crash Testing](https://www.sqlite.org/testing.html)
 
-PR #2526（页面显示合并于 2024-02-26，差异提交 `3031ee0`）从 `TestClient` 构造中删除传给 HTTPX 的弃用 `app` 参数，保留已有 transport；差异只有该文件的一行删除。[H1]
+## 3. Starlette: A Local Compatibility Fix That Constrains Overdesign (Retained v0.1.0 Record)
 
-这是源码差异观察，不是本轮运行验证。它支持“识别具体依赖契约，再选择有针对性的修复”，不支持新增包装层是必要的，也不代表所有版本组合已经兼容。
+PR #2526, shown as merged on 2024-02-26 with diff commit `3031ee0`, removes the deprecated `app` argument passed to HTTPX from the `TestClient` constructor while preserving the existing transport. The diff is a one-line deletion in that file. [H1]
 
-- [H1：PR #2526 的差异](https://github.com/Kludex/starlette/pull/2526/files)
+This is an observation from a source diff, not runtime verification in this round. It supports identifying a specific dependency contract and choosing a targeted fix. It does not establish a need for an added wrapper, or compatibility across every version combination.
 
-## 4. 项目知识组织：借鉴长处，保留不同责任（沿用 v0.1.0 记录）
+- [H1: PR #2526 diff](https://github.com/Kludex/starlette/pull/2526/files)
 
-| 材料 | 本轮实际看见的做法 | 本版借鉴 | 不照搬或不能证明的部分 |
+## 4. Organizing Project Knowledge: Borrowing Strengths while Keeping Responsibilities Distinct (Retained v0.1.0 Record)
+
+| Material | Practice actually observed in this round | What this version borrows | What is not adopted or established |
 |---|---|---|---|
-| rust-analyzer 架构说明 | 模块代码入口、架构约束、更深材料与测试方向 | 入口不仅列位置，还解释有意不存在的依赖 | 文档主张不等于本轮源码审计；不要求相同模块结构 |
-| GitLab 设计记录工作方式 | 概览、决定、按需子页，随实现吸收发现 | 设计可以从小开始，历史决定有取代关系 | 团队岗位、合并请求与组织审批不成为通用规则 |
-| Codified Context 保存系统记录 | 服务责任、运行中状态与持久状态、实现锚点 | 保存难以反复推导的合作关系 | 主分支记录可能变化；未核实其全部应用代码 |
-| Codified Context 掉落系统节选 | 遇理解缺口后读代码、写记录，再用于讨论 | 在真实任务中增长知识，不先建全库台账 | 精选交互不是长期效果对照证明 |
-| Nygard 的 ADR | 背景、决定、后果，旧决定标为被取代 | 保存重要判断依据与演变 | 不拿 ADR 单独承担当前代码导航 |
+| rust-analyzer architecture description | Module source entry points, architecture constraints, deeper material, and testing directions | An entry point should explain intentionally absent dependencies as well as list locations | Documentation claims are not a source audit in this round; the same module structure is not required |
+| GitLab's design-record workflow | An overview, decisions, on-demand subpages, and discoveries incorporated during implementation | Designs can start small; historical decisions can supersede one another | Team positions, merge requests, and organizational approvals do not become universal rules |
+| Codified Context save-system record | Service responsibilities, runtime versus persistent state, and implementation anchors | Retain relationships that are difficult to reconstruct repeatedly | Main-branch records may change; the full application code was not checked |
+| Codified Context drop-system excerpt | A knowledge gap leads to reading code, writing a record, and then using it in discussion | Grow knowledge during real tasks instead of creating a repository-wide ledger in advance | Selected interactions are not controlled evidence of long-term effectiveness |
+| Nygard's ADR | Context, decision, consequences, and old decisions marked superseded | Retain the reasons for important judgments and their evolution | An ADR alone does not provide navigation to the current code |
 
-rust-analyzer 的当前架构页面说明 `base-db` 不掌握 Cargo 的具体机制和文件路径，并给出多种实现入口。本轮把它作为作者的架构说明，而不是宣称当前全部实现满足这些约束。[R1]
+The current rust-analyzer architecture page says that `base-db` does not know the specifics of Cargo or file paths and provides several implementation entry points. This round treats that as the authors' architecture description, not a claim that all current implementation satisfies those constraints. [R1]
 
-GitLab 明确允许设计从一小段开始，随着探索和实现修正；关键决定和技术细节可放子页，作者选择需要的章节。[L1] 本版采用信息分层与演变方式，不采用固定团队流程。
+GitLab explicitly permits a design to start with a short paragraph and evolve through exploration and implementation. Key decisions and technical details may live on subpages, and authors choose the sections needed. [L1] This version adopts the organization and evolution of information, not a fixed team process.
 
-Codified Context 的 `save-system.md` 页面自带 `last-verified: 2026-02-15` 标记；这是作者记录的状态，不是我们的验证日期。掉落系统节选展示了按任务发现知识缺口并新增说明。[C1、C2]
+Codified Context's `save-system.md` contains `last-verified: 2026-02-15`. That is a status recorded by its author, not our verification date. The drop-system excerpt shows a task exposing a knowledge gap and prompting new documentation. [C1, C2]
 
-论文 v1 自述过旧说明引导代码走回废弃路径，并承认单人、单项目、观察性研究与未验证的跨工具迁移。[C3] 因此，本版保留按需记录，但拒绝“代理应该绝对相信文档”以及“有台账自然有效”的推论。
+The v1 paper reports stale documentation steering code back toward a deprecated path, and acknowledges a single-person, single-project observational study and unverified transfer across tools. [C3] This version therefore keeps on-demand records while rejecting the inferences that agents should trust documentation absolutely or that a ledger is automatically effective.
 
-- [R1：rust-analyzer 架构页面](https://rust-analyzer.github.io/book/contributing/architecture.html)，动态页面，阅读日 2026-10-17，未取得本轮固定提交。
-- [L1：GitLab Architecture Design Workflow](https://handbook.gitlab.com/handbook/engineering/architecture/workflow/)，动态页面，阅读日 2026-10-17。
-- [C1：保存系统记录](https://github.com/arisvas4/codified-context-infrastructure/blob/main/case-study/context-docs/save-system.md)，本轮阅读 main，未固定提交。
-- [C2：掉落系统交互节选](https://github.com/arisvas4/codified-context-infrastructure/blob/main/data/case-study-excerpts/cs6-drop-system.md)，本轮阅读 main，未固定提交。
-- [C3：Codified Context 论文 v1](https://arxiv.org/html/2602.20478v1)，重点 5.2、5.3。
-- [A1：Nygard，Documenting Architecture Decisions，2011-11-15](https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions)。
+- [R1: rust-analyzer architecture page](https://rust-analyzer.github.io/book/contributing/architecture.html), a changing page, read on 2026-10-17; no commit was pinned for this round.
+- [L1: GitLab Architecture Design Workflow](https://handbook.gitlab.com/handbook/engineering/architecture/workflow/), a changing page, read on 2026-10-17.
+- [C1: Save-system record](https://github.com/arisvas4/codified-context-infrastructure/blob/main/case-study/context-docs/save-system.md), read on main in this round without a pinned commit.
+- [C2: Drop-system interaction excerpt](https://github.com/arisvas4/codified-context-infrastructure/blob/main/data/case-study-excerpts/cs6-drop-system.md), read on main in this round without a pinned commit.
+- [C3: Codified Context paper v1](https://arxiv.org/html/2602.20478v1), focusing on sections 5.2 and 5.3.
+- [A1: Nygard, Documenting Architecture Decisions, 2011-11-15](https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions).
 
-## 5. Skill 技术承载的依据，不等于方法效果
+## 5. Evidence for the Skill's Hosting Format Is Not Evidence of Method Effectiveness
 
-本版使用带 `name`、`description` 的 `SKILL.md`，把按需资料和模板保留在同一 Skill 目录；可选 `agents/openai.yaml` 表达宿主显示信息与隐式调用策略。技术格式与发现机制来自 v0.1.0 的官方阅读记录；本次修订定向重读官方 Skills 与 AGENTS.md 入口，确认此处的格式、同名不自动合并与作用域说明仍有文档依据，不更改宿主 YAML。[O1、O2]
+This version uses a `SKILL.md` with `name` and `description`, and keeps on-demand references and templates in the same Skill directory. The optional `agents/openai.yaml` provides host display information and an implicit-invocation policy. Technical format and discovery mechanisms came from v0.1.0's official-documentation reading. This revision specifically reread the official Skills and AGENTS.md entry pages to confirm that the format, the fact that identical names do not automatically merge, and the scope descriptions still had documentation support. Host YAML was not changed. [O1, O2]
 
-简短工作入口可以放在现有 `AGENTS.md` 中，但它有作用域和加载时机，不保证所有子代理、每个会话或所有环境继承。详细项目事实不塞进启动说明。[O2]
+A brief working entry point can be placed in an existing `AGENTS.md`, but that file has a scope and loading time; it does not guarantee inheritance by every subagent, conversation, or environment. Detailed project facts do not belong in startup instructions. [O2]
 
-- [O1：OpenAI 官方 Skills 入口](https://developers.openai.com/codex/skills/)，本轮重定向到 `learn.chatgpt.com/docs/build-skills`。
-- [O2：OpenAI 官方 AGENTS.md 入口](https://developers.openai.com/codex/guides/agents-md/)，本轮重定向到 `learn.chatgpt.com/docs/agent-configuration/agents-md`。
+- [O1: Official OpenAI Skills entry](https://developers.openai.com/codex/skills/), which redirected in this round to `learn.chatgpt.com/docs/build-skills`.
+- [O2: Official OpenAI AGENTS.md entry](https://developers.openai.com/codex/guides/agents-md/), which redirected in this round to `learn.chatgpt.com/docs/agent-configuration/agents-md`.
 
-这些是截至阅读时的公开说明，不是用户本地版本已支持的保证。加载验收必须在本地做，文件检查不能替代。
+These are public descriptions as of the reading date, not guarantees of support in a user's local version. Loading must be checked locally; file checks cannot substitute for that.
 
-## 6. 研究材料怎样进入本版
+## 6. How Research Material Informed This Version
 
-研究方法受到花叔 Huashu 的 [女娲.skill](https://github.com/alchaincyf/nuwa-skill) 启发：从材料中辨认判断方法，整理成可使用的 Skill，再观察实际任务中的作用与局限。本库把研究对象转向软件工程案例，不沿用人物模拟、固定代理数量或评分结论；没有收录女娲的原 Skill、模板、脚本或图片。作者、许可与具体借鉴范围统一见[来源及许可核对](#source-licenses)。
+The research approach was inspired by [女娲.skill / Nuwa Skill](https://github.com/alchaincyf/nuwa-skill) by 花叔 Huashu: identify judgment methods in source material, organize them into a usable Skill, and observe their effect and limitations in actual tasks. This repository applies that approach to software engineering cases. It does not adopt persona simulation, fixed agent counts, or scoring conclusions, and does not include Nuwa's original Skill, templates, scripts, or images. Authors, licenses, and the specific extent of influence are recorded under [Sources and Licenses](#source-licenses).
 
-早期研究稿整理了变化、状态、授权、提交与效果、存量和验证等关注点。公开稿保留可说明判断依据的内容及其来源性质；历史材料提到某个项目，不代表已重新核实其全部机制。
+The early research draft organized concerns including change, state, authorization, submission versus effect, existing work, and verification. The public draft retains material that explains the basis for judgments and identifies the nature of its sources. A historical material's mention of a project does not establish that all its mechanisms have been rechecked.
 
-公开源码案例、维护者说明和实践报告分别标出阅读范围与固定版本条件。未重新核实的结论保留原证据边界，不因为公开整理而升级为新的验证结果。
+Public source cases, maintainer explanations, and practice reports identify their respective reading scopes and pinned-version conditions. Conclusions that were not rechecked retain their original evidence limits; preparing them for public use does not turn them into new verification results.
 
-不同入口可以采用符合各自边界的实现方式，不要求机械调用同一位置。实际使用方仍需沿自己的入口、状态与消费者核实适用性；说明性示例不能代替真实项目的行为验证。
+Different entry points can use implementations suited to their own boundaries; they need not mechanically call one shared location. Users must still check applicability along their own entry points, state, and consumers. Illustrative examples do not replace behavioral verification in a real project.
 
-## 7. 证据不足时的方法地位
+## 7. The Method's Status Where Evidence Is Limited
 
-现有真实案例较强地支持共享契约回归、局部兼容修复和知识组织；尚不足以声称已完成“大型项目整体架构形成与持续演变”的充分研究或迁移验证。这不阻止在明确边界下开始使用，也不要求本轮补齐大型案例。
+The existing real cases provide relatively strong support for shared-contract regressions, local compatibility fixes, and knowledge organization. They are not sufficient to claim adequate research or transfer validation for the formation and continuing evolution of an entire large-project architecture. This does not prevent use within explicit limits, or require completing a large case study in this round.
 
-有代码案例支持某条判断，不等于本版表达能可靠触发模型，也不等于跨项目长期有效。这里的推理关系是可使用、可修订的初版。与实际情况不符时，保留反例，缩小适用条件或删减条目；不靠更多历史例子给任何结论补充事后理由。
+A code case supporting a judgment does not establish that this version's wording reliably prompts a model, or that it works over the long term across projects. These reasoning links form a usable, revisable first version. When they conflict with actual conditions, keep counterexamples, narrow their applicability, or remove items. Do not use more historical examples to rationalize every conclusion after the fact.
 
 <a id="technical-sources"></a>
 
-## 8. 本次修订新增技术主张的定向依据
+## 8. Targeted Sources for Technical Claims Added in This Revision
 
-阅读日期：2026-10-17。下列为官方文档/规范的阅读，不是源码全审计或运行测试；它们分别支持具体限制，不能合并宣称整套工程方法已验证。专题中的组织与取舍为本候选的工程建议，可由本地反例修正。
+Reading date: 2026-10-17. The following are readings of official documentation and specifications, not complete source audits or runtime tests. Each supports a specific limitation; together they do not establish that the entire engineering method has been validated. The organization and tradeoffs proposed in the topic sections are this candidate's engineering recommendations and can be corrected by local counterexamples.
 
-| 编号与第一手入口 | 直接支持的事实 | 使用边界 |
+| ID and primary source | Fact directly supported | Applicability limit |
 |---|---|---|
-| [T1：Flask 3.1.x 请求上下文](https://flask.palletsprojects.com/en/stable/reqcontext/) | 请求上下文局部可用；在上下文之外访问相关代理会报错 | 框架行为，不推广为所有语言/框架；不证明任意后台委托已经合法 |
-| [T2：Python 3.11 asyncio，Task Cancellation](https://docs.python.org/3.11/library/asyncio-task.html#task-cancellation) | 取消时建议清理资源，显式捕获取消后通常应传播；吞掉取消可能影响相关机制 | 不保证进程崩溃后的清理或远端效果撤销 |
-| [T3：OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) | 最小权限以及逐请求授权检查的官方安全建议 | 指南，不是本地策略正确性证明；独立发布/业务委托仍需实际策略 |
-| [T4：RFC 9111 §3.5](https://www.rfc-editor.org/rfc/rfc9111.html#section-3.5) | 对带 Authorization 请求的共享 HTTP 缓存复用规定限制和例外 | 不是应用缓存权限隔离或即时撤权的完整方案 |
-| [T5：PostgreSQL 17 §47.2.2](https://www.postgresql.org/docs/17/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) | 逻辑解码位置在检查点持久化，崩溃后近期变化可能重发，消费者需处理重复 | 单个来源的机制，不能当作所有事件都有相同顺序保证 |
-| [T6：Stripe webhook，Event ordering](https://docs.stripe.com/webhooks#event-ordering) | 交付不保证按产生顺序；时间戳不足以独自承担去重或排序 | 动态接口文档，本轮未固定 SDK/API 版本，未调用服务；用于说明应核对来源能力 |
-| [T7：RFC 9110 §9.2.2](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2) 与 [§13.1.1](https://www.rfc-editor.org/rfc/rfc9110.html#section-13.1.1) | 非幂等请求自动重试的条件，以及 If-Match 的条件请求语义 | HTTP 规范，不代表对端已实现或某个业务操作因此具备绝对一次效果 |
+| [T1: Flask 3.1.x request context](https://flask.palletsprojects.com/en/stable/reqcontext/) | Request context is locally available; accessing its proxies outside the context raises an error | Framework behavior, not a claim about every language or framework; does not establish valid delegation to arbitrary background work |
+| [T2: Python 3.11 asyncio, Task Cancellation](https://docs.python.org/3.11/library/asyncio-task.html#task-cancellation) | Cleanup is recommended on cancellation, and explicitly caught cancellation should generally propagate; swallowing it can interfere with related mechanisms | Does not guarantee cleanup after a process crash or reversal of remote effects |
+| [T3: OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) | Official security recommendations for least privilege and permission checks on each request | Guidance, not proof of a local policy's correctness; independent publication and business delegation still require actual policies |
+| [T4: RFC 9111 §3.5](https://www.rfc-editor.org/rfc/rfc9111.html#section-3.5) | Restrictions and exceptions for reuse by shared HTTP caches after requests with Authorization | Not a complete design for permission isolation or immediate revocation in application caches |
+| [T5: PostgreSQL 17 §47.2.2](https://www.postgresql.org/docs/17/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) | Logical-decoding positions are persisted at checkpoints; recent changes can be resent after a crash, and consumers need to handle duplicates | A mechanism of one source, not evidence that every event has the same ordering guarantees |
+| [T6: Stripe webhook, Event ordering](https://docs.stripe.com/webhooks#event-ordering) | Delivery is not guaranteed to follow generation order; timestamps alone are insufficient for deduplication or ordering | Changing interface documentation; no SDK/API version was pinned and no service was called in this round; illustrates why source capabilities need checking |
+| [T7: RFC 9110 §9.2.2](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2) and [§13.1.1](https://www.rfc-editor.org/rfc/rfc9110.html#section-13.1.1) | Conditions for automatically retrying non-idempotent requests and the conditional-request semantics of If-Match | An HTTP specification, not evidence that a remote system implements it or that a business operation has absolute exactly-once effects |
 
-这些链接用于核实新增段落中的具体技术主张，不扩展为新的开源项目研究清单。v0.1.0 的大型架构证据限制继续保留；真实使用、加载和长期收益仍需各自取得证据。
+These links support specific technical claims in the new sections, not an expanded list of open-source projects to research. v0.1.0's limits on evidence about large architectures remain. Actual use, loading, and long-term benefits each require their own evidence.
 
 <a id="source-licenses"></a>
 
-## 9. 第三方来源、署名与许可核对
+## 9. Third-Party Sources, Attribution, and License Checks
 
-核对日期：2026-10-18。范围是本公开稿的 Skill、台账方法与起始稿、手册、示例及其中提及的研究材料，不是某个业务项目的依赖审计。作者栏采用原文署名或公开维护方；多人合作的项目不强行归功于一人，具体提交、文件和文档的署名仍以原来源为准。
+Check date: 2026-10-18. The scope is the Skill, project ledger method and starter records, handbooks, examples, and research materials mentioned in this public draft—not the dependencies of a business project. Author entries use original attribution or public maintainers. Collaborative projects are not forcibly credited to one person; the original source remains authoritative for the attribution of individual commits, files, and documents.
 
-### 已进入方法、案例或技术说明的来源
+### Sources Used in the Method, Cases, or Technical Explanations
 
-| 项目或材料与地址 | 作者／公开维护方 | 本库采用什么、位置在哪里 | 核实到的许可及第一手依据 |
+| Project or material and URL | Author / public maintainer | What this repository uses and where | License checked and primary evidence |
 |---|---|---|---|
-| [女娲.skill / nuwa-skill](https://github.com/alchaincyf/nuwa-skill) | 花叔 Huashu（alchaincyf） | 第 6 节的研究方法启发；未收录上游 Skill、模板或媒体 | [MIT；版权行 2026 Huashu（花叔）](https://raw.githubusercontent.com/alchaincyf/nuwa-skill/main/LICENSE) |
-| [Git](https://github.com/git/git) | Git 贡献者；本例引入提交作者 Derrick Stolee，回归测试与修复作者 René Scharfe，相关提交由 Junio C Hamano 集成 | 第 1 节的提交链、行为分析及文件／符号定位；没有附带 Git 实现或测试文件 | [所引固定版本 COPYING：GPL v2，除非另有明确声明](https://raw.githubusercontent.com/git/git/c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f/COPYING) |
-| [SQLite](https://www.sqlite.org/) | Richard Hipp 及 SQLite 作者与维护者 | 第 2 节的架构、不变量与测试方法概括 | [交付代码及文档为公有领域；构建脚本等可能另有许可](https://www.sqlite.org/copyright.html) |
-| [Starlette](https://github.com/Kludex/starlette) | Encode OSS Ltd 及贡献者；[本例 PR 作者 osoken](https://github.com/Kludex/starlette/pull/2526) | 第 3 节的局部兼容修复分析；没有复制实现片段 | [所引 3031ee0 版本 LICENSE.md：BSD-3-Clause](https://raw.githubusercontent.com/Kludex/starlette/3031ee0/LICENSE.md) |
-| [rust-analyzer 架构文档](https://rust-analyzer.github.io/book/contributing/architecture.html) | The rust-analyzer authors | 第 4 节的责任、入口及依赖组织借鉴 | [主仓库说明 MIT／Apache-2.0 双许可](https://github.com/rust-lang/rust-analyzer#license)；未见所引架构页另行声明许可 |
-| [GitLab Architecture Design Workflow](https://handbook.gitlab.com/handbook/engineering/architecture/workflow/) | GitLab 与 Handbook 贡献者 | 第 4 节对工作方式的概括与方法启发；没有收录原页面或其模板 | [Handbook 明确采用 CC BY-SA 4.0](https://handbook.gitlab.com/handbook/about/handbook-usage/#external-use-of-the-handbook)；不能用软件根目录的 MIT 声明替代 |
-| [Codified Context 配套仓库](https://github.com/arisvas4/codified-context-infrastructure) | Aris Vasilopoulos；许可证版权行署名 Aris | 第 4 节对保存系统记录及交互节选的分析；借鉴按需积累知识，未收录其记录、代理或 MCP 实现 | [MIT](https://raw.githubusercontent.com/arisvas4/codified-context-infrastructure/main/LICENSE)；[CITATION.cff](https://github.com/arisvas4/codified-context-infrastructure/blob/main/CITATION.cff) 请求引用论文 |
-| [Codified Context 论文 v1，arXiv:2602.20478v1](https://arxiv.org/abs/2602.20478v1) | Aristidis Vasilopoulos（配套仓库署名 Aris Vasilopoulos） | 第 4 节对观察报告及其局限的中文概括；未收录论文、图或原文段落 | 论文入口的许可链接为 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)；与仓库 MIT 分开记录 |
-| [Documenting Architecture Decisions，2011-11-15](https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions) | Michael Nygard；发布方 Cognitect | 第 4 节以及台账方法中的背景、决定、后果和取代关系；本库记录片段另行组织 | 原页面就本文明示在法律允许范围内放弃版权及相关权利；该声明不扩大到整个站点 |
-| [Flask 请求上下文文档](https://flask.palletsprojects.com/en/stable/reqcontext/) | Pallets 及 Flask 贡献者 | T1 与参考 07·A2 的特定框架行为概括 | [Flask 文档许可页：BSD-3-Clause](https://flask.palletsprojects.com/en/stable/license/) |
-| [Python 3.11 asyncio 文档](https://docs.python.org/3.11/library/asyncio-task.html#task-cancellation) | Python Software Foundation 及 Python 贡献者 | T2 与参考 07·A3 的取消和清理建议；本库单文件示例使用标准库 API，没有附带 Python 实现 | [软件／文档适用 PSF License Agreement；文档中的示例代码另可选 0BSD](https://docs.python.org/3.11/license.html) |
-| [OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) | OWASP Cheat Sheet Series 贡献者 | T3 与参考 07·B 的授权建议概括和进一步工程分析；没有收录原文、图或清单 | [Cheat Sheet Series：CC BY-SA 4.0](https://raw.githubusercontent.com/OWASP/CheatSheetSeries/master/LICENSE.md) |
-| [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) 与 [RFC 9111](https://www.rfc-editor.org/rfc/rfc9111.html) | 编辑 Roy T. Fielding、Mark Nottingham、Julian Reschke；IETF Trust 及文档作者 | T4／T7 与参考 07 对规范语义的概括；没有复制规范正文或代码组件 | 各 RFC 版权段明确适用 BCP 78 和发表时的 [IETF Trust 法律条款](https://trustee.ietf.org/license-info)；提取代码组件另须遵守所述 Revised BSD 条件 |
-| [PostgreSQL 17 逻辑解码文档](https://www.postgresql.org/docs/17/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) | PostgreSQL Global Development Group；许可页另保留加利福尼亚大学董事会的部分版权 | T5 与参考 07·C2 对重复交付条件的概括 | [PostgreSQL 17 文档许可说明](https://www.postgresql.org/docs/17/legalnotice.html)：PostgreSQL License，覆盖软件和文档 |
-| [Stripe webhook 文档](https://docs.stripe.com/webhooks#event-ordering) | Stripe 及其文档作者／权利人 | T6 与参考 07·C2 对交付顺序事实的概括；没有收录 SDK 或文档段落 | 未确认该网页采用通用开源许可；[官方条款](https://stripe.com/legal/ssa)保留文档权利并限制复制／再分发，不以 SDK 的许可证推定网页许可 |
-| [OpenAI Skills](https://learn.chatgpt.com/docs/build-skills) 与 [AGENTS.md 文档](https://learn.chatgpt.com/docs/agent-configuration/agents-md) | OpenAI | 第 5 节的格式及承载机制说明；没有附带客户端、生成器或网页正文 | 所引页面未见明确通用开源许可；按[官方条款](https://openai.com/policies/terms-of-use/)区分服务、文档、输出及第三方内容，不把开源工具的许可推及站点全部文本 |
+| [女娲.skill / nuwa-skill](https://github.com/alchaincyf/nuwa-skill) | 花叔 Huashu (alchaincyf) | Research-method inspiration in section 6; no upstream Skill, templates, or media are included | [MIT; copyright line 2026 Huashu (花叔)](https://raw.githubusercontent.com/alchaincyf/nuwa-skill/main/LICENSE) |
+| [Git](https://github.com/git/git) | Git contributors; introducing commit by Derrick Stolee, regression test and fixes by René Scharfe, relevant commits integrated by Junio C Hamano | Commit chain, behavior analysis, and file/symbol locations in section 1; no Git implementation or test files bundled | [COPYING at the cited fixed version: GPL v2 unless explicitly stated otherwise](https://raw.githubusercontent.com/git/git/c8ad9d04c6a51cb5c73ebc9e42b627314eeafe2f/COPYING) |
+| [SQLite](https://www.sqlite.org/) | Richard Hipp and SQLite authors and maintainers | Summary of architecture, invariants, and testing methods in section 2 | [Delivered code and documentation are in the public domain; build scripts and other materials may have separate licenses](https://www.sqlite.org/copyright.html) |
+| [Starlette](https://github.com/Kludex/starlette) | Encode OSS Ltd and contributors; [the case PR's author is osoken](https://github.com/Kludex/starlette/pull/2526) | Local compatibility-fix analysis in section 3; no implementation snippets copied | [LICENSE.md at cited version 3031ee0: BSD-3-Clause](https://raw.githubusercontent.com/Kludex/starlette/3031ee0/LICENSE.md) |
+| [rust-analyzer architecture documentation](https://rust-analyzer.github.io/book/contributing/architecture.html) | The rust-analyzer authors | Responsibility, entry-point, and dependency-organization ideas in section 4 | [Main repository states dual MIT / Apache-2.0 licensing](https://github.com/rust-lang/rust-analyzer#license); no separate license was found on the cited architecture page |
+| [GitLab Architecture Design Workflow](https://handbook.gitlab.com/handbook/engineering/architecture/workflow/) | GitLab and Handbook contributors | Workflow summary and method inspiration in section 4; no original page or templates included | [The Handbook explicitly uses CC BY-SA 4.0](https://handbook.gitlab.com/handbook/about/handbook-usage/#external-use-of-the-handbook); the software-root MIT notice cannot substitute for it |
+| [Codified Context companion repository](https://github.com/arisvas4/codified-context-infrastructure) | Aris Vasilopoulos; the license copyright line credits Aris | Analysis of the save-system record and interaction excerpts in section 4; on-demand knowledge accumulation is borrowed, but its records, agents, and MCP implementation are not included | [MIT](https://raw.githubusercontent.com/arisvas4/codified-context-infrastructure/main/LICENSE); [CITATION.cff](https://github.com/arisvas4/codified-context-infrastructure/blob/main/CITATION.cff) requests citation of the paper |
+| [Codified Context paper v1, arXiv:2602.20478v1](https://arxiv.org/abs/2602.20478v1) | Aristidis Vasilopoulos (credited as Aris Vasilopoulos in the companion repository) | Section 4 summarizes the observational report and its limits, originally written in Chinese; no paper, figures, or original paragraphs included | The paper entry links to [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); recorded separately from the repository's MIT license |
+| [Documenting Architecture Decisions, 2011-11-15](https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions) | Michael Nygard; published by Cognitect | Context, decision, consequences, and supersession in section 4 and the project ledger method; this repository organizes its own record fragments | The original page explicitly waives copyright and related rights in this article to the extent permitted by law; that statement does not extend to the entire site |
+| [Flask request-context documentation](https://flask.palletsprojects.com/en/stable/reqcontext/) | Pallets and Flask contributors | Specific framework-behavior summary in T1 and reference 07·A2 | [Flask documentation license page: BSD-3-Clause](https://flask.palletsprojects.com/en/stable/license/) |
+| [Python 3.11 asyncio documentation](https://docs.python.org/3.11/library/asyncio-task.html#task-cancellation) | Python Software Foundation and Python contributors | Cancellation and cleanup guidance in T2 and reference 07·A3; this repository's single-file example uses standard-library APIs without bundling Python's implementation | [Software/documentation use the PSF License Agreement; documentation example code also has a 0BSD option](https://docs.python.org/3.11/license.html) |
+| [OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) | OWASP Cheat Sheet Series contributors | Authorization guidance summary and further engineering analysis in T3 and reference 07·B; no original text, figures, or checklist included | [Cheat Sheet Series: CC BY-SA 4.0](https://raw.githubusercontent.com/OWASP/CheatSheetSeries/master/LICENSE.md) |
+| [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) and [RFC 9111](https://www.rfc-editor.org/rfc/rfc9111.html) | Editors Roy T. Fielding, Mark Nottingham, and Julian Reschke; IETF Trust and the document authors | Summaries of specification semantics in T4/T7 and reference 07; no specification text or code components copied | Each RFC's copyright section specifies BCP 78 and the [IETF Trust legal provisions](https://trustee.ietf.org/license-info) in effect at publication; extracted code components also require the stated Revised BSD conditions |
+| [PostgreSQL 17 logical-decoding documentation](https://www.postgresql.org/docs/17/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) | PostgreSQL Global Development Group; the license page also retains portions of copyright held by the Regents of the University of California | Summary of duplicate-delivery conditions in T5 and reference 07·C2 | [PostgreSQL 17 documentation license notice](https://www.postgresql.org/docs/17/legalnotice.html): PostgreSQL License, covering software and documentation |
+| [Stripe webhook documentation](https://docs.stripe.com/webhooks#event-ordering) | Stripe and its documentation authors / rights holders | Summary of delivery-ordering facts in T6 and reference 07·C2; no SDK or documentation paragraphs included | No general open-source license was confirmed for this webpage; [official terms](https://stripe.com/legal/ssa) reserve documentation rights and restrict copying/redistribution; an SDK license does not establish the webpage's license |
+| [OpenAI Skills](https://learn.chatgpt.com/docs/build-skills) and [AGENTS.md documentation](https://learn.chatgpt.com/docs/agent-configuration/agents-md) | OpenAI | Format and hosting-mechanism explanation in section 5; no client, generator, or webpage body bundled | No explicit general open-source license was found on the cited pages; distinguish services, documentation, output, and third-party content under the [official terms](https://openai.com/policies/terms-of-use/), rather than extending an open-source tool's license to all site text |
 
-表中的中文概括和工程迁移分析由本库整理，不是原作者的逐字陈述；具体来源性质仍按前文区分。署名与链接不表示原作者参与、认可或为本项目担保。
+The summaries, originally written in Chinese, and engineering-transfer analyses were prepared for this repository; they are not the original authors' verbatim statements. The nature of each source remains distinguished in the preceding sections. Attribution and links do not imply the original authors' participation, endorsement, or guarantee.
 
-### 仅提及、未作为本版实现或直接研究依据的项目
+### Projects Mentioned but Not Used as Implementations or Direct Research Evidence in This Version
 
-以下几项在前文作为历史材料或案例依赖出现，也补足身份和许可位置。这里只核对公开主仓库的许可现状；不能冒充已核实早期研究所用版本、所有插件或商业发行版。
+The following appear above as historical material or case dependencies; their identities and license locations are also recorded. Only the current public main repository licenses were checked here. This does not establish the licenses of versions used in earlier research, every plugin, or commercial distributions.
 
-| 项目与地址 | 作者／公开维护方 | 当前稿中的用途 | 许可核对 |
+| Project and URL | Author / public maintainer | Use in the current draft | License check |
 |---|---|---|---|
-| [Odoo Community](https://github.com/odoo/odoo) | Odoo 及贡献者 | 开头的历史背景提及；未收录代码或模板 | [19.0 主仓库 LGPL v3；单独第三方文件可能不同](https://raw.githubusercontent.com/odoo/odoo/19.0/LICENSE)；不涵盖 Enterprise |
-| [ERPNext](https://github.com/frappe/erpnext) | Frappe／ERPNext 贡献者 | 开头的历史背景提及；未收录代码或模板 | [主仓库 GPL v3](https://raw.githubusercontent.com/frappe/erpnext/develop/license.txt) |
-| [Temporal](https://github.com/temporalio/temporal) | Temporal Technologies Inc.、Uber Technologies, Inc. 及贡献者 | 开头的历史背景提及；未收录服务端、SDK 或工作流实现 | [服务端主仓库 MIT](https://raw.githubusercontent.com/temporalio/temporal/main/LICENSE)；其他组件另查 |
-| [Debezium](https://github.com/debezium/debezium) | Debezium 社区与贡献者 | 开头的历史背景提及；未收录连接器或其他实现 | [主仓库 Apache-2.0](https://raw.githubusercontent.com/debezium/debezium/main/LICENSE.txt) |
-| [HTTPX](https://github.com/encode/httpx) | Encode OSS Ltd 及贡献者 | 第 3 节 Starlette 案例中的依赖名称；没有单独提炼其实现 | [主仓库 BSD-3-Clause](https://raw.githubusercontent.com/encode/httpx/master/LICENSE.md) |
+| [Odoo Community](https://github.com/odoo/odoo) | Odoo and contributors | Mentioned in the opening historical context; no code or templates included | [19.0 main repository LGPL v3; individual third-party files may differ](https://raw.githubusercontent.com/odoo/odoo/19.0/LICENSE); does not cover Enterprise |
+| [ERPNext](https://github.com/frappe/erpnext) | Frappe / ERPNext contributors | Mentioned in the opening historical context; no code or templates included | [Main repository GPL v3](https://raw.githubusercontent.com/frappe/erpnext/develop/license.txt) |
+| [Temporal](https://github.com/temporalio/temporal) | Temporal Technologies Inc., Uber Technologies, Inc., and contributors | Mentioned in the opening historical context; no server, SDK, or workflow implementation included | [Main server repository MIT](https://raw.githubusercontent.com/temporalio/temporal/main/LICENSE); other components require separate checks |
+| [Debezium](https://github.com/debezium/debezium) | Debezium community and contributors | Mentioned in the opening historical context; no connectors or other implementations included | [Main repository Apache-2.0](https://raw.githubusercontent.com/debezium/debezium/main/LICENSE.txt) |
+| [HTTPX](https://github.com/encode/httpx) | Encode OSS Ltd and contributors | Dependency named in the section 3 Starlette case; its implementation was not separately distilled | [Main repository BSD-3-Clause](https://raw.githubusercontent.com/encode/httpx/master/LICENSE.md) |
 
-### 当前判断与后续复用边界
+### Current Finding and Limits on Future Reuse
 
-本次检查未发现随包分发上述项目的实现、图片、原始记录或大段原文；未发现明确违反已核实许可的复制内容。此前缺少统一作者／许可说明以及女娲方法启发署名，本节补足可核实的出处。该判断针对当前文本及能找到的直接来源，不是全量相似性鉴定，也不替代权属认定。
+This check found no implementations, images, original records, or substantial passages from the projects above distributed in this package, and no copied material clearly violating the verified licenses. A consolidated author/license description and attribution of Nuwa's methodological inspiration were previously missing; this section supplies verifiable sources. The finding applies to the current text and identifiable direct sources. It is not an exhaustive similarity assessment or a determination of ownership.
 
-研究软件行为、概括事实和借鉴方法，不自动使本库采用所研究软件的许可证；但翻译、改写或由 AI 整理，也不自动排除受保护表达的复制或改编。区分依据见 [WIPO 对思想与表达的说明](https://www.wipo.int/en/web/copyright/protection)和 [Creative Commons 对改编的说明](https://creativecommons.org/faq/#when-is-my-use-considered-an-adaptation)。
+Studying software behavior, summarizing facts, and borrowing methods do not automatically subject this repository to the studied software's license. Conversely, translation, rewriting, or AI-assisted organization do not automatically rule out copying or adapting protected expression. See [WIPO's explanation of ideas and expression](https://www.wipo.int/en/web/copyright/protection) and [Creative Commons' explanation of adaptations](https://creativecommons.org/faq/#when-is-my-use-considered-an-adaptation).
 
-以后真正纳入第三方代码、原文、译文、图或模板时，应就纳入部分保留具体来源、版本、修改说明及原许可要求的版权、许可和免责声明。MIT／BSD 等许可要求的通知不能只用一个来源链接代替；复制或实质改编 CC BY-SA 内容时，应保留署名、许可、修改说明，并为相应改编内容遵守相同方式共享要求。不能把这些内容一并宣称为本库自有、统一改授 MIT。未确认许可的网页不作为可任意复制材料。
+If third-party code, original text, translations, figures, or templates are actually incorporated later, preserve the specific source, version, modification notice, and the copyright, license, and disclaimer notices required by the original license for those portions. A source link alone cannot replace notices required by MIT, BSD, or similar licenses. Copying or substantially adapting CC BY-SA material requires attribution, license information, modification notices, and compliance with ShareAlike for the corresponding adapted content. Do not describe all such content as this repository's own or relicense it wholesale under MIT. Webpages without a confirmed license are not freely copyable material.
 
-本库有权授权的自有内容采用 [MIT](../LICENSE)，公开署名为 KZ；该选择不替代本节列明的第三方许可，也不代表已公开发布。新增真正采用的来源时在此补充相应行；只使用某个制作或检查工具，不等于分发该工具本身，无需把全部环境工具列为方法来源。
+This repository's own content that it is entitled to license uses [MIT](../LICENSE), with the public byline KZ. That choice does not replace the third-party licenses listed here or establish that publication has occurred. Add a row here when a new source is actually adopted. Merely using a production or checking tool does not mean distributing that tool; there is no need to list every tool in the environment as a source of the method.

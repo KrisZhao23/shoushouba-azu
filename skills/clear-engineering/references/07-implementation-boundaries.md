@@ -1,135 +1,137 @@
-# 按需编码判断：输入、授权、状态变化与外部效果
+# Implementation Judgment as Needed: Inputs, Authorization, State Changes, and External Effects
 
-用途：实际变化涉及下列关系时，直接阅读对应小节；不是每项任务逐节执行的检查表，也不要求另写四份报告。一般取舍仍见 [01](01-judgment.md)，影响追踪与停止见 [02](02-impact-and-evidence.md)。
+[English](07-implementation-boundaries.md) | [简体中文](07-implementation-boundaries.zh-CN.md)
 
-以下是本候选提出的条件式工程建议。列明来源处，只将一手材料用于支持该项具体事实，不把框架行为推广为所有系统保证。来源和版本见 [技术依据](06-case-evidence.md#technical-sources)。有重要新事实时，允许缩小、调整或放弃当前建议。
+Purpose: when an actual change involves one of the relationships below, read the relevant section directly. This is not a checklist to complete section by section for every task, nor a requirement to write four separate reports. General tradeoffs are covered in [01](01-judgment.md); impact tracing and stopping criteria are in [02](02-impact-and-evidence.md).
+
+The following are conditional engineering recommendations proposed by this candidate. Where a source is cited, it supports the specific fact at issue; a framework's behavior is not generalized into a guarantee for every system. Sources and versions are listed under [Technical Sources](06-case-evidence.md#technical-sources). Important new facts may justify narrowing, changing, or abandoning a recommendation.
 
 <a id="topic-a"></a>
 
-## A. 外部表示、隐形输入与资源生命周期
+## A. External Representations, Hidden Inputs, and Resource Lifecycles
 
-### A1. 先辨认改变的是编码方式还是含义
+### A1. First distinguish a change in encoding from a change in meaning
 
-遇到接口、文件、消息或依赖升级，不仅比较字段名和类型，还要比较对象身份、单位、空值、日期/时刻、默认值及失败含义。`0`、空字符串、字段缺失和“尚未取得”不能未经依据互相替换；字符串仍能解析，不证明它仍代表同一种事实。没有变化证据的维度不必逐项展开。
+For an interface, file, message, or dependency upgrade, compare object identity, units, null values, dates versus instants, defaults, and failure meanings as well as field names and types. Do not interchange `0`, an empty string, a missing field, and "not yet obtained" without a basis. A string remaining parseable does not establish that it still represents the same fact. Dimensions with no evidence of change need not be examined one by one.
 
-只是表示变了、含义确实保持时，让已有解析和校验位置吸收变化，给规则提供已解释的数据；一个清楚的局部函数可以足够。错误应在可解释的位置拒绝或进入明确的未知状态，不用默认值把输入错误伪装成成功。
+When only representation changes and meaning is demonstrably preserved, let existing parsing and validation absorb the change and give rules data whose meaning has already been established; a clear local function may be enough. Reject errors where they can be explained, or move to an explicit unknown state. Do not disguise invalid input as success with a default value.
 
-如果编号的命名空间、数量单位、时间口径或失败含义变了，就要追踪规则、身份关联、相关消费者和旧数据，而不是仅加一个字段别名。日期型事实和精确时刻各用适合的含义；只有业务确实要求换算时才指定时区及规则，不能无条件把全部日期变成 UTC 时刻。
+If the identifier namespace, quantity unit, time convention, or failure meaning changes, trace rules, identity associations, relevant consumers, and existing data instead of merely adding a field alias. Use appropriate semantics for date-only facts and exact instants. Specify a timezone and conversion rule only when the business actually requires conversion; do not unconditionally turn every date into a UTC instant.
 
-不要求业务规则反复校验已经由可信边界保证的格式，也不禁止外部入口进行必要的防御校验。判断落点是否合适，要看一次表示变化是否迫使无关规则理解来源细节，而不是看是否有 `parser` 或 `adapter` 目录。
+Business rules need not repeatedly validate a format already guaranteed by a trusted boundary, and external entry points may still need defensive validation. Judge whether the boundary is appropriate by whether a representation change forces unrelated rules to understand source details, not by whether a `parser` or `adapter` directory exists.
 
-### A2. 把影响判断的上下文放到能够辨认的位置
+### A2. Put context that affects a decision where it can be identified
 
-同一显式输入却因时间、用户、环境、随机数或全局连接不同而产生不同结果时，先定位这些真实输入。一个可以独立计算的规则，不应暗中选择“今天”、当前主体或配置版本，令调用方无法说明其计算口径。
+If the same explicit inputs yield different results because time, user, environment, randomness, or a global connection differs, locate those real inputs first. A rule that can be computed independently should not secretly choose "today," the current principal, or a configuration version, leaving its caller unable to explain the basis of the calculation.
 
-可由入口一次取得所需日期、身份或配置，向相关计算明确提供值；确实需要在执行过程中取得变化的时间或其他能力时，可以提供边界清楚的窄能力，而不是假装它是固定值。选择快照还是实时读取，由业务含义决定：历史报表的比较日期和请求剩余超时时间不是同一种输入。不要把所有全局对象机械塞进一个无边界 `context`，也不要求每个内部函数透传所有参数。
+An entry point can obtain the needed date, identity, or configuration once and provide explicit values to the relevant calculation. If execution genuinely needs changing time or another capability, provide a narrowly scoped capability rather than pretending it is a fixed value. Business meaning determines whether to use a snapshot or a live read: a historical report's comparison date is not the same kind of input as a request's remaining timeout. Do not mechanically put every global object in an unbounded `context`, or require every internal function to forward every parameter.
 
-框架管理的请求上下文可以用于入口编排；需知道它何时可用、谁管理、是否会跨请求或后台任务继续使用。Flask 3.1.x 文档说明请求上下文具有局部作用域，在其范围之外访问相关代理会失败 [T1]。据此作出的工程建议是：不要把请求代理当成长期业务事实或后台委托；后台需要的值、身份依据和资源分别明确。不能从这个例子推断所有框架采用相同上下文机制。
+Framework-managed request context can support entry-point orchestration. Know when it is available, who manages it, and whether it will be used across requests or in background tasks. Flask 3.1.x documentation describes a locally scoped request context; accessing its proxies outside that scope fails [T1]. The engineering recommendation drawn from this is to avoid treating request proxies as lasting business facts or as authorization delegated to background work. Make the values, identity basis, and resources needed in the background explicit. Do not infer that every framework uses the same context mechanism.
 
-若导入模块会发请求、写文件、启动任务，或必须先调用某个隐含初始化才正确，应让该条件与责任可辨认。优先利用已有启动/关闭入口，或让必要能力在可检查的组合处建立；别把重试、业务写入或凭证读取藏进“仅导入即可使用”。框架声明注册或无外部效果的常量初始化，不因发生在导入期就自动算缺陷。
+If importing a module sends requests, writes files, starts tasks, or requires a hidden initialization call to work correctly, make that condition and its ownership recognizable. Prefer existing startup and shutdown entry points, or establish necessary capabilities where their composition can be inspected. Do not hide retries, business writes, or credential reads behind "just import it." Framework declaration registration and constant initialization without external effects are not automatically defects merely because they occur during import.
 
-### A3. 创建、借用、转交与释放不是同一种责任
+### A3. Creating, borrowing, handing over, and releasing are different responsibilities
 
-函数创建资源、借用框架资源、借用共享池，关闭责任可能不同。明确有效期限、复用条件和失败后的状态；借用者不应擅自关闭整个共享池，创建者也不能在把资源交给异步消费者后立即释放。
+A function that creates a resource, borrows a framework resource, or borrows from a shared pool may have different closing responsibilities. Make its lifetime, reuse conditions, and state after failure clear. A borrower should not close an entire shared pool on its own, and a creator must not release a resource immediately after handing it to an asynchronous consumer.
 
-异常、超时、取消或部分初始化失败时，检查已经取得的资源由谁清理，仍在运行的子任务如何被观察/结束，清理失败怎样呈现。不要用广泛捕获异常把取消变成成功，也不要为了“总能清理”保证进程崩溃和远端资源都已恢复。Python 3.11 的 `asyncio` 文档建议用 `try/finally` 清理，并通常在清理后传播显式捕获的取消异常 [T2]；其他运行时应核对自己的生命周期机制。
+On exceptions, timeouts, cancellation, or partial initialization failure, check who cleans up resources already obtained, how still-running child tasks are observed or ended, and how cleanup failures are reported. Do not turn cancellation into success with broad exception handling, or claim that cleanup always restores everything after a process crash or at a remote system. Python 3.11's `asyncio` documentation recommends `try/finally` for cleanup and generally propagating cancellation after cleanup when explicitly caught [T2]. Other runtimes require checking their own lifecycle mechanisms.
 
-有区分力的局部检查可以是：同一事实分别传入两个日期、无请求上下文调用规则、第一次资源取得后第二次取得失败，或消费者仍在等待时取消调用。根据本次改变选择一两项；检查相关边界已显式保持、未修改消费者仍获得有效输入后，按 [02](02-impact-and-evidence.md) 判断停止，不扩成全库生命周期审计。
+Useful local checks might pass the same fact with two different dates, invoke a rule without request context, fail acquisition of a second resource after obtaining the first, or cancel a call while a consumer is still waiting. Select one or two relevant to this change. Once the relevant boundaries are explicitly preserved and unchanged consumers still receive valid inputs, apply the stopping criteria in [02](02-impact-and-evidence.md); do not expand into a repository-wide lifecycle audit.
 
-值得留下的是影响行为的输入口径、初始化前提和资源归属；不必登记每个 `with` 或每个参数。具体短代码见 [单文件示例](../examples/single-file-tool.md#code-example)。
+Retain input conventions that affect behavior, initialization prerequisites, and resource ownership. There is no need to register every `with` statement or parameter. See the [single-file example](../examples/single-file-tool.md#code-example) for short code.
 
 <a id="topic-b"></a>
 
-## B. 授权沿输出和实际效果延续
+## B. Authorization Follows Outputs and Actual Effects
 
-### B1. 先分清谁请求、谁执行、谁解释权限、作用于什么
+### B1. Distinguish who requests, who executes, who interprets permissions, and what is affected
 
-当需求涉及主体切换、共享副本、导出、搜索、缓存、推送或后台动作时，区分当前请求主体、实际执行主体、可信的授权解释方，以及对象/租户/字段/动作范围。这些角色可能重合，但不能仅凭传入一个 `user_id` 就认为已经形成合法委托。
+When a requirement involves switching principals, shared copies, exports, search, caching, pushes, or background actions, distinguish the current requesting principal, the actual executing principal, the trusted authority that interprets permissions, and the object, tenant, field, and action scope. These roles may overlap, but passing a `user_id` alone does not establish valid delegation.
 
-鉴权成功只确认某种身份，不自动授予所有对象的操作权。OWASP 的授权指南要求对请求检查相应权限 [T3]。本版据此建议沿实际数据输出与效果路径查授权：读取被允许，不自动说明汇总、导出、推送给另一个人或稍后执行也被允许。
+Successful authentication confirms an identity; it does not automatically grant permission to act on every object. OWASP's authorization guidance calls for checking the relevant permissions on requests [T3]. This candidate therefore recommends tracing authorization along actual data-output and effect paths: permission to read does not automatically establish permission to aggregate, export, push to another person, or execute later.
 
-后台任务应依据明确的服务权限，或范围和有效性清楚的业务委托；两者不要混用。服务账号“技术上能读全部”不是向所有请求者返回全部的依据。跨边界接到的主体和委托信息应有可信来源；任务记录不保存令牌和秘密。
+Background tasks should rely on explicit service permissions or business delegation with a clear scope and validity. Do not conflate the two. A service account's technical ability to read everything is not a basis for returning everything to every requester. Principal and delegation information received across a boundary needs a trusted origin. Task records must not store tokens or secrets.
 
-### B2. 检查改变了可见范围的中间结果和交付方式
+### B2. Check intermediate results and delivery paths that change visibility
 
-本地副本、汇总、搜索索引、导出文件、通知正文、错误信息和日志，都可能形成新的读取入口。结果是否暴露原本不可见的对象、明细或可推断信息，应按实际发布策略判断，而不是只检查最初页面的查询。
+Local copies, aggregates, search indexes, export files, notification bodies, error messages, and logs can all become new read entry points. Judge whether a result exposes previously invisible objects, details, or inferable information against the actual publication policy, rather than checking only the original page's query.
 
-缓存不必一律按用户 ID 复制；若多个主体确实共享同一可见范围，可以共享。需要解释缓存内容受哪种范围约束，使用时怎样得到正确授权视图，主体/对象权限变化后如何停止复用不再合法的结果。单有过期时长，不证明即时撤权要求得到满足；在明确允许延迟的策略下，也不必强行实现零延迟失效。
+Caches need not always be duplicated per user ID; principals that genuinely share the same visibility scope can share results. Explain which scope constrains the cached content, how use obtains the correctly authorized view, and how changes to principal or object permissions stop reuse of results that are no longer permitted. An expiry duration alone does not establish immediate revocation. Conversely, a policy that explicitly permits delay does not require zero-delay invalidation.
 
-RFC 9111 §3.5 对带 Authorization 请求的共享 HTTP 缓存复用有具体限制和例外 [T4]；这不是应用缓存的完整权限方案。应用仍需核对自己的范围隔离、失效、查询和交付，而不是抄一个 HTTP 头就宣称解决。
+RFC 9111 §3.5 specifies restrictions and exceptions for reusing shared HTTP-cache responses to requests with Authorization [T4]. It is not a complete permission design for application caches. Applications still need to check their own scope isolation, invalidation, queries, and delivery; copying an HTTP header does not settle those questions.
 
-任务排队或结果长期可下载时，应明确授权按读取、执行还是交付时的哪种策略成立。需要即时权限的动作应核对当前权限；允许已签发业务委托继续执行时，应有明确的对象/内容/期限与撤销规则。不能要求所有阶段都无条件重新做同一种权限查询，也不能默认为提交时检查一次便永久有效。并发撤权的精确保证取决于执行方能否把判定与效果协调，入口先查再写不自动消除时间窗口。
+When tasks queue or results remain downloadable, make clear which policy establishes authorization at reading, execution, or delivery. Actions that require current permission should check current permission. If issued business delegation may continue, define its objects, content, duration, and revocation rules. Do not unconditionally repeat the same permission query at every stage, or assume that a single submission-time check remains valid forever. Exact guarantees under concurrent revocation depend on whether the executor can coordinate the decision with the effect. Checking at the entry point before writing does not automatically eliminate the race window.
 
-### B3. 保留例外，但不把例外当绕过
+### B3. Preserve exceptions without turning them into bypasses
 
-有独立、已接受发布策略的汇总，可以采用不同于明细源数据的可见规则；需要解释发布对象和防止泄漏的约束，不能仅因“已经汇总”就当公开数据。合法交付到控制范围外的离线副本，不能承诺通过服务端撤权即时收回；只能准确区分未来访问控制与已经交付的事实。
+An aggregate with an independent, accepted publication policy may have visibility rules different from its source details. Explain its intended audience and constraints against leakage; aggregation alone does not make data public. For an offline copy lawfully delivered outside the system's control, do not promise immediate retrieval through server-side revocation. Distinguish controls on future access from the fact that delivery has already happened.
 
-优先复用现有可信授权机制，弥补实际路径的缺口，不因本节新增一个权限平台。一次有区分力的检查可以让不同范围的两个主体命中相同查询/缓存，或在排队与交付之间改变权限；断言应针对可见内容及实际动作，而不是仅看按钮隐藏或接口返回 200。
+Reuse existing trusted authorization mechanisms and close gaps in actual paths; this section does not require adding a new permission platform. A useful check might have two principals with different scopes hit the same query or cache, or change permission between queuing and delivery. Assertions should cover visible content and actual actions, not merely a hidden button or a 200 response.
 
-台账额外保存授权的解释方、范围与检查时机、必要的缓存/委托限制及已核实入口；具体策略代码和配置直接引用，不手抄全部权限矩阵。
+Add the authorization authority, scope and check timing, necessary cache or delegation limits, and verified entry points to the project ledger. Link to the actual policy code and configuration rather than manually copying the entire permission matrix.
 
 <a id="topic-c"></a>
 
-## C. 增量、撤销、重放与关系修正
+## C. Incremental Updates, Revocation, Replay, and Relationship Corrections
 
-### C1. 先确定消息或查询到底声明了什么
+### C1. Establish what the message or query actually claims
 
-一个对象的完整快照，不等于某个集合的完整快照；一页查询，更不等于全部对象。更新消息可能是完整替换、局部字段补丁、数量增减或业务命令，其处理不能互换。字段缺失是否保留旧值、显式空值是否清空，都应以实际契约为准。
+A complete snapshot of one object is not a complete snapshot of a collection; a page of query results is even less evidence of all objects. An update message may mean full replacement, a partial field patch, a quantity increment or decrement, or a business command. Their handling is not interchangeable. Whether a missing field preserves an old value or an explicit null clears it depends on the actual contract.
 
-“此次没有看到”只有在权威来源、范围、完整性和一致性边界都成立时，才可能支持删除或退出集合。分页未结束、过滤条件变化、权限收缩、局部失败和时间窗口都能造成缺失。失去可见权限可能要求停止展示或清除不再有权保留的副本，但不能伪造源对象已删除，也不能擅自撤销其业务贡献。
+"Not seen this time" can support deletion or removal from a collection only when the authoritative source, scope, completeness, and consistency boundary are established. Unfinished pagination, changed filters, reduced permissions, partial failures, and time windows can all cause absence. Losing visibility permission may require hiding an object or removing a copy one is no longer authorized to retain; it must not fabricate deletion of the source object or unilaterally undo its business contribution.
 
-### C2. 身份、去重和顺序提供的是不同证据
+### C2. Identity, deduplication, and ordering provide different evidence
 
-区分对象身份、事件/修订身份与业务操作身份。相同对象可以有多次合法变化；一个事件也可能被重复投递。明确版本在哪个对象、分区或来源内可比较；接收时间、本地时间和源时间不自动形成可靠全序，不应随意把不透明版本转成整数大小比较。
+Distinguish object identity, event or revision identity, and business-operation identity. The same object can change legitimately multiple times, while one event can be delivered more than once. Define the object, partition, or source within which versions are comparable. Receipt time, local time, and source time do not automatically establish a reliable total order. Do not arbitrarily convert opaque versions to integers for comparison.
 
-完整的较新对象快照，在来源保证版本可比较且可替代旧状态时，可以替换较旧快照；增量则未必可以跳过中间版本。比如先收到“再加 2”，并不代表此前“加 3”的贡献已经包含其中。要依据源端的顺序、幂等或可交换保证处理；缺少这些保证时，可以补查对象、对相关范围对账、缓冲待核实或拒绝危险推进，不凭最大时间戳宣布解决。
+A newer complete object snapshot may replace an older snapshot if the source guarantees that versions are comparable and the newer state supersedes the old. An incremental update may not allow skipping intermediate versions. Receiving "add another 2" first does not establish that an earlier "add 3" is included. Use the source's ordering, idempotency, or commutativity guarantees. Without them, possible responses include querying the object, reconciling the affected scope, buffering pending verification, or refusing unsafe progress; the largest timestamp alone does not solve the problem.
 
-重复投递与乱序是真实接口条件，但不是所有来源都采用同一种处理：PostgreSQL 17 文档说明逻辑解码在崩溃恢复后可能重发近期变化 [T5]；Stripe webhook 文档不保证事件按产生顺序交付，事件时间戳也不能独自承担去重和排序 [T6]。应分别核对实际协议，不把 PostgreSQL 的位置机制套给普通 HTTP 消息。
+Duplicate and out-of-order deliveries are real interface conditions, but sources do not all require the same handling. PostgreSQL 17 documentation states that logical decoding may resend recent changes after crash recovery [T5]. Stripe webhook documentation does not guarantee delivery in event-generation order; event timestamps alone do not provide deduplication and ordering [T6]. Check each actual protocol rather than imposing PostgreSQL's position mechanism on ordinary HTTP messages.
 
-去重记录与业务贡献若分别提交，可能出现“已经标记处理但未更新”，或“已更新但未标记”的重试窗口。能在现有事务中协调时可利用现有能力；不能时需有可恢复的中间状态或核实方式。只列一个已处理 ID 集合，不足以证明整个效果只发生一次。
+If deduplication records and business contributions commit separately, a retry window may leave an event marked processed without its update, or updated without being marked processed. Use an existing transaction when it can coordinate them. Otherwise, provide a recoverable intermediate state or a way to verify the outcome. A set of processed IDs alone does not establish that the complete effect occurs exactly once.
 
-### C3. 撤销与改归属要处理已有贡献
+### C3. Revocation and reassignment must account for existing contributions
 
-撤销、删除、纠错和新业务补偿不是同义词。先判断它撤掉的是哪项事实、关系或贡献，再决定重算、替换、扣回或产生新动作。不能用旧消息晚到把已确认撤销的对象重新“复活”；维护可比较的版本/删除标记是一种办法，但只在相应协议与保留范围成立时采用。
+Revocation, deletion, correction, and a new compensating business action are not synonyms. Identify which fact, relationship, or contribution is being withdrawn before choosing recalculation, replacement, subtraction, or a new action. A late old message must not "resurrect" an object whose revocation is confirmed. Comparable versions or deletion markers are one option, but only under a suitable protocol and retention scope.
 
-假设一项贡献由 A 改归 B：若投影保存的是归属合计，更新应解释 A 的旧贡献怎样撤去、B 的新贡献怎样加入，以及合计读取是否允许看到中间状态。不是只改对象的 `owner` 就完成，也不是对每个模型都要求做两次手工加减——按权威明细查询或受限重算可能更合适。
+Suppose a contribution moves from A to B. If a projection stores totals by owner, explain how A's old contribution is removed, how B's new contribution is added, and whether readers of the totals may see intermediate state. Changing an object's `owner` alone is not sufficient. Nor must every model perform two manual arithmetic updates: querying authoritative detail or recalculating a bounded scope may be more appropriate.
 
-拿不到旧归属或旧贡献时，不能编造差值；利用已有明细、源端补查或对有关 A/B 范围重算。真正相关的消费者可能包括筛选、汇总、缓存和搜索，不因其未在改动列表中就忽略。
+If the old ownership or contribution is unavailable, do not invent a delta. Use existing detail, query the source, or recalculate the relevant A/B scope. Relevant actual consumers may include filters, aggregates, caches, and search; do not overlook them because they are absent from the list of changed files.
 
-### C4. 重建派生结果，不等于重新执行业务动作
+### C4. Rebuilding derived results is not the same as repeating business actions
 
-重建索引、缓存或投影时，需要重新解释既有事实；不应无意再次发邮件、扣款、创建外部单据或启动业务任务。优先让派生计算与效果发起的责任可辨认；确实要重试通知或补办动作时，作为独立、获授权的意图处理，而不是重放的隐含副作用。
+Rebuilding an index, cache, or projection requires interpreting existing facts again. It should not inadvertently resend email, charge money, create external documents, or start business tasks. Make derived computation and initiation of effects distinguishable responsibilities. When a notification really needs retrying or an action needs completing, handle that as a separate, authorized intent rather than an implicit side effect of replay.
 
-历史事实按旧规则复原，还是按当前规则重新计算，是不同用途，应在结果含义中说明。重放进度只是处理位置，不自动证明数据完整、授权有效或外部效果一致。
+Restoring historical facts under old rules and recalculating them under current rules serve different purposes; state which meaning the result has. Replay progress is only a processing position. It does not automatically establish data completeness, valid authorization, or consistent external effects.
 
-选择与本次变化相关的短序列检查即可，例如“重复同一事件”“后版本先到”“分页缺失”“改归属后又收到旧修订”“重建结果但发送次数不增加”。先写期望的最终贡献与必要可见状态，再看实现是否满足。没有相关增量或重放行为的项目，不引入事件溯源、通用重放平台或全量扫描。
+Select short sequences relevant to this change, such as "repeat the same event," "receive the later version first," "a page is missing," "receive an old revision after reassignment," or "rebuild results without increasing the number of sends." State the expected final contribution and necessary visible states before checking the implementation. Projects without relevant incremental or replay behavior do not need event sourcing, a general replay platform, or full scans.
 
-留下的关键认识是输入契约、身份/顺序保证、缺失的含义、贡献更新和效果边界，以及证据与未知，不是保存第二份事件数据库。
+Retain the input contract, identity and ordering guarantees, meaning of absence, contribution updates, effect boundaries, evidence, and unknowns. Do not maintain a second event database.
 
 <a id="topic-d"></a>
 
-## D. 外部效果与存量衔接：补足确认绑定和部分结果
+## D. External Effects and Existing Work: Binding Confirmation and Preserving Partial Outcomes
 
-[01 §6](01-judgment.md) 已说明本地记录、请求、对端效果和回执的区别，超时与取消的限制，以及补偿和旧对象的基本取舍；[02 §7](02-impact-and-evidence.md) 已说明代码快照不等于业务恢复。本节不另建迁移流程，只补充会改变具体实现的关系。
+[01 §6](01-judgment.md) already distinguishes local records, requests, remote effects, and receipts; covers timeout and cancellation limits; and describes basic choices for compensation and existing objects. [02 §7](02-impact-and-evidence.md) already explains why a code snapshot is not business recovery. This section adds relationships that change implementation choices, not another migration process.
 
-### D1. 执行的内容必须符合实际确认的范围
+### D1. What executes must stay within the scope actually confirmed
 
-确认后仍可编辑、稍后执行或存在并发写入时，明确确认究竟针对什么：固定内容、对象版本、某个数值范围，还是允许动态求值的一项策略。需要绑定内容时，使用现有稳定版本、快照或可核对的内容标识；仅保存对象编号再读取最新值，可能已越出确认范围。
+When content can be edited after confirmation, executed later, or changed concurrently, identify what confirmation applies to: fixed content, an object version, a numeric range, or a policy that permits dynamic evaluation. Where content must be bound to confirmation, use an existing stable version, snapshot, or verifiable content identifier. Saving only an object ID and later reading its latest value may exceed the confirmed scope.
 
-变化落在已接受范围内，可以按约定继续；变化改变了被确认的目标、金额、接收人、对象范围或其他重要含义，则需要重新取得相应确认，或者拒绝失效动作。不因无关呈现修改机械要求重新审批，也不能用“用户曾点过按钮”解释全部后来变化。
+Changes within an accepted range may proceed under the agreement. If a change alters the confirmed target, amount, recipient, object scope, or other important meaning, obtain the relevant confirmation again or reject the stale action. Do not mechanically require new approval for unrelated presentation changes, or use "the user once clicked the button" to justify every later change.
 
-版本或摘要用于辨认被确认内容，不等于授权、锁或原子性。实际更新需要执行方提供相应条件检查或协调；单独先读版本再无条件写入仍有竞争窗口。RFC 9110 §13.1.1 的 If-Match 是 HTTP 条件请求的一个具体机制 [T7]，不是所有系统都支持、也不是所有业务约束都能靠它保护。
+A version or digest identifies confirmed content; it is not authorization, a lock, or atomicity. The actual updater needs to provide corresponding conditional checks or coordination. Reading a version and then writing unconditionally still leaves a race window. RFC 9110 §13.1.1 defines If-Match as one concrete HTTP conditional-request mechanism [T7]; not every system supports it, and it cannot protect every business constraint.
 
-### D2. 未知、部分成功和取消要保留到足够细的结果范围
+### D2. Preserve unknown, partial, and canceled outcomes at sufficient granularity
 
-批量动作中，已确认生效、确定未执行和结果未知的子项不应被一个“失败”覆盖。恢复时依据这些事实及对端能力，只对可安全重试的相同意图重试，避免无依据地整批重新执行。未知子项通常需要查询或对账；若已核实对端支持当前范围和有效期内的幂等重试，也可用原意图、原标识恢复，不把“先取得原结果”机械设为所有重试的前提。两种能力都不足时，保留待核实而非盲目重做。取消等待后对端仍可能完成，恢复者应能找到原操作与实际结果，不凭新的本地会话判断“从未做过”。
+In a batch, items confirmed effective, items definitely not executed, and items with unknown outcomes must not all be collapsed into "failed." During recovery, use those facts and the remote system's capabilities to retry only the same intent where it is safe. Do not rerun an entire batch without a basis. Unknown items generally require querying or reconciliation. If the remote system is verified to support idempotent retries within the current scope and validity period, recovery can instead use the original intent and identifier. Do not mechanically require obtaining the original result before every retry. If neither capability is sufficient, retain pending verification rather than blindly repeating the action. The remote side may complete after local waiting is canceled; a successor should be able to find the original operation and its actual result, rather than inferring "never done" from a fresh local conversation.
 
-本地操作 ID 仅帮助关联。对端去重还需要确认键的作用域、有效期、相同输入约束、并发和失败处理，以及重复请求究竟返回什么。改变真实意图时不能沿用旧键假装同一次请求；也不能为绕过未知结果换新键盲目重做。RFC 9110 §9.2.2 对非幂等请求的自动重试有条件限制 [T7]；具体接口的额外幂等能力必须另查，不从方法名或 HTTP 方法单独推断全部业务效果。
+A local operation ID only assists correlation. Remote deduplication also requires checking the key's scope and validity period, same-input constraints, concurrency and failure handling, and what a repeated request returns. Do not reuse an old key to disguise a changed intent as the same request, or use a new key to blindly repeat an operation with an unknown outcome. RFC 9110 §9.2.2 places conditions on automatic retries of non-idempotent requests [T7]. Additional idempotency capabilities of a specific interface require separate verification; neither a function name nor an HTTP method establishes all business effects.
 
-### D3. 旧对象与恢复方案不因文档通过自动获得执行许可
+### D3. A documented plan does not authorize handling existing objects or performing recovery
 
-旧数据、旧消息或在途任务缺少新含义时，依据实际需要选择继续按旧语义、明确兼容、受限迁移/重算，或安全拒绝。不能把未知版本直接默认为最新版。兼容退出条件由实际消费者和在途范围决定，不默认为永久兼容，也不要求无关小修改建立存量平台。
+When old data, old messages, or in-flight tasks lack new semantics, choose according to actual needs: continue with old semantics, provide explicit compatibility, perform bounded migration or recalculation, or safely reject. Do not default an unknown version to the newest one. Compatibility exit conditions depend on actual consumers and in-flight work. Do not assume compatibility must last forever or require a platform for handling existing state on an unrelated small change.
 
-代码回滚改变执行代码；数据恢复恢复某个数据状态，可能覆盖后来合法变化；业务补偿是新的、可能失败的动作；前向修复则保留历史并纠正现状。分别解释适用条件与风险，不能互相替代。写出恢复或补偿方案不构成执行授权，不能自动重发、恢复生产或调用外部系统。
+Code rollback changes the code being executed. Data restoration returns data to a state and may overwrite later legitimate changes. Business compensation is a new action that can itself fail. A forward fix preserves history and corrects the current situation. Explain their distinct conditions and risks; they are not interchangeable. Writing a recovery or compensation plan does not authorize execution, automatic resending, production restoration, or calls to external systems.
 
-检查可以选择确认后内容改变、部分批次丢回执或旧任务缺少新字段等本次真实相关情形。任务接续只留下操作/对象的非秘密关联、已知结果、未知范围和安全下一步；必要时链接已有证据，不增加全量操作流水账。
+Checks may cover relevant cases such as content changing after confirmation, lost receipts for part of a batch, or an old task lacking a new field. For continuation, retain only non-secret operation and object correlations, known outcomes, unknown scope, and the safe next step. Link existing evidence where needed rather than adding a complete operation log.

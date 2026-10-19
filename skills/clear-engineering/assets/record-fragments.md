@@ -1,68 +1,70 @@
-# 按问题展开的记录片段
+# Record fragments to expand as questions arise
 
-这些片段是可选素材，不是每个任务都要生成的六份文档。把所需片段放进当前说明、模块说明或任务记录；只有独立维护和引用确有价值时才拆文件。所有尖括号均待实际事实替换。
+[English](record-fragments.md) | [简体中文](record-fragments.zh-CN.md)
 
-## 责任说明
+These fragments are optional material, not six documents to create for every task. Place what you need in the current explanation, module documentation, or task record. Split a file only when independent maintenance and references offer real value. Replace all angle-bracketed prompts with actual facts.
 
-### `<责任名称>`
+## Responsibility description
 
-`<它对哪个结果负责，为什么由它承担，什么不归它负责。>`
+### `<Responsibility name>`
 
-关键合作：`<依赖谁提供什么；谁依赖它；共同保护什么>`。
-实现锚点：`<实际文件/符号/注册入口；不是全量成员清单>`。
-边界依据：`<真实变化、共同约束或资源差异>`。
-证据/未知：`<具体主张对应实际材料及范围>`。
+`<Which outcome it owns, why it owns that outcome, and what is outside its responsibility.>`
 
-## 完整行为说明
+Key collaboration: `<Who provides what it depends on; who depends on it; what they protect together>`.
+Implementation anchors: `<Actual files, symbols, or registration entry points; not an inventory of all members>`.
+Basis for the boundary: `<Actual changes, shared constraints, or resource differences>`.
+Evidence / unknowns: `<Actual materials and scope supporting specific claims>`.
 
-### `<从触发到可观察结果的行为>`
+## End-to-end behavior description
 
-`<入口、关键事实的产生/传递/读写、参与者和最终结果；文字可以充分，不规定节点数量。>`
+### `<Behavior from trigger to observable outcome>`
 
-需保持：`<允许变化和不可破坏的关系>`。
-重要交错/失败：`<只列本行为真实相关者>`。
-消费者与关联：`<包括必要的未修改入口、展示、后台、缓存或消息>`。
-实现与验证：`<关键锚点、断言或运行证据；未核实范围>`。
+`<The entry point; creation, transfer, reads, and writes of key facts; participants; and the final outcome. Use as much explanation as needed; there is no prescribed number of steps.>`
 
-## 共享状态或契约说明
+Must preserve: `<What may change and which relationships must remain intact>`.
+Important interleavings / failures: `<Only those genuinely relevant to this behavior>`.
+Consumers and relationships: `<Include relevant unchanged entry points, displays, background work, caches, or messages>`.
+Implementation and verification: `<Key anchors, assertions, or runtime evidence; unverified scope>`.
 
-### `<共享事实名称>`
+## Shared state or contract description
 
-含义与权威：`<代表什么、不代表什么、哪个系统/责任有权解释>`。
-生产/更新：`<谁在什么条件下改变；多个写入如何协调>`。
-使用：`<谁用来显示/决策/产生效果>`。
-语义条件：`<身份、单位、空值、版本、时效、失败解释中真正适用的部分>`。
-变更注意：`<哪些旧对象/入口会依赖旧含义；哪些边界可吸收变化>`。
-证据：`<实际位置与适用范围>`。
+### `<Shared fact name>`
 
-## 重要设计决定
+Meaning and authority: `<What it represents, what it does not represent, and which system or responsibility has authority to interpret it>`.
+Production / updates: `<Who changes it under which conditions; how multiple writers coordinate>`.
+Use: `<Who uses it to display information, decide, or produce effects>`.
+Semantic conditions: `<Applicable identity, units, null values, versions, freshness, and failure interpretations>`.
+Change considerations: `<Which old objects or entry points depend on the old meaning; which boundaries can absorb changes>`.
+Evidence: `<Actual locations and applicable scope>`.
 
-### `<决定ID> · <要解决的争议>`
+## Important design decision
 
-状态与时间：`<明确选择“提议（未接受）”“已接受”“被替代”或“已撤回”；实际日期未知不编造>`。
-接受依据与范围：`<仅在已接受时写具体内容、范围和可核对依据；提议不得默认转正；不强制单独一栏>`。
-背景：`<事实、约束及尚未确认的条件>`。
-选择与理由：`<为什么这个选择优于实际备选，不只列模式名称>`。
-代价与边界：`<承担了什么；何时不适用；什么证据会推翻>`。
-实现与验证：`<已实现、未实现或部分实现；证据指向，不能混为批准>`。
-关联：`<取代哪个决定、对应哪个事件/任务/当前说明>`。
+### `<Decision ID> · <Dispute to resolve>`
 
-## 证据说明
+Status and time: `<Explicitly choose "proposed (not accepted)", "accepted", "superseded", or "withdrawn"; do not invent an unknown date>`.
+Acceptance basis and scope: `<Only for an accepted decision, state the specific content, scope, and verifiable basis; proposals do not become accepted by default; a separate field is not mandatory>`.
+Context: `<Facts, constraints, and unconfirmed conditions>`.
+Choice and rationale: `<Why this choice is preferable to actual alternatives; do not merely list pattern names>`.
+Costs and boundaries: `<What it commits to; when it does not apply; what evidence would refute it>`.
+Implementation and verification: `<Implemented, unimplemented, or partly implemented; evidence references, distinct from approval>`.
+Relationships: `<Which decision it supersedes and which event, task, or current explanation it relates to>`.
 
-### `<证据ID> · <支持的具体主张>`
+## Evidence description
 
-性质：`<作者说明/源码观察/测试阅读/实际运行/用户确认等>`。
-对象与基线：`<实际版本、快照、相关配置和时间>`。
-检查方式：`<实际操作与断言；建议命令不要写成已经执行>`。
-结果：`<观察到什么>`。
-限制：`<不能证明什么，仍有何缺口>`。
-位置：`<源码、日志或结果文件；不复制秘密数据>`。
+### `<Evidence ID> · <Specific claim supported>`
 
-## 尚未核实的主张
+Type: `<Author's explanation, source observation, test reading, actual execution, user confirmation, etc.>`.
+Object and baseline: `<Actual version, snapshot, relevant configuration, and time>`.
+Check method: `<Actual operations and assertions; do not present suggested commands as already executed>`.
+Result: `<What was observed>`.
+Limits: `<What it cannot establish and what gaps remain>`.
+Location: `<Source, log, or result file; do not copy secret data>`.
 
-### `<未知/分歧ID> · <具体问题>`
+## Unverified claim
 
-现有依据：`<不同说法和来源，推断明确标记>`。
-影响：`<为什么会改变决定；是否限制当前动作>`。
-最小核查：`<在哪个实际位置、观察什么即可推进>`。
-状态：`<仍未知/已确认/被推翻；关联证据与事件>`。
+### `<Unknown / disagreement ID> · <Specific question>`
+
+Existing basis: `<Different accounts and their sources; clearly mark inferences>`.
+Impact: `<Why it could change a decision; whether it restricts current actions>`.
+Minimum check: `<What to observe at which actual location to make progress>`.
+Status: `<Still unknown, confirmed, or refuted; link evidence and events>`.

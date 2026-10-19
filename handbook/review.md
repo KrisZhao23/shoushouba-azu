@@ -1,39 +1,41 @@
-# 审核手册
+# Review handbook
 
-通用判断见 [Skill 主文](../skills/clear-engineering/SKILL.md)，计划与代码审核见[参考 04](../skills/clear-engineering/references/04-planning-review-and-handoff.md)，影响和证据范围见[参考 02](../skills/clear-engineering/references/02-impact-and-evidence.md)。本手册说明何时需要独立审核及怎样使用结论，项目已有的更具体约定继续适用。
+[English](review.md) | [简体中文](review.zh-CN.md)
 
-## 何时需要什么审核
+See the [main Skill](../skills/clear-engineering/SKILL.md) for general judgment, [reference 04](../skills/clear-engineering/references/04-planning-review-and-handoff.md) for plan and code review, and [reference 02](../skills/clear-engineering/references/02-impact-and-evidence.md) for impact and evidence scope. This handbook explains when independent review is needed and how to use its conclusions. More specific existing project agreements continue to apply.
 
-先区分新增变更、执行已审操作和恢复已授权的既有能力，按实际效果与风险判断。角色视角不自动要求独立窗口；涉及生产行为、权限、持久数据、运行依赖或不可逆效果时，依据项目治理和安全约定确定是否需要独立审核以及何时完成。
+## Determine the review needed
 
-项目要求独立审核时，由执行者及相应决策者之外的审核者承担，执行者的自检与测试不代替它。纯文档或同一已审对象、相关前提未变的重复操作，通常可复用既有结论；具体以项目要求为准。
+First distinguish a new change, execution of an already reviewed operation, and restoration of an existing capability that is already authorized. Judge them by their actual effects and risks. A role perspective does not automatically require a separate chat. Where production behavior, permissions, persistent data, runtime dependencies, or irreversible effects are involved, use the project's governance and safety agreements to determine whether independent review is required and when it must be completed.
 
-复用时核准真正将执行的内容、配置和副作用。任务名称相同不代表内容和风险未变；新的未审变更与重大风险需要在相关范围处理。规则更新也不自动撤销既有授权或静默改变在途任务顺序；未解决的冲突只限制受影响动作。
+When the project requires independent review, a reviewer other than the executor and the relevant decision-maker performs it. The executor's own checks and tests do not replace it. Pure documentation changes or repeated operations on the same reviewed object with unchanged relevant premises can usually reuse an existing conclusion, subject to the project's requirements.
 
-## 从本步目标开始
+Before reusing a conclusion, verify the content, configuration, and side effects that will actually be executed. The same task name does not establish unchanged content or risk. Address new unreviewed changes and material risks within the relevant scope. A rule update does not automatically revoke existing authorization or silently reorder work in progress; unresolved conflicts limit only the affected actions.
 
-先判断动作是否必要、现在的依赖顺序是否成立，以及失败会留下什么业务状态，再审实现细节。源代码符合原设计，也可能说明原设计本身需要修正。
+## Start with the goal of this step
 
-涉及中断已有能力时，检查实际必要对象、可提前完成的准备和受阻后的已授权恢复方式。操作后的健康或验收结果属于后置证据；操作前应明确的是必要条件与核实办法。
+Assess whether the action is necessary, whether the current dependency order makes sense, and what business state a failure would leave behind before reviewing implementation details. Source code that follows the original design may reveal that the design itself needs correction.
 
-缺少依据时说明它会导致本步什么风险。材料尚未齐全或记录格式不完整本身，不足以阻断所有工作。现有操作足够时，不为审核先制造新代码和额外交付链。
+When an existing capability must be interrupted, check the objects that genuinely need interruption, preparation that can be completed beforehand, and authorized recovery options if work is blocked. Health or acceptance results produced after an operation are subsequent evidence; what must be clear beforehand are the prerequisites and the method of verification.
 
-## 追到真实关系与准确断言
+When evidence is missing, explain the risk it creates for this step. Incomplete materials or record formatting alone do not justify blocking all work. If an existing operation is sufficient, do not create new code and an additional delivery chain merely to have something to review.
 
-核对相关生产者、写入者和最终消费者，包括未修改入口、默认值、输入格式、组合条件以及版本和失败含义。代码中的共同输入依赖仍要判断其必要性，不能直接当作业务前提。
+## Trace real relationships and precise assertions
 
-按本次风险寻找有区分力的反例，如旧对象、另一个入口、重复操作、版本交错或回执丢失。无需每次审计全类风险。静态阅读、模拟检查和真实环境结果分别说明，不把一种证据扩大为另一种保证。
+Check the relevant producers, writers, and final consumers, including unchanged entry points, defaults, input formats, combined conditions, versions, and failure meanings. A shared input dependency in the code still needs a necessity check; it cannot be treated directly as a business prerequisite.
 
-## 一份足够的结论
+Look for counterexamples that discriminate between correct and incorrect behavior for the current risk, such as old objects, another entry point, repeated operations, mixed versions, or a lost acknowledgment. Every review does not need to audit every risk category. Distinguish static reading, simulated checks, and results from the actual environment; do not expand one type of evidence into a different guarantee.
 
-在已有记录中说明准确对象、适用基线、覆盖、结论、阻断依据和重要未验证项。独立审核保留相应审核者定位；内容标识或哈希用于定位对象，不单独证明行为正确。
+## Produce one sufficient conclusion
 
-阻断事项与非阻断建议分开。不同合理实现不因目录、模式或风格偏好被判定为唯一对错。修正后审原问题及必要影响；没有对象变化、新失败或证据矛盾时复用有效结果，不为每次小差量另造完整审单。
+In an existing record, identify the exact object, applicable baseline, coverage, conclusion, grounds for any block, and important unverified matters. Retain a way to identify the reviewer for independent reviews. Content identifiers or hashes identify an object; they do not by themselves establish correct behavior.
 
-## 发布物与权限边界
+Separate blocking issues from non-blocking suggestions. Preferences for directories, patterns, or style do not make one of several reasonable implementations uniquely correct. After a correction, review the original issue and its necessary impact. Reuse valid results when the object has not changed and there is no new failure or contradictory evidence; a small change does not always need a new full review report.
 
-要求前审或复用已有审核时，实施前核对实际对象与已审对象对应；行为或风险相关变化只补受影响部分。打包或签名导致的字节差异可用可核实的源码到制品关系解释。
+## Respect deliverable and authorization boundaries
 
-项目要求前置通过而尚未取得时，不覆盖运行内容、迁移生产数据或激活该新变更；可以继续已授权且不改变运行实例的独立准备。明确的后审安排保留实际对象与修正记录，不能因模板更新另设前审关卡。
+When prior review is required or an existing review is reused, verify before execution that the actual object corresponds to the reviewed object. Recheck only the affected portions when behavior or risk changes. Verifiable source-to-artifact correspondence can account for byte differences caused by packaging or signing.
 
-审核通过只回答相应审查问题，不授予部署、停服、恢复、回滚或其他操作权限。无需代码审核的动作仍遵守授权与必要条件，不额外索取形式上的通过结论。
+If the project requires a prior pass and it has not been obtained, do not overwrite running content, migrate production data, or activate that new change. Authorized, independent preparation that does not change the running instance may continue. An explicitly agreed review after execution should retain the actual object and correction records; a template update must not introduce a new prior-review gate.
+
+A review pass answers the corresponding review questions. It does not grant permission to deploy, interrupt services, recover, roll back, or perform other operations. Actions that do not need code review still follow authorization and prerequisite requirements without seeking a formal pass merely for its own sake.

@@ -1,49 +1,51 @@
-# `<任务名称>`：工作与接续记录
+# `<Task name>`: work and continuation record
 
-> 可选起始稿。已有任务记录或交付说明足以继续时，更新原处即可。以下内容可合成一段，按实际需要删减，不要求创建新文件或逐项填表。
+[English](task-record.md) | [简体中文](task-record.zh-CN.md)
 
-## 当前接续点
+> An optional starting template. If an existing task record or delivery note is enough to continue the work, update it in place. The content below can become a single paragraph and be shortened as needed; a new file or a completed field-by-field form is not required.
 
-任务标识与目标：`<要改变/调查的结果与完成边界>`。
-项目入口及工作范围：`<项目身份、当前工程理解入口、任务范围与授权边界；路径基准沿用项目绑定，不另立项目入口>`。
-代码/配置基线：`<实际快照、版本或可核对的文件集合；不能只写“最新”>`。
-当前进展：`<进行中、等待具体事实、暂停、已实现未验证、已核实待生效、完成等准确描述>`。
+## Current continuation point
 
-已经查清：`<可继续使用的发现和依据>`。
-已经实现：`<实际变更位置；没有实现则写没有>`。
-已经运行的验证：`<方式、结果、适用环境与证据位置；没有运行则写未运行>`。
-尚未确认或阻碍：`<会改变下一步选择的未知>`。
-下一步：`<从哪个实际入口检查/完成什么，为什么优先做它>`。
-操作边界：`<不能重复的外部动作、未知效果、禁止修改的范围；不适用可删除>`。
+Task identity and goal: `<Outcome to change or investigate, and the boundary of completion>`.
+Project knowledge entry point and work scope: `<Project identity, current project knowledge entry point, task scope, and authorization boundaries; retain the project's established path base rather than creating another project entry point>`.
+Code / configuration baseline: `<Actual snapshot, version, or verifiable file set; "latest" alone is insufficient>`.
+Current progress: `<Precise status: in progress, waiting for a specific fact, paused, implemented but unverified, verified but not yet active, complete, etc.>`.
 
-## 相关整体理解与变化影响
+Established findings: `<Findings and supporting evidence that remain usable>`.
+Implemented: `<Actual change locations; state none if nothing has been implemented>`.
+Verification actually run: `<Method, results, applicable environment, and evidence location; state not run if it was not run>`.
+Unconfirmed matters or blockers: `<Unknowns that could change the next choice>`.
+Next step: `<What to inspect or complete, at which actual entry point, and why it comes first>`.
+Operation boundaries: `<External actions that must not be repeated, unknown effects, and areas that must not be changed; remove if inapplicable>`.
 
-`<这项工作进入哪个完整行为；依赖和改变什么共同事实；哪些相邻责任与消费者需要关注；为什么其他范围目前不展开。>`
+## Relevant overall understanding and change impact
 
-相关说明、已接受约定和证据：`<指向既有位置，约定注明接受范围，不复制全部项目架构>`。
-尚未接受的提议：`<单独说明，不能作为执行既定前提；不适用可删除>`。
-修改前预期：`<保留原先影响判断，不用最终差异覆盖>`。
-实际新增发现与差异：`<后续新增；区分必要联动、遗漏、无关修改>`。
+`<Which end-to-end behavior this work belongs to; which shared facts it depends on and changes; neighboring responsibilities and consumers to consider; why other areas are not being expanded now.>`
 
-## 关键过程
+Relevant explanations, accepted agreements, and evidence: `<Point to existing locations; identify the scope of acceptance for agreements; do not copy the whole project architecture>`.
+Unaccepted proposals: `<Describe separately; do not treat them as settled execution premises; remove if inapplicable>`.
+Expected impact before the change: `<Retain the original impact judgment rather than replacing it with the final difference>`.
+Actual new findings and differences: `<Add later discoveries; distinguish necessary coordinated changes, omissions, and unrelated edits>`.
 
-### `<事件ID> · <发生/观察时间，必要时补记录时间>`
+## Key developments during the task
 
-`<关键发现、选择变化、执行结果、核实或中断。只保存对接续有用的依据与解释。>`
+### `<Event ID> · <Occurrence / observation time, with recording time if needed>`
 
-对应快照/证据：`<实际引用>`。
-对当前计划或共同理解的影响：`<改变了什么；是否需相关参与者重新判断>`。
+`<Key discoveries, changed choices, execution results, verification, or interruptions. Preserve only the basis and explanations useful for continuation.>`
 
-## 结束或移交时
+Corresponding snapshot / evidence: `<Actual references>`.
+Effect on the current plan or shared understanding: `<What changed; whether the relevant participants need to reassess>`.
 
-`<最终完成和未完成分开；哪些稳定结论已进入当前台账；哪些事件进入关键演变；剩余工作由哪个真实任务承接。>`
+## At completion or handoff
 
-共同记录处理：`<已更新的具体位置；或项目认识未变无需更新；或受限未保存的内容与拟维护位置。原主张已不可靠时说明原处是否标出差异，不能只留下新任务笔记>`。
+`<Separate completed and incomplete work; identify stable conclusions added to the current ledger, events added to key developments, and the actual task taking over remaining work.>`
 
-最后接续核对：`<下次需要重新确认的快照差异或状态，不要求全库复查；不能重复的外部动作及结果未知应在当前停点可见>`。
+Shared records: `<Specific locations updated; or no update needed because project understanding did not change; or content not saved because of a restriction and its intended location. If an earlier claim is no longer reliable, state whether the difference is marked at the original location; a new task note alone is insufficient>`.
 
-以上可合成一段，不要求每次新增文件或固定长报告；保存失败、部分保存与实际成功分开说明。
+Final continuation check: `<Snapshot differences or state that must be reconfirmed next time; a full repository recheck is not required. External actions that must not be repeated and unknown outcomes should be visible at the current checkpoint>`.
+
+This can all be a single paragraph. A new file or a fixed long report is not required for each task. Distinguish failed saves, partial saves, and actual success.
 
 ---
 
-并行任务各保留自己的停点，在项目入口列出活跃任务，不争写一个全局“当前任务”。保存前重读相关共享记录，防止覆盖他人的事实。只读权限下可在回复中提供本段待保存内容，但不能称已经更新文件。
+Parallel tasks each retain their own checkpoint and are listed as active tasks at the project knowledge entry point; they do not compete to overwrite a global "current task". Reread relevant shared records before saving to avoid overwriting other people's facts. With read-only permission, provide the text to be saved in the response, but do not claim the file has been updated.

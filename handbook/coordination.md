@@ -1,39 +1,41 @@
-# 调度手册
+# Coordination handbook
 
-用于需要协调多个任务、参与者或共享资源的工作。可以由同一人承担调度与执行，是否需要独立审核由[审核手册](review.md)及项目约定决定。通用判断见 [Skill 主文](../skills/clear-engineering/SKILL.md)，计划与接续语义见[参考 04](../skills/clear-engineering/references/04-planning-review-and-handoff.md)。
+[English](coordination.md) | [简体中文](coordination.zh-CN.md)
 
-## 围绕当前结果安排工作
+Use this handbook when work requires coordinating multiple tasks, participants, or shared resources. One person may coordinate and execute; the [review handbook](review.md) and project agreements determine whether independent review is needed. For general judgment, see the [main Skill](../skills/clear-engineering/SKILL.md); for planning and continuation, see [reference 04](../skills/clear-engineering/references/04-planning-review-and-handoff.md).
 
-先确认当前目标、用户已接受的顺序、授权范围与停点。划分已完成、可以独立进行、依赖其他结果的工作；操作前条件与操作后的验收结果分开，避免要求先交出只有执行后才会产生的证据。
+## Organize work around the current outcome
 
-分派时给出需要完成的结果、范围、必要依据、可用资源和停止边界。已有任务与认识适用时复用。参与者应能访问相关依据，不假设其他窗口、工具或服务继承了本机上下文。
+First establish the current goal, the sequence the user has accepted, the authorized scope, and the stopping point. Distinguish completed work, work that can proceed independently, and work that depends on other results. Separate prerequisites for an operation from acceptance results produced afterward; do not require evidence that can only exist after execution.
 
-角色和工具由实际需要选择。项目可自行配置模型、运行方式和资源预算；这些选择不改变职责，也不成为通用的必选组合。创建新会话、并行任务或替换参与者仍遵守当前环境与用户授权。
+When assigning work, provide the required outcome, scope, necessary evidence, available resources, and stopping boundaries. Reuse existing tasks and understanding when they still apply. Participants must be able to access the relevant basis for the work; do not assume other chats, tools, or services inherit the local context.
 
-## 依赖与资源分别判断
+Choose roles and tools to meet actual needs. Projects may configure their own models, execution methods, and resource budgets. These choices do not change the responsibilities or become a universally required combination. Creating new chats, parallel tasks, or replacing participants remains subject to the current environment and user authorization.
 
-确认谁实际承担某个结果，再确认谁能使用对应文件、状态、进程或发布资源。空闲的参与者不自动拥有其他任务的资源。共享可变资源在同一时间由明确的执行方操作，角色变更不自动释放资源。
+## Assess dependencies and resources separately
 
-只并行已授权、资源独立且能保留成果的工作。关键未知只限制依赖它的动作，不一起冻结安全独立的调查与准备。支持性工作若持续挤占当前目标，应重新判断必要性。
+Establish who is actually responsible for an outcome, then who may use the corresponding files, state, processes, or release resources. An available participant does not automatically own another task's resources. Assign a clear operator for a shared mutable resource at any given time; a change of role does not automatically release that resource.
 
-涉及外部效果或服务中断时，核实作用对象、实际写入者与授权范围。尽可能提前完成不需要中断的准备；一致性要求可能需要静默实际写入者，但不能由“需要更新”直接推出“可以停止全部服务”。
+Run work in parallel only when it is authorized, has independent resources, and can preserve its results. A critical unknown limits only the actions that depend on it; safe, independent investigation and preparation can continue. If supporting work keeps displacing the current goal, reassess whether it is necessary.
 
-## 用可观察变化监督进展
+For external effects or service interruptions, verify the target, the actual writers, and the authorized scope. Complete preparation that does not require interruption in advance wherever possible. Consistency may require quiescing the actual writers, but a need to update something does not by itself authorize stopping all services.
 
-按下一项有意义的结果约定反馈事件或合理检查点。小对话无需精确计时；跨时区或先后关系重要时说明时区。没有可用的事件等待或提醒能力时，明确限制，不承诺未经安排的后台监督。
+## Monitor observable progress
 
-在完成、失败、受阻、偏离目标或需要决定时介入。时间经过本身不证明任务失控；无需反复读取无变化的状态、完整历史或原始日志。
+Agree on feedback events or reasonable checkpoints around the next meaningful result. Short conversations do not need precise timing; specify the timezone when work crosses timezones or sequence matters. If event waiting or reminders are unavailable, state that limitation and do not promise background supervision that has not been arranged.
 
-先判断受阻原因，再做最小有效调整。重复失败时重新评估目标、依赖、能力和范围，保留有效结果，不靠换任务名称或无限延长检查来维持形式进度。用户的暂停、停止与权限边界持续有效。
+Intervene when work completes, fails, is blocked, drifts from the goal, or needs a decision. Elapsed time alone does not establish that a task is out of control. There is no need to repeatedly read unchanged status, full histories, or raw logs.
 
-## 留下当前真相
+Identify the cause of a blockage, then make the smallest effective adjustment. After repeated failures, reassess the goal, dependencies, capabilities, and scope while retaining valid results. Renaming tasks or extending checks indefinitely does not constitute progress. The user's pauses, stops, and permission boundaries remain in force.
 
-在项目已有入口或协调停点记录当前目标、实际承担者、相关资源、有效授权、已取得结果及下一步。引用原任务证据，不抄录全部实施细节；简单项目用一段话即可。
+## Preserve the current facts
 
-交接责任时明确接收者实际接受了什么，不能仅凭消息已经发送就认为交接完成。普通结果汇报不自动增加审批等待。结果未知的外部动作与不能重复的操作，应在停点可见。
+Use the project's existing entry point or coordination checkpoint to record the current goal, actual owners, relevant resources, valid authorization, results obtained, and next step. Refer to the original task evidence rather than copying every implementation detail. One paragraph can suffice for a simple project.
 
-上下文不足时先补与下一步有关的记录和差异。确需更换参与者或工作上下文，再按环境约定完成交接，不因固定对话次数机械换人。
+When handing over responsibility, establish what the recipient has actually accepted; sending a message alone does not complete a handoff. An ordinary progress report does not automatically introduce an approval wait. External actions with unknown outcomes and operations that must not be repeated should be visible at the current checkpoint.
 
-## 到哪里停止
+When context is insufficient, first fill in the records and differences relevant to the next step. If a different participant or work context is truly needed, follow the environment's handoff rules. Do not replace participants mechanically after a fixed number of exchanges.
 
-执行者核实实际执行结果，审核者负责相应审核，总协调者据此处理范围、资源与下一步。没有新失败、对象变化或证据矛盾时，不重复同一层核实。目标达到且已有足够直接证据，就交付并停止。
+## Know when to stop
+
+The executor verifies the actual execution result; the reviewer performs the relevant review; the overall coordinator uses those results to manage scope, resources, and next steps. Without a new failure, a changed object, or contradictory evidence, do not repeat verification at the same level. Once the goal is met and sufficient direct evidence exists, deliver the result and stop.

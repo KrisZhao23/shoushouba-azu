@@ -1,48 +1,59 @@
-# 公开整理稿的验证记录
+# Public candidate validation record
 
-对象：基于 `0.1.3-candidate` 的公开候选内容。当前自有内容采用 MIT，公开署名为 KZ。下列检查按发生阶段保留，早期的文件数、许可证及未发布状态属于当时快照；线上内容以仓库可访问的具体提交为准。
+[English](VALIDATION.md) | [简体中文](VALIDATION.zh-CN.md)
 
-## 已实际完成
+Scope: public candidate content based on `0.1.3-candidate`. Project-owned content is licensed under MIT, with the public name KZ. Checks below retain their original stages; earlier file counts, license status, and unpublished status describe those snapshots. The available repository commit determines the content actually online.
 
-- Skill 格式验证器成功返回 `Skill is valid!`。这是文件格式检查，不证明宿主已经安装、自动发现或正确使用本方法。
-- 在 Python 3.11.9 中按顺序执行单文件示例的两个 Python 代码块，使用其自带 `check_example()`；检查通过。覆盖示例中的截止日、逾期日、完成日、两个输出入口、字段归一化及非法输入拒绝。只使用标准库，无网络调用或业务文件写入。
-- 检查公开目录的 23 份文件及 62 个本地 Markdown 文件链接，未发现缺失目标。
-- 对已知私人标识、个人与绝对目录、主机地址、邮箱、会话标识及常见密钥形态进行扫描，修正发现的内部资料背景引用后无匹配。公开第三方来源名称与链接保留；未带入业务源码、运行日志、聊天截图或历史 Git 数据。
-- 23 份文件的 PowerShell 原生 UTF-8 读取内容与 Python 读取内容一致，规范化文本哈希核对通过。
-- 目录中没有 Git 历史或许可证文件；未创建远端仓库、提交或上传。
+## Initial checks completed
 
-## 证据边界
+- The Skill format validator returned `Skill is valid!`. This checks file format, not installation, automatic discovery, or correct use.
+- The two Python code blocks in the single-file example were executed in order under Python 3.11.9, using their existing `check_example()`. Checks passed for the due date, overdue date, completion date, two output entry points, field normalization, and rejection of invalid input. Only the standard library was used, with no network calls or business-file writes.
+- Checked 23 public files and 62 local Markdown file references; no missing targets were found.
+- Scanned known private identifiers, personal and absolute paths, host addresses, emails, conversation identifiers, and common secret patterns. After correcting references to internal background materials, no matches remained. Public third-party names and links were retained; business source code, runtime logs, chat screenshots, and historical Git data were not included.
+- Native PowerShell UTF-8 reads and Python reads agreed for all 23 files; normalized text hashes matched.
+- At this stage, there was no Git history or license file, and no remote repository, commit, or upload had been created.
 
-文件核对与离线示例只支持对应范围，不证明所有代理环境兼容、所有输入正确或方法普遍有效。第三方项目的研究阅读与本次仓库检查分别表述，未把本次检查冒充使用方的业务验证。
+## Evidence limits
 
-后续修改在本文件更新相关实际结果即可，不要求为每次编辑另建验证报告。
+File checks and offline examples support only their stated scope. They do not prove compatibility with every agent environment, correctness for all inputs, or general effectiveness. Reading third-party research and checking this repository are separate activities; these checks are not presented as validation of an adopter's business system.
 
-## 2026-10-18：来源、署名与许可补充
+Update relevant actual results here after changes. A separate validation report is not required for every edit.
 
-- 核对公开稿实际内容与其中提及的第三方来源，以原仓库、固定版本许可证、官方文档许可页或规范版权段为依据；参考 06 第 9 节现在列有 21 组来源，区分 16 组研究／启发／技术说明与 5 组仅提及项目。女娲的作者与来源已明确补入。
-- 重要区别：GitLab Handbook 内容使用 CC BY-SA 4.0，不以软件根许可证代替；Codified Context 仓库的 MIT 与论文的 CC BY 4.0 分开；Stripe、OpenAI 所引网页没有被标作已获通用开源复制许可。未发现当前材料中明确违反已核实许可的复制内容；这不是全量相似性或权属鉴定。
-- 联动修改限于本公开稿的 README、Skill 导航、台账方法、参考 06 和本记录。来源清单留在 Skill 目录内，复制整个 Skill 时可一并保留。未修改已安装 Skill、全局指令或业务项目。
-- 格式验证器用进程参数 `python -X utf8` 成功返回 `Skill is valid!`；首次默认 GBK 读取失败属于检查命令的编码设置，未因此重写文件或修改全局编码配置。
-- 公开目录仍为 23 个文件，65 处本地 Markdown 文件／锚点引用均有效；本地私人标识、目录、主机地址、邮箱和常见凭证形态扫描无匹配。PowerShell 原生 UTF-8 与 Python 的 23 份内容哈希一致；本记录补写后的原生读取另外核对。没有修改示例代码，不重复执行未受影响的示例。
-- 已有独立只读隐私复核对应本次来源补充前的文件内容；本次新增公开出处及说明由本次检查覆盖，不自动扩大他人的审核结论。自有内容许可证、公开署名及未来 Git 发布元数据仍待确定；未创建许可证、提交、远端或上传。
+## 2026-10-18: sources, attribution, and licenses
 
-## 2026-10-18：自愿案例反馈与 MIT
+- Reviewed the public content and its third-party references against original repositories, pinned-version licenses, official documentation license pages, or specification copyright sections. Reference 06 section 9 lists 21 source groups: 16 research/inspiration/technical groups and 5 projects merely mentioned. Nuwa's author and source were added explicitly.
+- Key distinctions: GitLab Handbook content uses CC BY-SA 4.0, not the software repository's root license; the Codified Context repository's MIT license is separate from the paper's CC BY 4.0 license. Cited Stripe and OpenAI pages were not labeled as generally open-licensed for copying. No clearly noncompliant copying under the checked licenses was identified in the current materials; this was not a comprehensive similarity or ownership assessment.
+- Coordinated changes were limited to the public README, Skill navigation, ledger method, reference 06, and this record. The attribution inventory stays inside the Skill directory so it accompanies a separate copy. Installed Skills, global instructions, and business projects were not changed.
+- The format validator returned `Skill is valid!` with the process option `python -X utf8`. The initial default-GBK read failure was a check-command encoding issue; files and global encoding settings were not rewritten because of it.
+- There were still 23 public files, with 65 valid local Markdown file/anchor references. Known private identifiers, paths, host addresses, emails, and common credential patterns had no matches. Native PowerShell UTF-8 and Python content hashes matched for all 23 files; the later record update received a separate native-read check. Unchanged example code was not rerun.
+- The earlier independent read-only privacy review covered the files before this source supplement. This check covered the new public sources and explanations without extending the other reviewer's conclusion. At this stage, the project-owned license, public attribution, and future Git publication metadata remained undecided; no license, commit, remote, or upload had been created.
 
-- 维护者选定 MIT 与公开署名 KZ。根目录及 Skill 子目录加入相同的标准许可文本，版权行为 `Copyright (c) 2026 KZ`；README、Skill、来源说明和仓库维护说明同步当前状态。Skill 单独分发时保留许可文本与原有来源说明，第三方许可边界未改变。
-- README 明确案例和跨项目证据仍有限；贡献指南说明如何从现有记录分享经历、如何处理反馈及确认案例收录；单个 Markdown Issue 模板提供四个可删减问题。参考 05 同步自愿分享、不重复建账及不自动上传的边界。公开仓库维护说明允许经确认可公开的脱敏使用经历。
-- 小范围只读接续检查确认三份角色手册已有复用原记录的说明，本轮无需再加反馈步骤。没有修改已安装 Skill、个人配置或其他项目，也没有联系或招募试用者。
-- 本次公开目录共 26 份文件，74 处本地文件／显式锚点引用有效；两份 LICENSE 内容一致；Issue 模板的 YAML 前置元数据可解析，包含有效 name 和 about。模板位置与格式依据 [GitHub 官方说明](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates)核对，模板正文自行编写。
-- Skill 格式检查返回 `Skill is valid!`。26 份文件的 PowerShell 原生 UTF-8 与 Python 内容哈希一致；已知私人标识、个人路径及凭证形态扫描无匹配。后续补写的维护说明和本记录另外核对原生读取。不重复执行未改动的示例。
-- 检查支持本地内容、链接与格式；尚未推送到 GitHub 默认分支，未验证线上模板选择器，也尚未收到新的社区案例。没有提交、推送或发布，Git 发布身份及远端仍未配置。
+## 2026-10-18: voluntary case feedback and MIT
 
-## 2026-10-18：首次 Git 发布准备
+- The maintainer chose MIT and the public name KZ. Identical standard license text was added at the root and in the Skill directory, with `Copyright (c) 2026 KZ`. The README, Skill, source inventory, and repository instructions were aligned. A separately distributed Skill retains the license and source inventory; third-party license boundaries did not change.
+- The README states that case evidence and cross-project validation remain limited. The contribution guide explains how to summarize existing records, handle feedback, and confirm inclusion of a case. One Markdown issue template provided four optional prompts. Reference 05 was aligned on voluntary sharing, avoiding duplicate ledgers, and no automatic uploads. Repository instructions now permit de-identified experiences confirmed safe for publication by their provider.
+- A narrow read-only continuity check found that the three role handbooks already required reuse of existing records, so no feedback step was added to each role. Installed Skills, personal settings, and other projects were not changed; no trial users were contacted or recruited.
+- At this stage, there were 26 public files and 74 valid local file/explicit-anchor references. The two LICENSE files matched. The issue template's YAML frontmatter parsed with valid name and about fields. Its location and format were checked against [GitHub's official documentation](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates); the template wording was written for this project.
+- The Skill format check returned `Skill is valid!`. Native PowerShell UTF-8 and Python hashes matched for all 26 files; known private identifiers, personal paths, and credential patterns had no matches. The later maintenance-note and validation-record edits received separate native-read checks. Unchanged examples were not rerun.
+- These checks covered local content, links, and format. At that stage, the default branch had not been pushed, the online template chooser had not been tested, and no new community cases had been received. No commit, push, or publication had occurred, and Git publication identity and remote settings were not configured.
 
-- 已获维护者公开发布授权。使用独立新建 Git 仓库，仅纳入上述 26 份公开文件；不带入其他项目的历史。提交署名为 KZ，使用 GitHub noreply 邮箱；仅设置本仓库身份，未修改全局 Git 配置。
-- README 与贡献指南同步公开候选版状态及实际 Issue 地址。此次新增许可、反馈说明和模板的只读复查未发现具体隐私项或强制反馈义务；该结论不扩大为未来贡献内容的保证。
-- 核对 Git 暂存区中的实际文件清单、UTF-8 正文及已知私人标识，26 份均为预期普通文件；暂存内容与本地 Python、PowerShell 原生读取的正文一致。修正一处文末多余空行，后续修改的两份文档另作相同核对；未改动示例行为。
-- 此处保存发布前文件与内容检查。远端分支和提交结果以 GitHub 上的实际提交为准；本地模板格式检查不冒充线上选择器或真实反馈效果验证。
+## 2026-10-18: preparation for the first Git publication
 
-## 2026-10-18：公开名称修正
+- The maintainer authorized public publication. A fresh independent Git repository included only the 26 public files, without history from another project. Commits used KZ and a GitHub noreply email; identity was set only for this repository, without changing global Git configuration.
+- The README and contribution guide were updated to public-candidate wording and the actual issue URL. A read-only review of the new license, feedback guidance, and template found no specific private information or mandatory feedback obligation. This does not guarantee the safety of future contributions.
+- Checked the actual staged file list, UTF-8 text, and known private identifiers. All 26 entries were expected regular files; staged content matched local Python and native PowerShell reads. One extra trailing blank line was removed, and the two subsequently changed documents received the same checks. Example behavior was unchanged.
+- This section records checks before publication. Actual GitHub branches and commits establish the remote result; local template-format validation is not presented as online chooser or real feedback-effectiveness validation.
 
-- 公开名称为“收手吧阿祖”，仓库地址使用 `KrisZhao23/shoushouba-azu`；首页、维护说明和反馈链接同步。Skill 仍以 `clear-engineering` 调用和安装，内容目录与既有相对引用不变。
-- 此次只涉及名称、简介、地址与记录；核对变更文档的 UTF-8 正文、暂存内容和链接，未重跑未受影响的示例。实际远端名称与提交以发布结果为准。
+## 2026-10-18: public-name correction
+
+- The public project name is "收手吧阿祖" (Shoushouba Azu), at `KrisZhao23/shoushouba-azu`. The homepage, maintenance instructions, and feedback links were aligned. The Skill remains installed and invoked as `clear-engineering`; its content directory and existing relative references did not change.
+- Only naming, description, addresses, and records changed. UTF-8 text, staged content, and links in the changed documents were checked; unaffected examples were not rerun. Actual publication results establish the remote name and commit.
+
+## Complete English and Simplified Chinese reading paths
+
+- Preserved all 22 original Chinese Markdown documents as corresponding `.zh-CN.md` files and translated all 22 main documents into English. Both paths cover the Skill, three role handbooks, four ledger/record templates, two examples, seven references, contribution guidance, and maintenance records. Both issue templates offer the same four optional prompts.
+- Added language switches and language-specific internal links. The same Skill package includes both languages, retains the `clear-engineering` invocation name, and asks the agent to use the user's preferred language. UI metadata is bilingual. Meaning changes should update the affected counterparts; users need not read both versions or file duplicate feedback.
+- Reviewed translation conditions, exceptions, authorization, evidence limits, and attribution. Corrected an English feedback paragraph whose imperative wording could assign the maintainer's follow-up responsibilities to the reporter. Remaining Chinese text in English documents consists of the public project name and attributed source names.
+- Checked all 48 public files: 22 document pairs and 232 local file/explicit-anchor references. Both issue frontmatters parsed; Skill UI metadata retained implicit invocation and a valid prompt. The Skill format validator returned `Skill is valid!`. Both licenses match, and all 67 distinct URLs in the evidence/source reference were preserved in each language.
+- Native PowerShell UTF-8 and Python content hashes matched for all 48 files. Known private identifiers, personal paths, and credential patterns had no matches. The two example Python blocks remained identical to their originals; running the existing `check_example()` passed. Later additions to this record and its Chinese counterpart receive separate native-read and staged-content checks before committing.
+- Scope is the public repository only; installed personal Skills and global settings were not changed. These results validate document coverage, local links, encoding, format, and the stated example behavior. They do not prove automatic host loading, equivalent model behavior across languages, online issue-chooser behavior, or cross-project effectiveness.

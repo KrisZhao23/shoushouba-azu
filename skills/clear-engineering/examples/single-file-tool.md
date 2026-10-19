@@ -1,24 +1,26 @@
-# 单文件小工具：充分理解，不强制拆分
+# A single-file tool: understand enough without forcing a split
 
-以下业务、文件名、符号与 EX 事件全部为说明性虚构，不对应真实用户代码。两个代码块可组成一个离线示例；实际是否运行及结果应以使用方的验证记录为准，不把示例检查当作真实项目验证或维护成本证明。
+[English](single-file-tool.md) | [简体中文](single-file-tool.zh-CN.md)
 
-## 可以合在一份说明里的当前台账
+The business scenario, filenames, symbols, and EX events below are all illustrative fiction and do not correspond to real user code. The two code blocks form one offline example. Whether it was actually run, and with what result, must be established by the user's validation record. Example checks are not real project verification or proof of maintenance costs.
 
-项目：任务状态报表。目标是界面与导出在相同事实和同一比较日期下采用同一政策。当前只有一个输入来源，不需要为“未来多个来源”先建插件结构。
+## A current ledger that fits in one document
 
-整体合作：在虚构的 `report.py` 中，`parse_task` 解释来源字段；`state_for` 接收已经明确的数据和比较日期；`show_report` 与 `export_report` 组织不同输出。都留在一个文件，没有接口家族。真实项目也可以用一个清楚的共享函数承担解析和计算；下面分开写是为了展示变化落点，不据此认定更低维护成本。
+Project: a task status report. The goal is for the display and export to apply the same policy to the same facts and comparison date. There is currently one input source, so no plugin structure is needed for hypothetical future sources.
 
-示例内已接受约定（虚构）：同一比较日期下，完成日期不晚于比较日期则为 completed；否则截止日期早于比较日期则为 overdue；其他为 open。截止当天不算逾期。历史日期导出与今天界面可以不同，不能要求它们总显示相同状态。完成日期与截止日期都是日期，不是要自动换算的时刻。
+How the whole works together: in the fictional `report.py`, `parse_task` interprets source fields; `state_for` receives explicit data and a comparison date; `show_report` and `export_report` organize different outputs. Everything stays in one file, without a family of interfaces. A real project could also use one clear shared function for parsing and calculation. They are separated below to illustrate where changes belong, not to establish lower maintenance costs.
 
-限制：只有一次完成、没有重开/撤销历史；它按当前已知事实回算指定日期，不复原“当时系统知道什么”。`completed_on` 的 None 在这个例子中明确表示“当前没有完成事实”；缺失字段不能自动解释成 None。真实来源语义不同就需要重新判断。
+Agreement accepted within the fictional example: for a given comparison date, the status is completed if the completion date is no later than that date; otherwise it is overdue if the due date is earlier than the comparison date, and open otherwise. The due date itself is not overdue. An export for a historical date can differ from today's display; they need not always show the same status. Completion and due dates are dates, not instants to convert automatically.
 
-代码导航：同一假设文件里的解析、共享规则与两个输出入口。输出仅是可交给呈现/序列化部分的 Python 值，不是真实屏幕、CSV 文件或授权实现。未展示的批量、持久化和安全策略不视为已解决。
+Limits: there is only one completion, with no history of reopening or reversal. The rule calculates status for a specified date using currently known facts; it does not reconstruct what the system knew at that time. In this example, `None` for `completed_on` explicitly means "there is currently no completion fact." A missing field must not automatically be interpreted as `None`. Different source semantics require reassessment.
+
+Code navigation: parsing, a shared rule, and two output entry points in the same hypothetical file. Outputs are only Python values that could be passed to presentation or serialization code; they are not a real screen, CSV file, or authorization implementation. Batch processing, persistence, and security policies that are not shown are not thereby solved.
 
 <a id="code-example"></a>
 
-## 少量代码：明确输入，而不搭建应用
+## A little code: explicit inputs without an application framework
 
-两个 Python 代码块可按顺序放在同一临时文件运行，需 Python 3.10 或以上；只用标准库，没有网络或文件写入。没有在默认参数或规则内部读取当前时钟。函数签名用于展示责任，不是通用的必需拆分方式。
+Place the two Python blocks in order in one temporary file to run them with Python 3.10 or later. They use only the standard library and perform no network access or file writes. Neither default arguments nor the rule read the current clock. Function signatures illustrate responsibilities, not a universally required way to split code.
 
 ```python
 from dataclasses import dataclass
@@ -66,11 +68,11 @@ def export_report(task: Task, *, as_of: date) -> tuple[str, str]:
     return task.task_id, state_for(task, as_of=as_of)
 ```
 
-这里规则依赖的是有意义的 `Task` 和 `as_of`，而不是当前用户、原始字段名或全局时钟。Task 应由可信构造位置提供合法字段；类型标注不是运行时自动校验，绕过解析直接构造对象的其他入口仍需遵守相同数据契约。选择日期的入口也应说明业务日历和用途，不是由内部函数随意选择“今天”。
+The rule depends on a meaningful `Task` and `as_of`, rather than the current user, raw source field names, or a global clock. Trusted construction sites should provide valid `Task` fields. Type annotations do not perform automatic runtime validation; other entry points that construct objects directly without parsing must still obey the same data contract. The entry point choosing a date should explain the business calendar and purpose; an internal function should not choose "today" arbitrarily.
 
-## 一个有区分力的组合检查
+## One discriminating check of the combined behavior
 
-下面不是只比较两个入口互相相等，还分别与政策预期比较，避免两个入口一起错误也通过。一次调用覆盖截止日、逾期日、完成日及显式的来源格式解释；错误输入必须被拒绝。
+The following checks each output against the policy's expected result instead of merely comparing the two entry points with each other, which could pass when both are wrong. A single call covers the due date, an overdue date, the completion date, and explicit interpretation of the source format. Invalid input must be rejected.
 
 ```python
 def check_example() -> None:
@@ -106,28 +108,28 @@ if __name__ == "__main__":
     print("PASS: illustrative date policy, two outputs, field mapping, invalid input")
 ```
 
-这组输入能区分“尊重传入日期”与“内部固定使用某一天”，也能识别一个入口绕过共享完成判断。它不证明所有日期、输入或历史情况正确，更不能证明拆开的函数比清楚的共享函数更省维护成本。示例片段检查也不等于真实业务环境验证。
+These inputs distinguish respecting the supplied date from using one fixed day internally, and can detect an entry point bypassing the shared completion check. They do not establish correctness for all dates, inputs, or historical situations, nor do they prove that separate functions cost less to maintain than a clear shared function. Checking these snippets is not verification in a real business environment.
 
-## 两类变化怎样找到落点
+## Finding the right place for two kinds of change
 
-只有 `due` 改名为 `deadline`、含义不变时，可以调整来源解释位置；检查保留同一个 Task 和政策结果。上面的局部归一化只是说明这一点，不是建立通用字段映射引擎，也没有证明真实来源只改了名字。
+If only the field name changes from `due` to `deadline` and its meaning stays the same, adjust the source interpretation and check that it preserves the same Task and policy results. The local normalization above illustrates that point; it is not a general field-mapping engine and does not establish that a real source changed only the name.
 
-若业务改成“截止日当天就算逾期”，则共享规则的比较和截止日预期需要按新约定变化，两种输出继续核实。若来源把截止日期变成有时区的截止时刻，则不再是单纯字段映射，应重审数据含义和比较策略。不能为了让旧断言通过而无依据改预期。
+If the business rule changes to "overdue on the due date itself," update the shared rule's comparison and the due-date expectation under the new agreement, and continue checking both outputs. If the source changes a due date into a timezone-aware deadline instant, that is no longer a simple field mapping; revisit the data meaning and comparison policy. Do not change expectations without a basis just to make old assertions pass.
 
-## 简短时间线也能保留关键演变
+## A short timeline can preserve key developments
 
-EX-01，发生时间未设定：虚构项目接受“相同数据/日期下同政策”的方向。不对应真实项目接受。
+EX-01, occurrence time unspecified: the fictional project accepts the direction "same policy for the same data and date." This is not acceptance by a real project.
 
-EX-02，后续虚构需求：增加历史日期导出。保留共享政策，调整入口日期来源；不把导出与今天界面结果相同作为要求。
+EX-02, a subsequent fictional requirement: add export for historical dates. Preserve the shared policy and adjust where the entry point obtains its date. Do not require the export to match today's display.
 
-EX-03，待观察：若增加第二来源后，字段变化反复影响业务判断，再比较转换函数与当前组织。不能事后认定最初就必须拆分。
+EX-03, pending observation: if adding a second source causes field changes to repeatedly affect business judgments, compare conversion functions with the current organization. Do not conclude afterward that a split was mandatory from the outset.
 
-上述是示例项目的时间线。实际运行片段属于示例检查，记录在对应验证说明中，不回填为 EX 事件已经在业务环境发生。
+This is the example project's timeline. Actually running the snippets is an example check, recorded in the corresponding validation notes; it does not retroactively make the EX events facts that occurred in a business environment.
 
-## 当前任务的接续点
+## Current task continuation point
 
-示例内的工作是假设“接入历史日期输入”。真实接手者应先读自己的两个入口怎样取得日期，再确认规则是否暗读时钟。这里只交付说明性片段，不代表用户代码已改、测试已补或任务已完成。
+The hypothetical task in this example is to accept a historical date as input. A real successor should first read how their own two entry points obtain dates, then confirm whether the rule reads the clock implicitly. This example provides illustrative snippets; it does not mean the user's code has been changed, tests have been added, or the task is complete.
 
-## 从这个例子保留什么
+## What to retain from this example
 
-一个文件可以承担清楚责任，记录也可以合在一份说明中。能接续的关键是共同政策、输入含义、位置和证据边界，而不是 class 清单。真实项目已有等效注释与 README 时，只增加缺失关系和当前停点。代码展示用于理解判断，不作为必须照抄的实现。
+One file can hold clear responsibilities, and one document can hold the records. Shared policy, input meaning, locations, and evidence boundaries make continuation possible; a class inventory does not. If a real project already has equivalent comments and a README, add only missing relationships and the current checkpoint. The code helps explain the judgment; it is not a required implementation to copy.

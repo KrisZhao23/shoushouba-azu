@@ -1,85 +1,87 @@
-# `<项目名称>`：当前工程理解
+# `<Project name>`: current engineering understanding
 
-> 项目台账起始稿。当前内容是写作提示，不是项目事实，也不是已接受约定。已有文档承担同样用途时，复用并补足，不要另建平行索引。选择需要的内容，可以合并或删除提示；不要为了完整而填写未知细节。
+[English](project-ledger.md) | [简体中文](project-ledger.zh-CN.md)
+
+> A starting template for a project ledger. The content below consists of writing prompts, not project facts or accepted agreements. When existing documentation serves the same purpose, reuse and supplement it instead of creating a parallel index. Choose what you need, merge or remove prompts, and do not invent unknown details for the sake of completeness.
 >
-> 目的：让读者理解整体、找到相关责任与实现、核实依据，并沿已有进展继续工作。
+> Purpose: help readers understand the whole, locate relevant responsibilities and implementations, verify the basis for claims, and continue from existing progress.
 
-## 1. 阅读与适用范围
+## 1. Reading guide and scope
 
-项目及工作区：`<项目身份、范围与实际工作区；说明与平台/内部项目的关系，不把资料目录等同于全部实现>`。
-本入口的指定与发现：`<指定依据、实际登记的工作入口及其中位置；尚未登记或读取未核实就注明，不因本模板存在宣称已接入>`。
-路径解析基准：`<项目根或其他明确基准；已有上文说明可引用，不重复登记>`。
-当前材料对应：`<可核对的代码/配置版本、文件快照或明确范围>`。
-本入口与既有资料的分工：`<哪些现有说明继续作为依据，避免重复>`。
-已确认覆盖与重要缺口：`<已检查哪些范围；哪些只是转述/历史/尚未核实>`。
+Project and workspace: `<Project identity, scope, and actual workspace; explain its relationship to the platform or internal projects without treating a materials directory as the full implementation scope>`.
+Designation and discovery of this entry point: `<Basis for its designation, the actual registered work entry point, and its location there; state when it has not been registered or reading has not been verified. The existence of this template does not establish adoption>`.
+Base for resolving paths: `<Project root or another explicit base; reference an existing explanation rather than registering it again>`.
+What the current materials correspond to: `<Verifiable code/configuration version, file snapshot, or explicit scope>`.
+Division of responsibility between this entry point and existing materials: `<Which existing explanations remain authoritative for their purposes; avoid duplication>`.
+Confirmed coverage and important gaps: `<What has been inspected; what is only secondhand, historical, or still unverified>`.
 
-`<用自然段说明：当前读者从这里得到什么，需要深入哪个位置；不要把整份记录标为笼统“审核通过”。>`
+`<Explain in prose what the current reader can learn here and where to go deeper; do not label the entire record with a blanket "review passed".>`
 
-## 2. 目标、边界与当前阶段
+## 2. Goal, boundaries, and current stage
 
-`<谁需要什么结果，哪些行为必须成立；哪些不是本项目责任；当前是研究、演示、实现中还是实际运行。业务范围草图不等于最终模块、顺序或状态模型。>`
+`<Who needs what outcome, which behaviors must hold, which responsibilities are outside the project, and whether the work is currently research, a demonstration, implementation in progress, or actual operation. A business scope sketch is not a final module, sequence, or state model.>`
 
-重要共同约束：`<身份与权限、状态含义、版本对应、数据完整性、实际效果、运行约束等真正适用的要求，附确认依据；不照抄通用风险清单。>`
+Important shared constraints: `<Requirements that actually apply, such as identity and authorization, state meanings, version correspondence, data integrity, actual effects, or operational constraints, with their basis for confirmation; do not copy a generic risk checklist>`.
 
-## 3. 整体怎样合作
+## 3. How the whole works together
 
-`<解释主要责任怎样共同产生结果，以及谁决定结果是否成立。除正常路径外，指出真正影响理解的分支、并行、汇合、撤销或失败。无需画全量图，也不能只列模块名称。>`
+`<Explain how the main responsibilities cooperate to produce the outcome and who determines whether it holds. Beyond the normal path, identify branches, parallel work, joins, reversals, or failures that genuinely matter to understanding. A complete diagram is not required, but a list of module names is insufficient.>`
 
-| 责任或协作对象 | 承担的承诺及边界 | 实现/既有说明入口 | 需要特别知道的合作关系 |
+| Responsibility or collaborator | Commitment and boundary | Implementation / existing documentation entry point | Collaboration relationships that matter |
 |---|---|---|---|
-| `<实际对象>` | `<为何由它承担，不承担什么>` | `<实际路径与符号>` | `<依赖谁的什么，谁使用其结果>` |
+| `<Actual object>` | `<Why it owns this responsibility; what it does not own>` | `<Actual paths and symbols>` | `<What it depends on, from whom, and who uses its results>` |
 
-表格只是可选表达。小项目用一段话即可；大项目在这里保留全景解释，把内部细节按问题展开。
+The table is optional. A paragraph can suffice for a small project; a large project can retain the overall explanation here and expand internal details as questions arise.
 
-## 4. 关键行为、状态与契约
+## 4. Key behaviors, states, and contracts
 
-### `<目前最需要理解的一项行为或共享事实>`
+### `<The behavior or shared fact most important to understand now>`
 
-目标与完成含义：`<用户结果、状态或外部效果>`。
-已接受约定：`<具体内容、适用范围、实际接受依据；没有则明确未确认>`。
-尚在提议：`<尚未接受的选项或限制，不作为既定前提；不适用可删除>`。
-实际观察：`<关键入口、写入者、解释者与消费者；适用快照>`。
-合作前提：`<真实影响行为的版本、身份、时序、资源与失败含义>`。
-验证与未知：`<证据位置、实际运行范围、尚未核实的主张>`。
-深入位置：`<需要展开时链接到已有说明或行为/契约记录，不先建空文件>`。
+Goal and meaning of completion: `<User outcome, state, or external effect>`.
+Accepted agreement: `<Specific content, applicable scope, and actual evidence of acceptance; state explicitly if unconfirmed>`.
+Still proposed: `<Options or restrictions not yet accepted; do not treat them as settled premises; remove if inapplicable>`.
+Actual observations: `<Key entry points, writers, interpreters, and consumers; applicable snapshot>`.
+Collaboration premises: `<Versions, identity, timing, resources, and failure meanings that genuinely affect behavior>`.
+Verification and unknowns: `<Evidence locations, actual execution scope, and unverified claims>`.
+Where to go deeper: `<Link to existing explanations or behavior/contract records when expansion is needed; do not create empty files in advance>`.
 
-同一状态被多个行为引用时，可把其解释保存为独立契约，再由相关行为引用。相同词语不自动代表同一事实。
+When several behaviors refer to the same state, its interpretation can be maintained as a separate contract and referenced by those behaviors. Identical words do not automatically denote the same fact.
 
-## 5. 重要决定与实现差异
+## 5. Important decisions and implementation differences
 
-`<保存难以从代码重建的取舍：基于什么事实选什么、代价和限制、什么变化会要求重新判断。小决定可直接写在相关行为中。>`
+`<Preserve tradeoffs that are hard to reconstruct from code: which facts led to which choice, its costs and limits, and changes that would require reassessment. Small decisions can remain within the relevant behavior description.>`
 
-当前有效决定：`<已经接受的决定、范围与依据；尚未实现时明确>`。
-尚未接受的选择：`<与当前有效决定分开，说明仍待谁/什么依据判断；可删>`。
-实现与约定的差异：`<记录过期、实现偏差或已接受变更尚未同步，需要分别判断>`。
-关键历史入口：`<重要决定/时间线的实际位置；不把完整历史复制在这里>`。
+Currently valid decisions: `<Accepted decisions, their scope and basis; make clear if not yet implemented>`.
+Choices not yet accepted: `<Keep separate from currently valid decisions; explain whose judgment or what evidence is still needed; optional>`.
+Differences between implementation and agreements: `<Distinguish stale documentation, implementation deviations, and accepted changes not yet reflected in the record>`.
+Key history entry point: `<Actual location of important decisions or the timeline; do not copy the full history here>`.
 
-## 6. 验证依据与需核实事项
+## 6. Verification basis and matters to check
 
-`<对关键主张分别指出对应源码观察、测试断言或实际结果；文档完整不是证据。>`
+`<For each key claim, point to the corresponding source observation, test assertion, or actual result. Complete documentation is not evidence.>`
 
-| 重要主张 | 证据与基线 | 支持范围及限制 | 仍需核实什么 |
+| Important claim | Evidence and baseline | Supported scope and limits | What remains to be verified |
 |---|---|---|---|
-| `<具体主张>` | `<实际来源/快照/结果>` | `<静态阅读或已运行、环境与覆盖>` | `<会改变决定的问题>` |
+| `<Specific claim>` | `<Actual source / snapshot / result>` | `<Static reading or executed check, environment, and coverage>` | `<Questions that could change the decision>` |
 
-重要未知对应具体核查入口；不影响当前工作时保留范围继续推进，会影响高风险决定时限制相关动作。
+Connect important unknowns to concrete places to investigate. Continue within scope when they do not affect current work; restrict relevant actions when they affect high-risk decisions.
 
-## 7. 当前工作与接续入口
+## 7. Current work and continuation entry points
 
-| 活跃任务或讨论 | 当前状态 | 接续记录 | 对共同认识的影响 |
+| Active task or discussion | Current status | Continuation record | Effect on shared understanding |
 |---|---|---|---|
-| `<真实任务>` | `<已查/已实现/未验证等准确状态>` | `<实际文件或本文件段落>` | `<有关约束或待决定问题>` |
+| `<Actual task>` | `<Precise status: investigated, implemented, unverified, etc.>` | `<Actual file or section in this file>` | `<Relevant constraints or unresolved decisions>` |
 
-无并行需求的小项目可用一段“当前停点”替代表格。任务结束后，把稳定知识放回对应责任/行为，将无关过程移出当前导航。
+A small project without parallel work can replace the table with a paragraph describing the current checkpoint. When a task ends, move stable knowledge back to the relevant responsibility or behavior and remove irrelevant process details from current navigation.
 
-## 8. 关键演变
+## 8. Key developments
 
-`<写在这里，或者指向实际时间线。事件保留日期、性质、改变的判断、影响与证据。决定时间不等于实现或生效时间。>`
+`<Record them here or point to the actual timeline. Preserve the date, event type, changed judgment, impact, and evidence. Decision time is not implementation time or the time an effect became active.>`
 
-### `<事件ID> · <已知时间/未知> · <事件标题>`
+### `<Event ID> · <Known time / unknown> · <Event title>`
 
-`<事实变化与判断依据；实现/验证/生效各自到哪里；补记时标明记录时间；关联实际任务、决定和证据。>`
+`<Changes in facts and the basis for judgment; the respective implementation, verification, and activation status; recording time for retrospective entries; links to actual tasks, decisions, and evidence.>`
 
 ---
 
-维护原则：谁发现或改变了相关共享事实，谁使差异可见；谁核实主张，谁说明依据及范围。并行保存前核对原文及基线。不强制五轮审批，不允许无痕覆盖重要历史，不要求每次任务重读全部台账。
+Maintenance principle: whoever discovers or changes a relevant shared fact makes the difference visible; whoever verifies a claim explains the basis and scope. Check the original text and baseline before saving parallel work. Five rounds of approval are not required, important history must not be overwritten without a trace, and every task need not reread the entire ledger.

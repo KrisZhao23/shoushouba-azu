@@ -1,23 +1,25 @@
 ---
-name: "使用经历或反例"
-about: "分享一次帮助、遗漏、卡住或流程变重的经历；没有修改方案也欢迎"
+name: "Use case or counterexample"
+about: "Share help, omissions, blockers, or extra process; no proposed fix required"
 ---
 
-几句话即可。以下提示可按需删除，不必全部填写；尚未实际使用或结果未知，请直接说明。
-请只提供可公开的概括，不贴公司或内部项目标识、账号、地址、个人目录、凭证、业务数据或完整聊天。最小虚构情形也可以。
+[English](https://github.com/KrisZhao23/shoushouba-azu/issues/new?template=use-case.md) | [简体中文](https://github.com/KrisZhao23/shoushouba-azu/issues/new?template=use-case.zh-CN.md)
 
-### 当时要完成什么？
+A few sentences are enough. Delete any prompts you do not need; you do not have to answer them all. Say if you have not tried the method or the result is unknown.
+Share only a public-safe summary. Do not include company or internal project identifiers, accounts, addresses, personal directories, credentials, business data, or complete chats. A minimal fictional example is welcome.
 
-<!-- 用一般描述说明任务与关键约束，无需项目真名。 -->
+### What were you trying to accomplish?
 
-### Skill、手册或台账方法影响了什么行动？
+<!-- Describe the task and key constraints in general terms; no real project name is needed. -->
 
-<!-- 能定位到某句话最好；也可以描述未触发、误解或照做后的行为。版本和工具信息按需补充，不确定就写不确定。 -->
+### What action did the Skill, handbook, or ledger method influence?
 
-### 实际结果如何？
+<!-- Point to wording if possible, or describe a missed trigger, misunderstanding, or action taken after following it. Version and tool details are optional; say when you do not know. -->
 
-<!-- 哪一步有帮助，哪里多做、漏做或卡住？哪些是观察，哪些是推测？未知和没有明显变化也有价值。 -->
+### What actually happened?
 
-### 希望保留、删除或改写什么？
+<!-- What helped? Where did you do extra work, miss something, or get stuck? Separate observations from guesses. Unknown results and no observable change are useful too. -->
 
-<!-- 可留空，不要求先有解决方案。 -->
+### What would you keep, remove, or rewrite?
+
+<!-- You may leave this blank; a proposed solution is not required. -->

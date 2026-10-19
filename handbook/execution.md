@@ -1,43 +1,45 @@
-# 执行手册
+# Execution handbook
 
-用于设计、编码、调试、工具操作以及项目已有的交付与恢复工作。先遵守实际环境的授权和项目约定，通用方法见 [Skill 主文](../skills/clear-engineering/SKILL.md)。需要审核时按[审核手册](review.md)判断；多人协作见[调度手册](coordination.md)。
+[English](execution.md) | [简体中文](execution.zh-CN.md)
 
-## 从真实入口到最小完整修改
+Use this handbook for design, coding, debugging, tool operations, and the project's existing delivery and recovery work. Follow the actual environment's authorization boundaries and project agreements first; see the [main Skill](../skills/clear-engineering/SKILL.md) for the general method. Use the [review handbook](review.md) when review is needed and the [coordination handbook](coordination.md) for work involving multiple participants.
 
-取得当前目标、相关整体认识与任务停点，再沿入口追到实现、状态来源和真实消费者。已知关系仍适用时复用，只补本次改变。查明关键事实、约束和变化落点，使用现有足够的能力。
+## Trace the real entry point to the smallest complete change
 
-局部、可逆且不改变共享含义的组织由执行者判断。改变共享接口、状态解释、授权、资源生命周期或外部效果时，使差异对相关参与者可见，并调整受影响的计划和验证。
+Establish the current goal, the relevant overall understanding, and the task's current checkpoint. Then trace the entry point to the implementation, the source of state, and the actual consumers. Reuse known relationships that still apply and add only what this change requires. Identify the key facts, constraints, and places where changes belong; use existing capabilities when they are sufficient.
 
-需要新脚本、包装或抽象时，说明现有机制的具体缺口。记录需要保留结果，不自动要求先生成一段代码来完成普通操作。
+The executor may decide how to organize local, reversible implementation details that preserve shared meaning. When changing shared interfaces, state interpretation, authorization, resource lifecycles, or external effects, make the differences visible to the affected participants and adjust the relevant plans and verification.
 
-## 先决条件与结果分开
+If a new script, wrapper, or abstraction is needed, identify the specific gap in the existing mechanism. A need to preserve results in a record does not automatically require generating code to perform an ordinary operation.
 
-操作前核准真正的对象、权限、输入、相关版本与失败边界，明确怎样观察结果。启动后的健康、页面表现和运行事实，在启动后取得；代码共用的加载入口仍需核对其中每项输入是否真的属于本步依赖。
+## Separate prerequisites from results
 
-缺少条件时指出本步可能造成的具体错误，只停止真正受影响的危险动作。安全且独立的本机调查或准备可继续，不能因现场窗口不足而默认暂停所有工作。
+Before an operation, verify the actual target, permissions, inputs, relevant versions, and failure boundaries, and establish how the result will be observed. Obtain health, page behavior, and runtime facts after startup. Even when code uses a shared loading entry point, check whether each input is genuinely a dependency of the current step.
 
-## 按实际项目机制交付
+When a prerequisite is missing, identify the specific error this step could cause and stop only the hazardous actions actually affected. Safe, independent local investigation or preparation may continue; an insufficient operational time window does not automatically suspend all work.
 
-交付方式由项目决定，可以是构建制品、平台发布、受控文件更新或其他现有机制。明确准确对象与适用版本，保留当前环境的配置、业务数据和无关变更。
+## Deliver through the project's actual mechanism
 
-需要审核或复用审核结论时，使实际交付物与相应对象一致。项目要求前审而尚未取得时，不激活该新变更；仍可进行已授权且不改变运行实例的独立准备。完整边界见[审核手册](review.md)。
+The project determines the delivery mechanism: build artifacts, a platform release, controlled file updates, or another existing method. Identify the exact target and applicable version, preserving the current environment's configuration, business data, and unrelated changes.
 
-准备、必要静默、发布、启动和验收按实际依赖安排。备份是否需要静默取决于一致性与写入者；服务中断必须在授权范围内。发送给外部执行者的指令应自足，不能依赖对方看不到的本机文件或聊天。
+When review is required or an existing review conclusion is reused, ensure the actual deliverable matches the reviewed object. If the project requires prior review and it has not been obtained, do not activate that new change. Authorized, independent preparation that does not change the running instance can still proceed. See the [review handbook](review.md) for the full boundaries.
 
-指令发送、对方接收、实际执行、效果生效和结果回执分别核实。下游执行者由明确的负责人跟进，其他参与者避免发送竞争指令；使用可用的反馈事件或检查点，不重复无变化轮询。
+Order preparation, any necessary quiescence, release, startup, and acceptance checks according to actual dependencies. Whether a backup requires quiescence depends on consistency needs and the writers involved; service interruption must be within the authorized scope. Instructions sent to an external executor must be self-contained and cannot depend on local files or conversations that executor cannot see.
 
-## 失败、未知与恢复
+Verify instruction dispatch, receipt, actual execution, the effect taking place, and the result acknowledgment separately. A designated owner follows up with downstream executors; other participants avoid sending competing instructions. Use available feedback events or checkpoints instead of repeatedly polling unchanged state.
 
-发生失败后，先保留实际状态、影响对象和结果未知的部分，停止继续扩大影响。超时不证明外部动作未发生；是否重试取决于操作语义和对端保证，不能只靠本地编号宣布安全。
+## Handle failure, uncertainty, and recovery
 
-恢复目标明确且已有合适机制时，核准其实际版本、参数及副作用后复用，不默认扩大为新脚本交付。若仍需新危险变更，再按项目要求处理其风险与审核。
+After a failure, first preserve the actual state, affected objects, and portions whose outcomes remain unknown, and stop extending the impact. A timeout does not prove an external action did not happen. Retry safety depends on the operation's semantics and the other system's guarantees; a local identifier alone does not establish it.
 
-回退代码、恢复数据和撤销外部效果是不同动作。授权范围应分别明确，遵守项目对回滚或不可逆操作的额外授权要求，不从“继续修复”推断已经授权所有恢复方式。
+When the recovery goal is clear and an appropriate mechanism already exists, verify its actual version, parameters, and side effects, then reuse it. Do not automatically turn recovery into delivery of a new script. If a new hazardous change is still needed, address its risks and review under the project's rules.
 
-## 验证与接续
+Reverting code, restoring data, and undoing external effects are different actions. Clarify authorization for each, follow any additional project requirements for rollback or irreversible operations, and do not infer permission for every recovery method from an instruction to continue fixing the problem.
 
-核实本次应改变与必须不变的行为，检查真实消费者的格式、默认值、组合条件和状态含义。测试应有准确预期，避免两个入口一起错误却互相比较通过。
+## Verify and enable continuation
 
-在本任务已有说明里保存必要的实现位置、关键词、实际检查与结果，其他地方引用。区分提议、实现、已验证、生效与未确认，不为每个角色或普通编辑另建文档。
+Verify the behavior that should change and the behavior that must remain unchanged. Check actual consumers' formats, defaults, combined conditions, and state meanings. Tests need precise expectations; comparing two entry points with each other can pass when both are wrong.
 
-足够证据支持当前承诺后交付并停止。未完成时留下下一步入口、实际承担者及不能重复的动作；没有安排就不承诺后台继续。
+Preserve necessary implementation locations, keywords, actual checks, and results in the task's existing documentation, and reference that record elsewhere. Distinguish proposals, implementation, verified results, effects in force, and unconfirmed matters. Do not create a separate document for every role or ordinary edit.
+
+Once sufficient evidence supports the current commitment, deliver and stop. If work is incomplete, leave the next entry point, the actual owner, and actions that must not be repeated. Do not promise background continuation unless it has been arranged.

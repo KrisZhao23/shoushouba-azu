@@ -1,57 +1,59 @@
-# 计划、设计审核、执行、代码审核与接续
+# Planning, design review, execution, code review, and continuity
 
-这些是责任视角，不是五个必需代理、五份报告或不可跳过的审批链。同一个人或代理可以承担多种责任，但不把复述同一假设当独立核实。
+[English](04-planning-review-and-handoff.md) | [简体中文](04-planning-review-and-handoff.zh-CN.md)
 
-## 1. 每个制定计划的人如何取得大局观
+These are perspectives on responsibility, not five required agents, five reports, or a mandatory approval chain. The same person or agent may take several responsibilities, but restating the same assumption is not independent verification.
 
-取得与本任务相关的目标、主要合作关系和重要约束；已有整体认识仍适用时，读当前停点与相关变化，再沿真实疑问进入实现和验证。需要清楚本次输出由谁使用、改变什么，以及哪些条件由别人提供，不要求每个小差量重新调查整体。
+## 1. How everyone making a plan obtains the wider context
 
-每个子计划保留与整体目标的联系，而不是只下发文件清单。委派可以给出目标、边界、关键契约、相关记录和权限；不用把整包 Skill 或全库文档复制给所有参与者。接收者核实自己能访问这些依据，不假设子代理自动继承文件或上下文。
+Establish the goals, main cooperation relationships, and important constraints relevant to the task. When the existing overall understanding still applies, read the current stopping point and relevant changes, then investigate implementation and verification through real questions. Understand who will use this output, what it changes, and which conditions others must provide; every small change does not require investigating the whole again.
 
-## 2. 不完全了解实现时怎样作计划
+Each subplan should remain connected to the overall goal, rather than merely receiving a file list. A delegation can provide the goal, boundaries, key contracts, relevant records, and permissions without copying the entire Skill or all repository documentation to every participant. Recipients check that they can access these sources; do not assume subagents automatically inherit files or context.
 
-把计划分成当前可确定的承诺与需要探索后再决定的局部问题，而不是虚构一份精确函数名单。一个待核查问题应尽量具体，例如“当前批准动作是否还检查申请仍待处理”，而不是“请审计所有并发”。
+## 2. Plan when the implementation is not fully understood
 
-影响共享含义、授权、持久数据、外部效果或昂贵撤换的决定应先有相称依据。私有、可逆、不改变其他部分前提的实现保留自主空间。需要探索资源能力时，明确要回答的问题、允许的操作及得到什么结果便足够，不默认安装新工具或调用生产系统。
+Separate commitments that can be made now from local questions that need exploration before a decision. Do not invent a precise list of functions. Make a question to investigate as specific as possible, such as "Does the current approval action also check that the request is still pending?" rather than "Audit all concurrency."
 
-区分操作前的条件与操作后的证据。例如启动前要核准对象、权限、参数和安全边界；启动成功与实际运行行为由启动后观察。先明确取证办法，不要求提前交出尚未发生的结果。代码把验收输入放进共同加载函数，不自动使它成为合理的启动前提。
+Decisions affecting shared meaning, authorization, persistent data, external effects, or costly replacement need proportionate support first. Private, reversible implementation that does not change others' assumptions should retain room for judgment. When exploring resource capabilities, state the question to answer, the allowed actions, and what result would be enough; do not install tools or call production systems by default.
 
-缺少依据时指出本步会产生的具体风险，只限制真正依赖它的危险动作，继续安全的独立工作。也不能在关键能力尚未知时先完成依赖它的危险实现，再补设计解释。
+Distinguish conditions before an action from evidence after it. For example, before starting something, establish the target, permissions, parameters, and safety boundaries; startup success and actual runtime behavior are observed afterward. Establish how evidence will be obtained, rather than requiring results before they exist. Placing acceptance-check inputs in a shared loading function does not automatically make them legitimate startup prerequisites.
 
-## 3. 设计审核检查主张能否成立
+When support is missing, identify the specific risk in this step, limit only the dangerous actions that actually depend on it, and continue safe, independent work. Equally, do not complete a dangerous implementation that depends on an unknown key capability and only afterward supply the design rationale.
 
-先审这一步是否服务当前目标、现在是否有必要、条件能否按顺序取得，再审约束归属、参与者含义和失败后状态。涉及中断既有能力时，检查必要范围、可提前完成的准备及受阻后的已授权恢复方式。通过一个有区分力的情形检验合作关系，比检查报告格式更有意义。
+## 3. Design review checks whether claims can hold
 
-允许带条件接受方向，但条件不自动成为事实。明确哪项依据尚待实现调查；若其失效会改变方案，应让执行者能够辨认。不同方案都合理时，不用审核者的目录、模式或代码风格偏好充当唯一标准。
+First assess whether this step serves the current goal, whether it is needed now, and whether its conditions can be obtained in the proposed order. Then review ownership of constraints, the meaning participants assign to them, and the state left after failure. When an existing capability would be interrupted, check the necessary scope, preparation that can happen beforehand, and the authorized way to restore it if blocked. Testing cooperation with a discriminating scenario is more meaningful than checking the report format.
 
-## 4. 执行把责任落实到真实行为
+A direction may be accepted conditionally, but its conditions do not thereby become facts. Identify which supporting facts still need investigation in the implementation. If a fact turning out false would change the approach, make that visible to the executor. When several approaches are reasonable, a reviewer's preferences for directories, patterns, or code style must not become the only standard.
 
-优先使用足够的现有能力，从承诺进入实现，关注状态来源、调用时机、外部交互和真实消费者。新增脚本或包装入口前，确认现有操作确实不能满足目标；留痕需求本身不要求生成代码。发现计划遗漏，保留新事实及影响。
+## 4. Execution turns responsibilities into actual behavior
 
-若只改变局部实现且保留共享含义，可直接推进并进行必要验证。若改变共享接口的语义、状态解释、写入权限、版本适用、失败行为或重要资源约束，应使相关计划与共同理解得到调整。不是任何函数改动都回到设计审核，也不是内部函数就永远没有外部影响。
+Prefer existing capabilities that are sufficient. Trace from the commitment into implementation, attending to the source of state, call timing, external interactions, and actual consumers. Before adding a script or wrapper entry point, establish that existing operations really cannot meet the goal; a need to leave a record does not itself require generated code. When the plan missed something, preserve the new fact and its impact.
 
-## 5. 代码审核检查组成的结果
+If only local implementation changes and shared meaning is preserved, proceed with the necessary verification. If the change affects shared interface semantics, state interpretation, write permissions, version applicability, failure behavior, or important resource constraints, adjust the relevant plans and shared understanding. Not every function edit returns to design review, and an internal function is not necessarily free of external impact.
 
-不只读差异；从本次承诺追到相关未修改消费者，核对真正的生产者与读取位置，包括默认值、组合条件和最终输入格式。检查实际测试断言、运行快照和限制，不把测试文件存在当通过。
+## 5. Code review checks the combined result
 
-独立寻找一个能推翻实现解释的情形，例如另一个入口、旧对象、新旧版本交错、重复执行或失去回执。由本次风险选择，不每次审计全类风险。
+Read beyond the changed lines. Trace the current commitment to relevant unchanged consumers, and check the actual producers and read locations, including defaults, combined conditions, and final input formats. Inspect actual test assertions, execution snapshots, and limits; a test file's existence is not a passing result.
 
-审核可以指出设计本身的问题。若代码符合设计而设计破坏业务承诺，应调整设计与实现；若设计已被合法改变而记录过时，应更新记录。保持差异原因可见。
+Independently look for a scenario that could overturn the implementation's explanation, such as another entry point, an old object, interleaved old and new versions, repeated execution, or a lost response. Choose according to the current risk; do not audit every class of risk each time.
 
-## 6. 从过程记录进入当前认识
+Review may reveal a problem in the design itself. If code follows a design that violates a business commitment, adjust both design and implementation. If the design has legitimately changed and the record is outdated, update the record. Keep the reason for the discrepancy visible.
 
-执行者保存重要发现与实现位置；任何角色都可发现并起草共同事实的修正。核实后更新当前说明并关联对应事件。重大未决主张继续标为未知或有争议，不能被“任务已关闭”自动转正。
+## 6. Move from process records to current understanding
 
-稳定的项目知识离开单个任务成为共享依据。任务保留为什么改变、用哪个快照核实、哪些工作未完成；普通操作细节退出当前导航。重要失败与否决方案有继续参考价值时才长期保留。
+Executors preserve important findings and implementation locations; any role may discover and draft corrections to shared facts. After verification, update the current explanation and link the corresponding event. Important unresolved claims remain unknown or disputed; closing the task does not automatically make them accepted facts.
 
-## 7. 中断、转交或新会话的最低接续信息
+Stable project knowledge becomes shared context beyond a single task. The task retains why something changed, which snapshot was used for verification, and what remains unfinished; ordinary operational details leave the current navigation. Retain important failures and rejected approaches long term only when they remain useful references.
 
-接手者需要知道：当前目标与范围、工作区/文件快照、已经调查/实现/运行验证的区别、重要约定或变化、未决与阻碍、下一步从哪个位置查什么，以及哪些动作不能重复。
+## 7. Minimum continuity information for interruptions, transfers, and new conversations
 
-这些信息可引用已有记录、更新原停点或用一段文字表达，不因换角色再写一份完整报告。下一步应能直接着手，并保留必要理由。没有执行权限或外部效果未知时，明确安全边界。
+The next person needs the current goal and scope; workspace/file snapshot; the distinction between investigated, implemented, and verified by execution; important agreements or changes; unresolved matters and blockers; where to inspect what next; and which actions must not be repeated.
 
-恢复时先核对当前文件与记录基线的差异，随后继续。不要因为读取了同一条记录就认为理解一致；能否指出同一状态由谁解释、失败代表什么、受影响入口在哪里，才是可观察信号。
+This information can reference existing records, update the original stopping point, or be expressed in a paragraph. Changing roles does not require another full report. The next step should be ready to start, with the necessary reasons retained. State the safe boundaries when execution is not authorized or an external effect is unknown.
 
-## 8. 方法与项目事实的改变分开
+On resuming, first check differences between the current files and the recorded baseline, then continue. Reading the same record does not establish shared understanding. Observable signs include identifying who interprets the same state, what failure means, and where affected entry points are.
 
-单次业务修改可以更新台账，不自动修改通用 Skill。若发现方法本身诱导过度拆分、漏查或无用记录，保留反例并提出方法修订。通用变更应说明适用范围与证据，避免把某项目的特殊决定推广给所有项目。
+## 8. Separate changes to the method from changes to project facts
+
+An individual business change may update the project ledger without changing the general Skill. If the method itself appears to encourage excessive splitting, missed checks, or useless records, preserve the counterexample and propose a method revision. A general change should state its scope and evidence, rather than extend one project's special decision to every project.

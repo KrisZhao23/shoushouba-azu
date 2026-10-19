@@ -1,67 +1,69 @@
-# 修改影响、组合证据与停止依据
+# Change impact, evidence across components, and reasons to stop
 
-用途：新增行为、修复缺陷、修改共享状态或契约、审核与定位回归时阅读。目标是查到足以支持本次决定，而不是证明全系统绝无遗漏。
+[English](02-impact-and-evidence.md) | [简体中文](02-impact-and-evidence.zh-CN.md)
 
-## 1. 先界定改变的事实
+Purpose: read this when adding behavior, fixing defects, changing shared state or contracts, reviewing work, or locating regressions. The goal is to investigate far enough to support the current decision, not to prove that nothing anywhere in the system has been missed.
 
-不要把“改了哪个文件”直接当影响边界。先解释本次需要改变的外部结果、允许保持的行为，以及承诺依赖的关键事实。记录可以是一段话，不是强制表格。
+## 1. Define the fact that is changing
 
-例如，同一字段允许了一个新的值，要判断是扩大表示集合、增加业务状态，还是改变旧值的含义。验证函数更宽容可能使原本被忽略的输入进入下游，参数类型完全不变也会改变行为。Git 案例提供了这种实际链条。
+Do not treat the edited file as the impact boundary. First explain the external result that needs to change, the behavior that may remain, and the key facts on which the commitment depends. A paragraph can be enough; a table is not mandatory.
 
-## 2. 从锚点沿相关关系寻找影响
+For example, when a field gains a new allowed value, determine whether this expands its representation, adds a business state, or changes the meaning of an old value. A more permissive validator may let previously ignored input reach downstream consumers. Behavior can change even when parameter types remain identical. The Git case demonstrates such a chain in practice.
 
-从实际入口或共享事实出发，确认它的产生者、写入者、解释者和消费者。按触发证据选查找方式：符号引用、字段和值的读写、事件与订阅注册、配置读取、路由与启动注册、缓存更新和失效、后台与批处理、导出/展示、旧数据和在途对象。
+## 2. Trace relevant relationships from an anchor
 
-一次搜索没有匹配，不能等价于依赖不存在。动态注册、模板字段、字符串构造、插件、跨进程协议和生成代码需要对应入口核实。也不必为纯局部样式改动审计所有这些关系。
+Start at an actual entry point or shared fact and identify its producers, writers, interpreters, and consumers. Choose searches according to the evidence that triggers them: symbol references; reads and writes of fields and values; event and subscription registration; configuration reads; route and startup registration; cache updates and invalidation; background and batch work; exports and display; existing data and in-flight objects.
 
-台账先提供相关词汇、位置和已知合作路径；源码、配置和测试再校准当前事实。优先验证最可能改变选择、或者错误代价最高的主张，不按文件顺序遍历。
+A search with no matches does not establish that a dependency is absent. Dynamic registration, template fields, constructed strings, plugins, cross-process protocols, and generated code need checks at the corresponding entry points. A purely local styling change does not require auditing all these relationships.
 
-若发现过滤/分页导致缺失、关系改归属、缓存跨主体复用或重建时触发发送，应按 [07·B/C](07-implementation-boundaries.md) 对应小节辨别实际语义；不能把它们仅概括成“注意状态”。专题中的反例服务本次影响与停止判断，不另起全系统检查。
+The project ledger first supplies relevant vocabulary, locations, and known cooperation paths; source code, configuration, and tests then establish the current facts. Prioritize claims most likely to change the decision or whose failure would be most costly, rather than traversing files in order.
 
-## 3. 组合关系检查什么
+If you find omissions caused by filtering or pagination, reassigned relationships, caches reused across principals, or a rebuild that triggers sending, use the relevant sections of [07·B/C](07-implementation-boundaries.md) to determine their actual semantics. Do not reduce them to "pay attention to state." The counterexamples in those sections support this task's impact and stopping judgments; they do not start a separate whole-system audit.
 
-生产者给出的值或状态，要在消费者使用时仍满足其前提。除了返回值结构，还可能需要核对身份与范围、版本绑定、读写次序、并发竞争、失败解释、资源是否仍有效。
+## 3. What to check when components work together
 
-一个消费者没有改动，仍可能是本次最重要的验证对象。另一个消费者无需修改，也应能解释是旧契约被维持、兼容入口隔离了变化，还是本次事实根本不影响它。
+A value or state supplied by a producer must still satisfy the consumer's assumptions when used. Beyond the shape of the return value, this may require checking identity and scope, version binding, read/write order, concurrency races, failure interpretation, and whether resources remain valid.
 
-例如，审核接受的是内容版本七，发布读取的却是版本八；两个函数各自按本地定义工作，仍不能保护“只发布被审核内容”。这类问题需要检查生产者、载体和消费者之间的对应关系，而不是继续拆函数。
+An unchanged consumer may still be the most important verification target. When another consumer needs no change, explain whether its old contract is preserved, a compatibility entry point isolates the change, or the changed fact does not affect it at all.
 
-## 4. 停止是一项范围判断，不是绝对证明
+For example, review may accept content version seven while publication reads version eight. Both functions can behave correctly by their local definitions and still fail to protect "publish only reviewed content." This requires checking the correspondence between the producer, the artifact carrying the content, and the consumer, rather than splitting more functions.
 
-对向外扩展的一个方向，以下理由可组合形成相称停止依据：
+## 4. Stopping is a scope judgment, not an absolute proof
 
-- 相邻边界的语义、错误含义和必要前提保持，且已检查真实使用者；
-- 变化被现有转换、版本或兼容边界吸收，并有相关反例/契约验证；
-- 构建、静态约束或配置证据排除了本次具体担忧，而不是笼统“类型检查通过”；
-- 仍未知的范围已明确，当前动作不会冒用该范围的保证，剩余风险可接受且有撤换办法。
+For one direction of outward investigation, these reasons can combine into a proportionate basis for stopping:
 
-这些不是每个方向都要填齐的四个条件。关键是把“为什么到这里够了”说成与本次变化有关的证据。没有发现重要反例不等于已经证明不存在；参数未变、链接未坏、到了另一个目录都不是独立停止依据。
+- The neighboring boundary's semantics, error meaning, and necessary assumptions remain intact, and actual consumers of that boundary have been checked.
+- An existing conversion, version, or compatibility boundary absorbs the change, supported by relevant counterexample or contract checks.
+- Build, static-constraint, or configuration evidence rules out the specific concern at hand, rather than merely showing that "type checking passed."
+- The remaining unknown scope is explicit; the current action does not rely on guarantees from that scope; the residual risk is acceptable and there is a way to replace the approach.
 
-相邻消费者包含无法核实的高风险状态或效果时，先限制受影响动作，提出具体最小核查。不要假装所有动态依赖都已找到，也不要把纯低风险未知转化成无限调查。
+These are not four conditions to fill out for every direction. The point is to explain why the investigation is sufficient using evidence relevant to this change. Not finding an important counterexample does not prove none exists. Unchanged parameters, working links, and reaching another directory are not sufficient reasons to stop on their own.
 
-## 5. 验证要区分不同证明对象
+When a neighboring consumer involves high-risk state or effects that cannot be verified, first limit the affected action and propose a specific, minimal check. Do not pretend every dynamic dependency has been found, or turn a low-risk unknown into an endless investigation.
 
-| 证据 | 可以支持什么 | 不能自动支持什么 |
+## 5. Distinguish what different evidence establishes
+
+| Evidence | What it can support | What it does not automatically establish |
 |---|---|---|
-| 阅读源码、类型、配置 | 某版本中的显式逻辑与依赖、可见前提 | 实际运行成功、所有动态路径覆盖 |
-| 构建、类型与静态检查 | 对应环境下的定义、接口或规则约束 | 业务含义正确、外部效果正确 |
-| 局部规则/契约测试 | 指定输入和断言下的规则或边界 | 多入口、并发、真实资源与消费者整体 |
-| 组合与入口测试 | 被执行路径中的行为与状态关系 | 未执行配置、其他版本或环境 |
-| 故障/并发/恢复测试 | 指定失败注入或交错下的处理 | 所有可能故障、绝对一次效果 |
-| 人工观察和历史运行记录 | 记录时的观察结果，若来源可靠 | 当前快照仍然成立、未记载的细节 |
+| Reading source, types, and configuration | Explicit logic and dependencies, and visible assumptions, in a given version | Successful execution or coverage of all dynamic paths |
+| Build, type, and static checks | Definitions, interfaces, or rule constraints in the corresponding environment | Correct business meaning or correct external effects |
+| Local rule or contract tests | Rules or boundaries for the specified inputs and assertions | Behavior across all entry points, concurrency, real resources, and consumers |
+| Tests across components and through entry points | Behavior and state relationships on the paths exercised | Configurations not exercised, other versions, or other environments |
+| Failure, concurrency, or recovery tests | Handling under the specified injected failure or interleaving | Every possible failure or an absolute exactly-once effect guarantee |
+| Human observation and historical execution records | Observations at the time recorded, if the source is reliable | Continued validity in the current snapshot or details that were not recorded |
 
-只采用和本次承诺有关的组合。出现缺陷时，优先检查测试是否会在缺陷仍存在时失败；不能通过修改预期值使错误结果“变绿”。无法运行时，准确报告已阅读的断言、阻碍和待执行范围。
+Use only the combination relevant to the current commitment. When a defect appears, first check whether the test would fail while the defect still exists. Do not change expected values just to make an incorrect result "green." If execution is unavailable, report precisely which assertions were read, what prevents execution, and what remains to be run.
 
-记录实际命令或检查方式、工作快照、相关环境、结果与限制；敏感参数删去。命令本身是建议时不能填进“已运行”。退出码成功也需要检查究竟验证了什么。
+Record actual commands or checking methods, the working snapshot, relevant environment, results, and limits; remove sensitive arguments. A suggested command must not be listed as "run." A successful exit code still requires checking what was actually verified.
 
-## 6. 影响说明、实际差异与行为结果分别保留
+## 6. Keep expected impact, actual changes, and behavioral results distinct
 
-修改前的影响预期有助于发现遗漏；实际差异可能包含必要联动、无关整理或缺少的修改；运行结果可能揭示二者都未想到的问题。不要用最终差异替换原先预期，再宣称判断准确。
+The expected impact before a change helps expose omissions. The actual changes may include necessary related edits, unrelated cleanup, or missing edits. Execution results may uncover issues neither anticipated. Do not replace the original expectation with the final changes and then claim the judgment was accurate.
 
-新发现是否要求回到设计，取决于它是否改变共享前提或重要约束，不取决于差异大小。可把前后预期与关键发现保存在任务记录中；稳定结论再进入项目当前认识。
+Whether a new finding requires revisiting the design depends on whether it changes shared assumptions or important constraints, not on the size of the edit. Before-and-after expectations and key findings can remain in the task record; stable conclusions can then enter the project's current understanding.
 
-## 7. 风险控制与证据保存
+## 7. Risk control and preserving evidence
 
-本地快照、相关文件清单和测试结果足以作为起步，不要求 Git。对不可逆数据或外部效果，源文件备份并不等于业务恢复能力，需要分别说明。不要为了取证调用未经授权的生产服务。
+Local snapshots, a relevant file list, and test results are enough to start; Git is not required. For irreversible data changes or external effects, a source-file backup is not equivalent to business recovery capability. Explain them separately. Do not call production services without authorization just to obtain evidence.
 
-未知信息若不影响本次决定，可留在明确范围的待核实事项中继续工作。会影响授权、数据完整性、并发或重复效果的重要未知，不得被“后续完善”掩盖。
+If an unknown does not affect the current decision, keep it as a clearly scoped item to verify and continue working. Important unknowns affecting authorization, data integrity, concurrency, or duplicate effects must not be hidden under "improve later."

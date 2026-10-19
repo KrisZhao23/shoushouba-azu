@@ -1,27 +1,31 @@
-# 反馈与修改建议
+# Feedback and contributions
 
-欢迎指出方法帮到你的地方，也欢迎指出它让工作更复杂、漏掉真实约束或不适用的情形。删减和澄清与增加内容同样有价值。
+[English](CONTRIBUTING.md) | [简体中文](CONTRIBUTING.zh-CN.md)
 
-## 分享一次具体经历
+Tell us where the method helped, made work more complicated, missed a real constraint, or did not fit. Removing and clarifying material is as valuable as adding it.
 
-可以在仓库 Issues 中[提交使用经历或反例](https://github.com/KrisZhao23/shoushouba-azu/issues/new?template=use-case.md)，也可以自由描述。[案例反馈模板](.github/ISSUE_TEMPLATE/use-case.md)的四个提示只是帮助回忆，不必全部填写；没有修复方案、试到一半卡住或没有观察到改善，都可以提交。尚未实际使用的设想请标明。
+## Share one concrete experience
 
-已有任务记录时，概括与问题有关的几句话即可，不用为反馈再建一套台账。有助于理解时，可补充 Skill 版本、使用的工具以及哪些内容确认被读取；不知道就写不知道，不要求为反馈重跑任务或补造对照实验。局部差异与其他规则、人工提醒的作用也可以一起说清。
+[Open a use-case or counterexample issue](https://github.com/KrisZhao23/shoushouba-azu/issues/new?template=use-case.md), or describe it freely. The [case template](.github/ISSUE_TEMPLATE/use-case.md) provides four optional prompts; you do not have to answer all of them. You can report a problem without a fix, a task that got stuck halfway, or no observable improvement. Mark ideas that have not yet been tried.
 
-只提供可公开内容。去掉真实账号、公司与内部项目标识、主机地址、个人目录、会话标识、业务数据及秘密；复现可以用最小虚构情形，无需提交完整对话或私有项目。
+If you already have a task record, summarize the few relevant points rather than creating another ledger for feedback. When useful, include the Skill version, tools used, and which material was actually read. Say "unknown" where appropriate; you do not need to rerun the task or invent a control experiment to submit feedback. Mention relevant differences and the effects of other rules or human guidance.
 
-## 反馈如何进入改进
+Provide only information you may make public. Remove real accounts, company and internal project identifiers, host addresses, personal directories, conversation identifiers, business data, and secrets. A minimal fictional reproduction is welcome; complete conversations and private projects are not required.
 
-我们会围绕具体行为在原 Issue 中说明判断：是否需要修订、适用范围是什么，或为何暂缓、不采纳；有后续修改时链接到实际改动。没有足够依据时保留未知，不把一份好评或一次失败直接变成通用结论。处理进度留在原讨论，不另要求反馈者完成审核报告，也不承诺固定响应时间。
+## How feedback informs changes
 
-有代表性的经历可以成为带适用边界的案例。收录前与提交者确认概括内容和公开署名方式，按意愿匿名；保留实际观察、参与者解释及未验证事项的区别。尚无案例时不预填成功故事。
+We will discuss the concrete behavior in the original issue: whether a change is needed, the conditions in which it applies, or why it is deferred or not adopted. When we make a change, we will link to it in that discussion. We will keep uncertainty explicit when evidence is insufficient, rather than turning one positive report or one failure directly into a universal conclusion. We will keep progress in the original discussion without asking the reporter to produce a separate review report. We do not promise a fixed response time.
 
-愿意试用的人可以从本来就要做的一项真实任务开始，结束或遇到阻碍时分享一次经历，无需专门制造任务。维护者可与自愿参与者约定一次简短交流；参与和后续反馈均自愿。
+Representative experiences can become cases with explicit limits. Before including one, confirm its summary and public attribution with the contributor; anonymize it if requested. Keep actual observations, participants' interpretations, and unverified points distinct. Do not invent success stories to fill an empty collection.
 
-## 提出修改
+If you would like to try the method, start with a real task you already need to do, then share an experience when it ends or reaches a blocker. There is no need to manufacture a task. The maintainer may arrange a brief conversation with willing participants; participation and follow-up feedback are voluntary.
 
-可以先讨论问题，也可以直接提出文字或示例修改。简要解释希望改善什么、哪些行为需要继续保护。保留公开研究来源，明确引用、观察与推断的区别，不用单次成功、模型自评或文件数量证明普遍有效。
+## Propose a change
 
-共同约束在主要说明处维护，其他位置引用。修改方法时同步真正受影响的手册和示例，避免为每个案例增加一条全局强制流程。
+You can discuss a problem first or propose a wording or example change directly. Briefly explain the intended improvement and the behavior that must remain intact. Preserve public research sources and distinguish quotations, observations, and inferences. A single success, model self-assessment, or file count does not establish general effectiveness.
 
-拟并入仓库的自有文字或代码贡献按 [MIT](LICENSE) 提供，请确保有权作此授权；涉及第三方材料时说明来源及其许可，不能用本库许可覆盖它。普通问题反馈不要求提交代码或转让版权。
+Maintain shared constraints at their primary explanation and link to them elsewhere. Update the handbooks and examples that are actually affected by a method change, rather than adding a global mandatory procedure for every case.
+
+Keep the English and Chinese counterparts aligned when meaning changes. One issue or contribution can cover both languages; no duplicate reports are needed. A translation should preserve conditions, exceptions, authorization, and evidence limits without silently strengthening recommendations into requirements.
+
+Contributions of original text or code intended for inclusion are offered under [MIT](LICENSE); ensure you have the right to grant that license. Identify sources and licenses for third-party materials rather than replacing them with this project's license. Ordinary issue feedback does not require code contributions or copyright assignment.

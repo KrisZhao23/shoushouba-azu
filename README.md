@@ -1,45 +1,51 @@
-# 收手吧阿祖
+# 收手吧阿祖 · Shoushouba Azu
 
-把事情做清楚，做到足够就停。
+[English](README.md) | [简体中文](README.zh-CN.md)
 
-一套用于 AI 辅助软件工作的工程判断 Skill 与配套手册。帮助理解目标与现有实现、明确职责和状态、追踪真实消费者、验证变化，并留下足以接续的记录。
+Do the work clearly. Stop when it is enough.
 
-Practical engineering judgment for AI-assisted software work: understand the goal, trace real consumers, verify behavior, and leave useful context for the next contributor.
+A reusable engineering-judgment Skill and companion handbooks for AI-assisted software work. Understand the goal and existing implementation, clarify responsibilities and state, trace actual consumers, verify changes, and leave enough context for the next contributor.
 
-**当前状态：** `0.1.3-candidate` 公开候选版。维护者公开署名为 **KZ**，自有内容采用 [MIT](LICENSE)。当前只有少量使用反馈与说明性案例，跨项目、跨使用者的长期效果仍待检验。
+**Status:** Public candidate `0.1.3-candidate`. Maintained under the public name **KZ**; project-owned content is licensed under [MIT](LICENSE). We have limited usage feedback and illustrative examples. Long-term results across projects and users still need to be tested.
 
-## 从哪里开始
+## Two complete reading paths
 
-- 希望代理使用方法：阅读 [Skill 主文](skills/clear-engineering/SKILL.md)，再按当前问题进入参考资料。
-- 希望了解如何组织工作：阅读[调度手册](handbook/coordination.md)、[执行手册](handbook/execution.md)或[审核手册](handbook/review.md)。这是责任视角，可以由同一人承担，不要求创建三个代理或三轮审批。
-- 想看小项目如何使用：阅读[单文件小工具](skills/clear-engineering/examples/single-file-tool.md)和[组合行为示例](skills/clear-engineering/examples/composed-publication.md)。案例均为说明性虚构。
-- 需要项目接续：按需使用[台账方法](skills/clear-engineering/references/03-ledger-and-timeline.md)与 [assets 中的起始稿](skills/clear-engineering/assets/project-ledger.md)，已有记录足够时更新原处。
-- 关心实际作用：阅读[使用与观察说明](skills/clear-engineering/references/05-usage-and-evaluation.md)、[研究依据、作者与许可边界](skills/clear-engineering/references/06-case-evidence.md)和[本仓库验证记录](VALIDATION.md)。
+English files use `.md`; their Simplified Chinese counterparts use `.zh-CN.md`. The Skill, role handbooks, ledger templates, examples, references, and feedback guidance are available in both languages. Each document links to its counterpart.
 
-## 怎样使用
+Both languages are included in the same `skills/clear-engineering/` package; install it once. The discoverable entry remains `SKILL.md`, with a complete Chinese reading entry at `SKILL.zh-CN.md`. The agent should communicate in the user's preferred language and read the relevant language's materials as needed.
 
-`skills/clear-engineering/` 是完整的 Skill 内容目录。需要安装时，按所用宿主当前支持的方式安装该子目录；也可以直接读取主文，将其作为当前任务的工作方法。安装、启用和修改个人配置由使用者按自己的环境与授权决定。
+## Where to start
 
-文件可读、技能被发现、正文被读取、判断得到改善是不同事实。通用正文不保证所有代理工具都自动加载，也不保证读过就会做对。其他宿主的加载与继承方式应在实际环境核实。
+- To use the method with an agent, read the [Skill](skills/clear-engineering/SKILL.md), then follow only the references relevant to the task.
+- To understand how to organize the work, read the [coordination](handbook/coordination.md), [execution](handbook/execution.md), or [review](handbook/review.md) handbook. These are responsibility perspectives that one person can cover; they do not require three agents or three approval rounds.
+- For small-project examples, read the [single-file tool](skills/clear-engineering/examples/single-file-tool.md) and [composed-behavior example](skills/clear-engineering/examples/composed-publication.md). Both are fictional illustrations.
+- For project continuity, use the [ledger method](skills/clear-engineering/references/03-ledger-and-timeline.md) and [starter template](skills/clear-engineering/assets/project-ledger.md) when needed. Update existing records when they are already sufficient.
+- For evidence of usefulness, read [usage and evaluation](skills/clear-engineering/references/05-usage-and-evaluation.md), [research evidence, attribution, and license boundaries](skills/clear-engineering/references/06-case-evidence.md), and the [repository validation record](VALIDATION.md).
 
-日常从当前目标、有效项目入口和任务停点开始，按问题展开。已有认识、能力、审核和证据仍然适用时复用；操作前明确必要条件与检查办法，结果在对应动作后取得。足够证据支持本次承诺后停止。
+## How to use it
 
-## Skill 与手册怎样联动
+`skills/clear-engineering/` is the complete Skill directory. Install that subdirectory using the mechanism currently supported by your host, or read the main document directly and use it as the working method for the current task. Installation, activation, and personal configuration changes remain subject to your own environment and authorization.
 
-通用判断及记录语义以 Skill 主文和它的参考资料为主要说明；手册提供对应角色的使用情境。审核机制的适用与授权边界见[审核手册](handbook/review.md)，具体项目仍遵守自己的约定。
+File readability, skill discovery, reading the instructions, and improving decisions are separate facts. The instructions do not guarantee automatic loading in every agent tool, or correct behavior after reading. Verify the actual host's loading and inheritance behavior in your environment.
 
-本仓库提供通用内容，使用方的系统地址、模型偏好、运行参数和生产约束保留在自己的项目配置中。没有某种规模、技术栈或代理角色数量是使用本方法的前提。
+Start with the current goal, a valid project knowledge entry point, and the current task state; expand only as questions arise. Reuse understanding, capabilities, reviews, and evidence while their assumptions remain valid. Establish the necessary prerequisites and verification method before an action; obtain its results after the action. Stop when sufficient evidence supports the current commitment.
 
-## 希望收到怎样的反馈
+## How the Skill and handbooks fit together
 
-我们尤其想听到：“我照着做了，事情反而更难推进了。”帮助、遗漏、误触发、重复工作和删减建议都值得记录。请尽量讲清哪句话影响了什么行动，以及实际发生了什么；结果还没出来或尚未实际使用，也可以如实说明。
+The Skill and its references define the shared reasoning and record semantics. The handbooks apply them to particular responsibilities. See the [review handbook](handbook/review.md) for review applicability and authorization boundaries; each project still follows its own agreements.
 
-欢迎[提交使用经历或反例](https://github.com/KrisZhao23/shoushouba-azu/issues/new?template=use-case.md)，也可以只写几句话。[案例反馈模板](.github/ISSUE_TEMPLATE/use-case.md)可按需删减。无需公开源码、公司信息、完整台账或聊天，也不要求先准备补丁。反馈的处理与案例收录方式见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+Keep system addresses, model preferences, runtime parameters, and production constraints in the adopting project's own configuration. No particular project size, technology stack, or number of agent roles is required.
 
-## 研究与许可状态
+## The feedback we want
 
-本项目由维护者与 AI 助手协作整理，包含来自公开源码、测试、设计记录和实践报告的研究。原作者的理由、源码观察、实践报告与本项目的迁移推断分别保留，引用不代表原项目认可本方法。
+We especially want to hear: **"I followed this, and the work became harder to move forward."** Useful results, omissions, false triggers, repeated work, and suggestions to remove rules all matter. Describe which wording affected an action and what actually happened. If the result is still unknown, or you have not tried the method, say so.
 
-方法研究受到花叔 Huashu 的女娲.skill 启发。各项实际研究、技术说明和仅提及项目的作者、地址、许可及采用范围统一见[第三方来源与许可核对](skills/clear-engineering/references/06-case-evidence.md#source-licenses)。该清单随 Skill 一起保留；引用不改变第三方许可，署名不能替代复用所需的许可条件。
+[Share a use case or counterexample](https://github.com/KrisZhao23/shoushouba-azu/issues/new?template=use-case.md), or write a few sentences in your own format. The [case template](.github/ISSUE_TEMPLATE/use-case.md) is optional and can be shortened. You do not need to disclose source code, company details, a complete ledger, or chat history, or prepare a patch first. See [CONTRIBUTING.md](CONTRIBUTING.md) for how feedback is handled and cases are included.
 
-本仓库有权授权的 Skill、手册、台账模板与示例代码采用 [MIT](LICENSE)，版权声明为 `Copyright (c) 2026 KZ`；第三方材料仍遵循各自许可。Skill 子目录附有相同的 [LICENSE](skills/clear-engineering/LICENSE)，单独分发时应一并保留。欢迎分享改进与使用经历，反馈是自愿的，不是许可附加条件。
+## Research and licensing
+
+This project was developed collaboratively by the maintainer and AI assistants, drawing on public source code, tests, design records, and practice reports. Authors' stated reasons, source observations, reported experience, and this project's transfer inferences are distinguished. A citation does not imply endorsement by the source project.
+
+The research approach was inspired by Huashu's (花叔) Nuwa Skill. Authors, URLs, licenses, and the scope of use for actual research sources, technical references, and projects merely mentioned are collected in the [third-party attribution and license review](skills/clear-engineering/references/06-case-evidence.md#source-licenses). This inventory stays inside the Skill package. Attribution does not replace the license conditions required for reuse.
+
+The Skill, handbooks, ledger templates, and example code that this project has the right to license are provided under [MIT](LICENSE), with `Copyright (c) 2026 KZ`. Third-party materials retain their own licenses. An identical [LICENSE](skills/clear-engineering/LICENSE) is included in the Skill subdirectory and must accompany separate distributions. Sharing improvements and experiences is welcome and voluntary, not an additional license condition.

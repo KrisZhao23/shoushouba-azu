@@ -1,116 +1,118 @@
-# 项目台账、时间线与可接续理解
+# Project ledgers, timelines, and understanding others can continue from
 
-用途：开始项目记录、选择记录单位、更新共同理解、处理过期或跨会话接续时按需阅读。已有入口和停点足以继续时，沿用并补本次差异即可；不为证明使用方法而增加文件或复制记录。
+[English](03-ledger-and-timeline.md) | [简体中文](03-ledger-and-timeline.zh-CN.md)
 
-知识组织的研究借鉴、作者与许可统一见[案例和来源说明](06-case-evidence.md#source-licenses)。本库起始稿按这些判断另行组织，没有收录上游项目的原始台账或业务记录。
+Purpose: read this as needed when starting project records, choosing what a record should cover, updating shared understanding, handling outdated information, or continuing work across conversations. When the existing entry point and stopping point are enough to continue, reuse them and add the current differences; do not add files or copy records merely to demonstrate use of the method.
 
-## 1. 一项内容根据读者问题选择归属
+Research influences on knowledge organization, their authors, and their licenses are collected in the [case and source notes](06-case-evidence.md#source-licenses). This repository's starter documents are organized separately using these judgments; they do not include upstream projects' original ledgers or business records.
 
-| 读者正在问什么 | 优先围绕什么记录 | 内容应增加什么理解 |
+## 1. Place information according to the reader's question
+
+| What is the reader asking? | Organize the record around | What understanding should it add? |
 |---|---|---|
-| 这部分负责什么，为什么在这里 | 责任 | 目标、边界、关键依赖与实现锚点 |
-| 这个结果怎样完成，失败后如何解释 | 完整行为 | 入口、事实流动、参与者、状态/效果与消费者 |
-| 多个部分共同依赖哪种含义 | 共享契约或状态 | 权威、读写权限、版本、失败含义与维护位置 |
-| 当时为什么这样选，何时需要改 | 重要决定 | 背景、备选、代价、适用条件与替代关系 |
-| 这项结论有什么依据 | 证据或未知 | 来源、适用快照、断言/观察、未覆盖范围 |
-| 这项工作做到哪，接下来做什么 | 任务 | 当前目标、进展、差异、阻碍、安全接续点 |
+| What is this part responsible for, and why does it belong here? | A responsibility | Goal, boundary, key dependencies, and implementation anchors |
+| How is this result achieved, and what does failure mean? | Complete behavior | Entry points, flow of facts, participants, states/effects, and consumers |
+| What meaning do several parts rely on together? | A shared contract or state | Authority, read/write permissions, versions, failure meaning, and maintenance location |
+| Why was this choice made, and when should it change? | An important decision | Context, alternatives, costs, applicable conditions, and what it supersedes or is superseded by |
+| What supports this conclusion? | Evidence or an unknown | Source, applicable snapshot, assertions/observations, and uncovered scope |
+| How far has this task progressed, and what comes next? | A task | Current goal, progress, differences, blockers, and a safe point to continue from |
 
-这些是可组合的用途，不是每个项目都要创建六种文件。优先用一项说明解释一个稳定的责任或问题；一个重要状态被多个行为共享时，才把其契约单独作为可引用的依据。多个视图引用同一个解释，避免各写一遍含义。
+These purposes can be combined; they do not require six kinds of file in every project. Prefer one explanation for a stable responsibility or question. Give an important state its own referenceable contract when multiple behaviors share it. Different views should refer to the same explanation rather than restate its meaning independently.
 
-## 2. 项目识别、新建与绑定
+## 2. Identify the project, create an entry point when needed, and bind it to the working context
 
-台账属于持续维护的项目，不属于会话、角色或一次需求。根据已明确的目标、边界、维护责任、工作区和任务上下文识别归属；目录、模块、测试副本或新的需求本身不构成新项目。项目改名或搬移通常更新定位并延续原有认识。副本或分支说明所对应的基线与差异，不冒充另一个已指定的当前入口。只有目标、边界及维护责任确实独立时，才考虑另立项目；无需为此创建全局项目编号系统。
+A project ledger belongs to a project maintained over time, not to a conversation, role, or individual request. Identify the project from its established goal, boundaries, maintenance responsibility, workspace, and task context. A directory, module, test copy, or new request does not by itself create a new project. Renaming or moving a project usually means updating its location while continuing the existing understanding. A copy or branch should state its baseline and differences, not present itself as another designated current entry point. Consider a separate project only when its goal, boundaries, and maintenance responsibility are genuinely independent; this does not require a global project-ID system.
 
-先查已指定的当前入口；没有绑定指令时，再看相关 README、项目说明及其引用，必要时做限定范围的路径与名称查找。已有材料能承担整体解释与导航时优先复用，不另建平行索引。已知入口打不开、目标目录未挂载、权限不足或多个说明都声称当前有效，均不等于没有台账；先依据可访问的定位与来源核查，仍不能消除归属冲突时提出具体确认，保留本次草稿但不宣布新入口。查找范围相称且没有仍待处理的既有入口线索时即可决定是否建立，不要求搜索整台机器或全库历史。范围已经明确的持续工作，不重复向用户索要相同路径与规则。
+First check the designated current project knowledge entry point. If no binding instruction exists, inspect the relevant README, project descriptions, and their references; use a bounded search of paths and names if necessary. Reuse material that can explain the whole and provide navigation, rather than creating a parallel index. A known entry point that will not open, an unmounted target directory, insufficient permissions, or several descriptions each claiming to be current do not mean there is no ledger. Check accessible location information and sources first. If the project association still cannot be resolved, ask for specific clarification; retain the current draft without declaring a new entry point. Once the search has been proportionate and no leads to an existing entry point remain unresolved, decide whether to create one. There is no need to search the entire machine or all repository history. Do not repeatedly ask for the same paths and rules for ongoing work whose scope is already clear.
 
-确实缺少入口、任务需要持续开展或接续，且已有授权允许相关记录写入时，建立最小但真实的入口。默认可用 `PROJECT-LEDGER.md`，实际位置依项目约定；保存有依据的目标与范围、主要职责和合作、重要约束、实现入口、未知及当前任务停点，保留来源性质。没有实现就说明尚无实现，不编造符号，不补齐通史，不预建空模板。纯问答和没有形成持久项目的临时示例不机械建账；已有项目的只读调查若产生接续价值，仍可在授权范围留痕，不能把“未改代码”当作一概无需记录。
+When an entry point is genuinely missing, the task needs ongoing work or continuity, and existing authorization permits the relevant records to be written, create a minimal but truthful entry point. `PROJECT-LEDGER.md` is a possible default name; its location follows project conventions. Save the supported goal and scope, main responsibilities and cooperation, important constraints, implementation entry points, unknowns, and the current task stopping point, retaining the nature of the sources. If there is no implementation, say so: do not invent symbols, reconstruct the project's entire history, or pre-create empty templates. Do not mechanically create a ledger for a simple question or a temporary example that has not become a lasting project. A read-only investigation of an existing project may still produce information worth preserving for continuity within the authorized scope; "no code was changed" does not mean a record is never needed.
 
-每个项目认定一个当前工程理解入口，不要求只有一个文件。初期可把整体、关键行为、时间线和任务放在同一文件；确有阅读或独立维护需要时再展开。平台和内部逻辑项目可各有范围明确的入口，共用能力在其真实归属处解释，其余位置引用。总入口保留整体解释、重要约束和展开方向，不能只剩目录，也不能要求读完历史才知道当前认识。
+Designate one current project knowledge entry point per project; this does not mean there can be only one file. Initially, the overview, key behaviors, timeline, and tasks may share a file. Split them out when reading or independent maintenance warrants it. A platform and a logical project within it may each have clearly scoped entry points. Explain shared capabilities where they actually belong and reference that explanation elsewhere. The main entry point should retain the overall explanation, important constraints, and directions for deeper reading. It must not become merely a directory listing or require reading all history to discover the current understanding.
 
-新建或复用记录后，在获准修改且实际会被读取的工作入口中登记项目范围、当前台账位置及路径解析基准。创建记录、登记定位和在某个环境实际读到，是三项不同事实；可用普通文字说明，不强制状态表。通用入口只承载识别、查找和使用方法，项目绑定只承载范围与定位，详细规则在本节维护，不在各处复制。通用触发规则不能仅藏在尚未触发的 Skill 内；实际宿主接入须使用已能到达的工作指令或明确任务交接，不能由本方法自行声称已经生效。
+After creating or reusing records, register the project scope, current ledger location, and the base for resolving its path in a working entry point that you are authorized to edit and that will actually be read. Creating a record, registering its location, and reading it successfully in a particular environment are three different facts. Plain text can distinguish them; a status table is not mandatory. General instructions should cover identification, discovery, and use; project-specific binding should cover scope and location. Keep the detailed rules in this section rather than copying them everywhere. A general trigger rule cannot exist only inside a Skill that has not yet been triggered. Integrate it through working instructions the host already reaches or through an explicit task handoff; the method cannot declare itself active.
 
-已有授权与项目约定足以支持的日常记录，不需每次重新请求同样许可；能写台账也不自动代表可以修改启动规则、AGENTS.md 或扩大权限。受只读或范围限制时提供待保存内容与拟维护位置，标明未写入、未登记或未验证读取；在可访问事实内继续安全的独立工作。后续实际读取核查见[使用与验证](05-usage-and-evaluation.md)第 3 节。
+Routine records covered by existing authorization and project conventions do not require asking for the same permission again each time. Permission to write a ledger does not automatically authorize changing startup rules, `AGENTS.md`, or permissions. Under read-only or scope restrictions, provide the proposed text and maintenance location, stating whether it has not been saved, registered, or verified as readable. Continue safe, independent work using accessible facts. For checking actual reading later, see section 3 of [usage and evaluation](05-usage-and-evaluation.md).
 
-## 3. 纵向找到实现，横向看见合作
+## 3. Trace down to implementation and across to cooperation
 
-纵向从目标进入责任与实现。横向从一个用户结果追踪共同事实、生产者、消费者、资源和失败。跨模块约束在上层可被发现，并在相关位置指回同一解释。
+Trace vertically from goals to responsibilities and implementation. Trace horizontally from a user result through shared facts, producers, consumers, resources, and failures. Constraints spanning modules should be discoverable at the higher level, with related locations pointing back to the same explanation.
 
-描述依赖时说明“依赖谁的什么、在什么时候使用、谁改变后会影响什么”，而不是仅贴“与数据库耦合”的标签。初始化先后、环境读取、共享身份、缓存失效、消息协议也可能值得记录，但由实际行为决定是否展开。
+Describe a dependency as "what is needed from whom, when it is used, and whose change affects what," rather than merely labeling something "coupled to the database." Initialization order, environment reads, shared identities, cache invalidation, and message protocols may also deserve a record, but actual behavior determines whether to expand on them.
 
-用文件路径与符号作为主要实现锚点，行号只作辅助。一个位置正确不说明责任描述正确。关键锚点与相关代码/环境快照关联，不需要每行文字都带时间戳。
+Use file paths and symbols as the main implementation anchors, with line numbers as aids. A correct location does not establish a correct responsibility description. Associate key anchors with relevant code/environment snapshots; every sentence does not need a timestamp.
 
-## 4. 分开提议、已接受约定、现状、证据与未知
+## 4. Separate proposals, accepted agreements, current conditions, evidence, and unknowns
 
-建议用普通文字区分以下性质，重要时可加短标记，不要求每条记录填状态表：
+Plain text is usually enough to distinguish the following. Short labels can help when the distinction matters; every record need not have a status table.
 
-- 提议：尚未被接受的方向或限制；不自动成为后续实现的既定前提。
-- 已接受约定：明确已被接受的内容、范围及依据；超出该范围仍需判断，不能把助手建议或没有反对当作接受。
-- 观察：在何种代码/配置快照中看到什么；不把静态阅读称为运行验证。
-- 证据：哪项运行、测试或检查支持哪条主张，覆盖与不覆盖什么。
-- 未知/推断：目前不知道什么，依据是什么，什么核查会改变当前选择。
+- Proposal: a direction or constraint not yet accepted; it does not automatically become an established premise for implementation.
+- Accepted agreement: what was explicitly accepted, within what scope, and on what basis. Anything beyond that scope still needs judgment. An assistant's suggestion or the absence of objection is not acceptance.
+- Observation: what was seen in which code/configuration snapshot. Do not call static reading runtime verification.
+- Evidence: which execution, test, or check supports which claim, and what it does and does not cover.
+- Unknown/inference: what is not currently known, the basis for the inference, and which check could change the current choice.
 
-提议被接受时保留实际接受依据；撤回或被替代时关联相应事件。接受设计不等于授予安装、数据修改或生产执行权限。
+When a proposal is accepted, retain the actual basis for acceptance. When it is withdrawn or superseded, link the corresponding event. Acceptance of a design does not grant permission to install software, modify data, or execute production actions.
 
-“决定接受”“实际实现”“验证完成”“环境生效”不是一个状态机的同义词。可分别在相关事件中表达，不要求每份记录维护固定状态矩阵。
+"Decision accepted," "actually implemented," "verification completed," and "effective in the environment" are not interchangeable states in one state machine. Express them separately in the relevant events; a fixed status matrix is not required for every record.
 
-某部分未记录，代表覆盖不足；不能推断没有依赖或风险。接受的设计可能尚未实现，运行中的现状也可能违背有效约定。
+An unrecorded area indicates missing coverage, not the absence of dependencies or risks. An accepted design may not yet be implemented, and the running system may violate a valid agreement.
 
-## 5. 当前说明与时间线的分工
+## 5. Divide the work between the current explanation and the timeline
 
-当前说明回答今天如何理解。时间线记录关键变化：出现了什么新事实，哪个判断或实现因此改变，涉及谁，以及证据或后续任务在哪里。
+The current explanation answers how to understand the project today. The timeline records important changes: what new fact appeared, which judgment or implementation changed because of it, who was involved, and where the evidence or follow-up task is.
 
-先让读者读到当前解释，再按需要进入历史。项目入口只索引影响整体的事件；局部历史留在对应行为或任务中。一个事件只保存一份主要说明，其他位置用事件 ID/链接引用，避免多处复制不同版本。
+Let the reader reach the current explanation first, then history as needed. The project knowledge entry point indexes events that affect the whole; local history stays with the corresponding behavior or task. Keep one primary account of each event and use an event ID or link elsewhere, rather than copying diverging versions into several places.
 
-时间线值得记录的通常是共享前提改变、重要失败与修复、已接受设计被替代、验证推翻结论、重大未知被解决，以及会影响接续的暂停/恢复。不把所有工具调用和日常编辑收集成必读历史。
+Events usually worth recording include changed shared assumptions, important failures and fixes, superseded accepted designs, verification overturning a conclusion, resolution of a major unknown, and pauses or resumptions that affect continuity. Do not turn every tool call and everyday edit into required historical reading.
 
-项目决策演变和任务过程都需要被接续。任务过程未必全部进入长期项目历史：只把稳定的新认识、关键取舍及会影响未来的失败提升到当前说明或决定记录。
+Both the evolution of project decisions and task progress need to be understandable to someone continuing the work. Not all task history belongs in the long-term project history: promote stable new understanding, key tradeoffs, and failures with future implications into the current explanation or decision records.
 
-## 6. 时间如何表达
+## 6. Express time accurately
 
-事件发生/观察时间与记录时间不同，必要时都保存。决定、实现、验证、上线/生效分开记录；没有实际发生的事件不能填完成时间。
+An event's occurrence/observation time differs from its recording time; preserve both when needed. Record decisions, implementation, verification, and release/effect separately. An event that has not happened cannot have a completion time.
 
-默认按项目实际约定记录日期；精确先后有意义时记录带时区的时间。不要从助手当前日期推断本地动作发生时间，不知道时区不要猜。发生时间无法恢复时，记录可确认的快照区间及补记时间。
+Use the project's actual date conventions by default. Record times with a time zone when precise order matters. Do not infer the time of a local action from the assistant's current date or guess an unknown time zone. When the occurrence time cannot be recovered, record the confirmable snapshot interval and the time of the retrospective entry.
 
-事件 ID 只用作关联，顺序由实际关系解释；时间戳不是因果证明。并行分支可以各有事件，再记录汇合或取代关系，不能以“时间更晚”认定谁覆盖谁。
+Event IDs provide links; actual relationships explain order. Timestamps do not prove causation. Parallel branches may have their own events, followed by explicit merge or supersession relationships; a later timestamp does not establish which one overrides another.
 
-后来更正错误时，留下与原事件的关系和更正理由。日常错字可以直接修正；影响判断的历史不能无痕改写。这里的时间线是工程理解记录，不是防篡改系统或业务事实存储。
+When correcting an error later, retain its relationship to the original event and the reason for correction. Everyday typos can be corrected directly; history that affects judgment must not be silently rewritten. This timeline records engineering understanding; it is not a tamper-proof system or a store of business facts.
 
-## 7. 发现过期时先判断是哪种差异
+## 7. Identify the kind of outdated information before correcting it
 
-定位过期：符号移动或改名。更新定位并检查相关责任是否也变化。
+Outdated location: a symbol moved or was renamed. Update the location and check whether its responsibility also changed.
 
-含义过期：位置仍在，真实作用、写入者、消费者或前提变了。先停止依赖错误主张，再核实受影响关系。
+Outdated meaning: the location still exists, but its actual role, writers, consumers, or assumptions have changed. Stop relying on the incorrect claim, then verify the affected relationships.
 
-适用范围过期：新增入口、配置、版本或运行方式让原解释不再完整。保留旧范围的准确性，但更新当前适用边界。
+Outdated scope: a new entry point, configuration, version, or runtime arrangement makes the old explanation incomplete. Preserve its accuracy for the old scope while updating the current applicability boundary.
 
-差异处理有三种不同可能：记录写错/过期；实现违背有效约定；已接受的新设计没有同步记录。不能机械“以代码为准”或“以审核过的大纲为准”。明确当前主张、观察及差异，纠正被证据推翻的部分，并通知真正依赖它的参与者。
+A discrepancy can mean three different things: the record is wrong or outdated; the implementation violates a valid agreement; or an accepted new design was not reflected in the record. Neither "the code wins" nor "the reviewed outline wins" is a sufficient automatic rule. State the current claim, observation, and discrepancy; correct what evidence overturns and notify the participants who actually rely on it.
 
-每次只核实与本次工作相关的重要主张。文件最近修改时间、链接能打开、整页写有“已审核”都不是语义一致证明。
+Verify only important claims relevant to the current work. A recent file modification time, a working link, or a page marked "reviewed" does not establish semantic consistency.
 
-## 8. 维护时点与可接续状态
+## 8. When to maintain records, and what makes work ready to continue
 
-判断是否维护，先问：下一位读者若继续依赖现有说明，是否会误解、漏做、重复调查或重复执行？在相应责任、行为、契约、决定或任务的主要记录处更新，不为每个角色建立独立解释。
+Before updating, ask: if the next reader continues to rely on the existing explanation, will they misunderstand, miss something, repeat an investigation, or repeat an action? Update the primary record for the relevant responsibility, behavior, contract, decision, or task; do not create a separate explanation for every role.
 
-过程中出现重要调查发现、原认识被推翻、难以重建的结果或接续风险时，及时保存依据和影响；值得后续讨论的新方案标为提议，被接受、被替代或改变适用范围时再更新有效约定及其依据。实现若改变职责、接口含义、状态归属、依赖、权限、生命周期或外部效果，或验证产生会改变判断的结果，维护相应说明并区分设计接受、实际实现、运行验证和环境生效。外部动作的实际结果或结果未知应及时留下，不能等待任务结束再靠记忆补写。
+During work, promptly save the basis and impact of important findings, overturned understanding, hard-to-reconstruct results, or continuity risks. Mark a new approach worth discussing as a proposal; update the effective agreement and its basis when the proposal is accepted, superseded, or changes scope. If implementation changes responsibilities, interface meaning, state ownership, dependencies, permissions, lifecycles, or external effects, or if verification yields a result that changes the judgment, maintain the corresponding explanation and distinguish design acceptance, actual implementation, runtime verification, and effect in the environment. Record the actual result or unknown outcome of an external action promptly; do not wait until the task ends and reconstruct it from memory.
 
-新发现通常先保存在任务记录；稳定且值得未来依赖的认识再进入项目主要说明。但已有证据足以使当前重要主张不再可靠时，应及时在原位置标明被推翻、受限或存在争议，并指向发现和证据，不等完整替代设计完成。未经核实的猜测仍标为猜测，标明旧说明有问题也不自动接受新方案。关键演变按第 5—6 节保留来由，普通编辑和工具调用不全部进入长期历史。
+New findings usually enter the task record first. Stable understanding worth relying on later then enters the project's primary explanation. But when existing evidence already makes an important current claim unreliable, promptly mark the original as overturned, limited, or disputed, and link the finding and evidence; do not wait for a complete replacement design. Unverified guesses remain guesses, and marking a problem in an old explanation does not automatically accept a new approach. Preserve the reasons for key changes as described in sections 5–6; do not put every routine edit and tool call into long-term history.
 
-收尾、移交或可预见中断前，只补足影响接续的信息：当前目标、适用基线、做到与核实到哪里、下一步及不能重复的动作。已有交付说明、任务记录或协调停点能承担这些用途时直接复用，不把同一事实分别抄进多份文档；并行任务保留各自范围与停点。
+Before finishing, handing off, or a foreseeable interruption, fill only the gaps that affect continuity: the current goal, applicable baseline, what has been done and verified, what comes next, and actions that must not be repeated. Reuse existing delivery notes, task records, or coordination stopping points when they serve these purposes. Do not copy the same facts into several documents; parallel tasks retain their own scopes and stopping points.
 
-保存后核对实际目标和相关内容；可在交付中简短说明“台账已更新：<位置>”“项目认识未改变，无需更新；任务结果见 <位置>”或“需要修订但尚未保存：<原因、位置与待保存内容>”。任务结果可以在现有记录或适用的交付回复中，不因此强制创建文件。部分写入成功时逐处说明，不能用一条“已更新”覆盖失败；写入受限时提供可保存文本，不假装落盘。
+After saving, check the actual target and relevant content. A brief delivery note may say "Project ledger updated: <location>," "Project understanding is unchanged; no update needed. Task results: <location>," or "Revision needed but not yet saved: <reason, location, and proposed text>." Task results can live in existing records or an appropriate delivery response; this does not force the creation of a file. If only some writes succeed, state the result at each location rather than masking failures with a single "updated." When writing is restricted, provide text that can be saved; do not claim it is on disk.
 
-中断不是完成。恢复时先取得整体入口与对应任务停点，再核对会影响下一步的快照和状态差异，不重新查全库。不能保证突发中断前的最后动作已经记录；涉及未知外部结果时先按实际能力核实或安全恢复，不能仅凭过程记录缺少成功条目重复执行。
+An interruption is not completion. On resuming, first obtain the overall project knowledge entry point and the relevant task stopping point, then check snapshot and state differences that affect the next step; do not investigate the entire repository again. The last action before an abrupt interruption may not have been recorded. When an external outcome is unknown, first verify it or recover safely using the capabilities actually available; do not repeat the action merely because the process record lacks a success entry.
 
-## 9. 多角色和并行更新
+## 9. Multiple roles and concurrent updates
 
-记录发现的角色可以起草变化，相关审核者核实其主张；不要求指定一个角色拥有全部设计权。共享事实有冲突时保留双方依据，由有权作决定的人在相称范围内裁决。
+The role that discovers a change can draft it, and relevant reviewers can check its claims; no single role needs to own all design authority. When shared facts conflict, preserve the evidence on both sides and let an authorized decision-maker resolve the conflict within a proportionate scope.
 
-共享记录遵循项目已有写入协调规则。保存前重读与比较基线有助于发现过期，但重读本身不能排除“双方读完后先后覆盖”的竞争。缺少可用协调且存在并行覆盖风险时，各任务先保存自己的修订建议，明确本轮由谁串行合并共享段落；不要求固定某个角色、不新增锁服务，也不阻塞无关工作。若合并期间基线又改变，重新对比，不以旧快照直接覆盖。先合并事实与证据，再合并文字；争议未解时保留各自依据，不宣布最后写入者胜出。
+Shared records follow the project's existing write-coordination rules. Rereading and comparing the baseline before saving can expose outdated information, but rereading alone does not prevent both writers from reading and then overwriting each other. If coordination is unavailable and concurrent overwrites are possible, each task should first save its own proposed revision and identify who will serially merge the shared sections for this round. No fixed role or new locking service is required, and unrelated work need not stop. If the baseline changes during the merge, compare again rather than overwrite it with an old snapshot. Merge facts and evidence before wording. Preserve each side's basis while a dispute remains unresolved; the last writer does not win by default.
 
-多任务各自保存进展，项目入口列出实际活跃任务的链接，避免一个全局“当前任务”被并行工作反复覆盖。一个人、小项目可以只有一个任务段。
+Each task preserves its own progress, and the project knowledge entry point links to the tasks that are actually active. Avoid a single global "current task" repeatedly overwritten by parallel work. One person on a small project may need only one task section.
 
-## 10. 长期保留与删减
+## 10. Long-term retention and reduction
 
-长期保存当前有效约束、重要理由、必要历史、不可轻易重建的事实解释。临时探索和普通操作细节可随任务关闭移出当前导航，但先保留会避免重复调查的结果。
+Retain currently valid constraints, important reasons, necessary history, and explanations of facts that cannot readily be reconstructed. Temporary exploration and ordinary operational details can leave the current navigation when a task closes, but first preserve results that will prevent repeated investigation.
 
-删除复制的字段表、无帮助的索引和已被清楚代码替代的冗余描述。不按访问次数一刀切：一个很少读取但能解释重要限制的决定仍有价值。不要求初版补齐项目通史，从当前可核实的认识开始生长。
+Remove copied field tables, unhelpful indexes, and redundant descriptions superseded by clear code. Do not delete solely by access frequency: a rarely read decision can still explain an important limit. The first version need not reconstruct the project's entire history; grow it from what can currently be verified.

@@ -1,35 +1,37 @@
-# 关键演变时间线
+# Timeline of key developments
 
-> 起始稿。可直接作为项目文件使用，也可将内容并入当前台账或相关行为说明。以下不是已经发生的项目事件。
+[English](timeline.md) | [简体中文](timeline.zh-CN.md)
+
+> A starting template. Use it directly as a project file or merge it into the current ledger or the relevant behavior description. The content below does not describe events that have already happened in a project.
 >
-> 当前有效认识以项目实际指定的入口为准。这里只解释变化，不能要求读完全部历史才知道现在怎样工作。项目级索引与局部事件互相引用，不复制多份正文。
+> The project's actual designated entry point defines its current valid understanding. This timeline explains changes; readers must not have to read the entire history to learn how to work now. The project index and local events reference each other instead of duplicating their full text.
 
-## 当前关联
+## Current relationships
 
-当前理解入口：`<实际文件与章节>`。
-覆盖范围：`<整体或指定行为/契约>`。
-尚未恢复的历史：`<仅说明会影响使用的缺口>`。
+Project knowledge entry point: `<Actual file and section>`.
+Scope: `<The whole project or specified behaviors / contracts>`.
+History not yet recovered: `<Only gaps that affect use>`.
 
-## 事件
+## Events
 
-### `<事件ID> · <简明事件标题>`
+### `<Event ID> · <Brief event title>`
 
-发生或观察时间：`<已知日期/带时区时间；未知写未知或快照区间>`。
-记录时间：`<实际补记/编写时间；与发生时间相同时可合并说明>`。
-事件性质：`<发现、提议、接受决定、实现、验证、生效、更正、暂停或恢复等实际含义>`。
+Occurrence or observation time: `<Known date or time with timezone; if unknown, say unknown or give a snapshot interval>`.
+Recording time: `<Actual time of writing or retrospective recording; combine with occurrence time if they are the same>`.
+Event type: `<Actual meaning: discovery, proposal, accepted decision, implementation, verification, activation, correction, pause, recovery, etc.>`.
 
-`<原来依据什么；出现了什么事实；因此改变/保留了什么；当前是否已经生效。用自然段即可。>`
+`<What the earlier basis was; which facts emerged; what was changed or retained as a result; whether it is currently in effect. Prose is sufficient.>`
 
-影响与关联：`<相关责任/行为/契约、任务，以及取代/更正/依赖的事件>`。
-证据：`<对应源码或文件快照、测试/观察位置；未运行明确写未运行>`。
-仍未完成：`<真正影响接续的事项；没有则删除本行>`。
+Impact and relationships: `<Relevant responsibilities, behaviors, contracts, and tasks, plus events this one supersedes, corrects, or depends on>`.
+Evidence: `<Corresponding source or file snapshot, test or observation location; explicitly state when a check was not run>`.
+Still incomplete: `<Matters that genuinely affect continuation; remove this line if there are none>`.
 
-## 使用说明
+## How to use this timeline
 
-提议事件不代表已接受；转为已接受时注明内容、范围和接受依据，不以更晚记录或没有反对替代。
+A proposal event does not mean acceptance. When it becomes accepted, record the content, scope, and basis for acceptance. A later record or the absence of objections is not a substitute.
 
-一项重要变化可以有“接受设计”“实现”“验证”“环境生效”等多个事件，也可以在同一事件中明确这些事实的不同时间；不能用一个完成时间覆盖未知状态。
+An important change can have separate events for design acceptance, implementation, verification, and activation in an environment. Alternatively, one event can distinguish the times of these facts. A single completion timestamp must not conceal an unknown status.
 
-日期不是因果证明，后记录不代表后发生。并行事件保留关联，不强行排成一个线性真相。重要更正引用原事件，不把旧判断改写成从未出错。
+Dates do not establish causality, and an event recorded later may have occurred earlier. Preserve relationships between parallel events instead of forcing them into one linear account. Important corrections reference the original event rather than rewriting an earlier judgment as though it had never been wrong.
 
-从当前可核实状态开始记录，不补写没有证据的项目通史。不要把每次工具调用搬进这里；任务过程只把长期有价值的变化提升到本时间线。
+Start from the current verifiable state; do not reconstruct an unsupported complete project history. Do not copy every tool call here. Promote only changes with lasting value from the task process into this timeline.
