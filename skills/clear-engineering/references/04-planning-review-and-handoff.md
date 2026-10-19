@@ -42,9 +42,7 @@ Review may reveal a problem in the design itself. If code follows a design that 
 
 ## 6. Move from process records to current understanding
 
-Executors preserve important findings and implementation locations; any role may discover and draft corrections to shared facts. After verification, update the current explanation and link the corresponding event. Important unresolved claims remain unknown or disputed; closing the task does not automatically make them accepted facts.
-
-Stable project knowledge becomes shared context beyond a single task. The task retains why something changed, which snapshot was used for verification, and what remains unfinished; ordinary operational details leave the current navigation. Retain important failures and rejected approaches long term only when they remain useful references.
+After verification, correct the original explanation. Delete useless wrong directions, expired conditions, duplicate explanations, and routine logs. For turns worth tracing, keep only the original basis, where judgment went wrong, the correction, and an evidence link; do not retain the full mistaken plan. Important unresolved claims remain unknown or disputed even after task closure. See [reference 03](03-ledger-and-timeline.md) for record selection.
 
 ## 7. Minimum continuity information for interruptions, transfers, and new conversations
 

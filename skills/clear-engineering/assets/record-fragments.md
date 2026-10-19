@@ -2,16 +2,19 @@
 
 [English](record-fragments.md) | [简体中文](record-fragments.zh-CN.md)
 
-These fragments are optional material, not six documents to create for every task. Place what you need in the current explanation, module documentation, or task record. Split a file only when independent maintenance and references offer real value. Replace all angle-bracketed prompts with actual facts.
+Add fragments to existing explanations as needed; six new documents are not required. Formats may be combined, but [written implementation relationships](../references/03-ledger-and-timeline.md#implementation-map) are required. Replace prompts with facts, state unknowns, and use the shared maintenance method for pruning and corrections.
 
 ## Responsibility description
 
 ### `<Responsibility name>`
 
-`<Which outcome it owns, why it owns that outcome, and what is outside its responsibility.>`
+Purpose summary: `<Why it exists, what it owns, its inputs, outputs, and responsibility boundary.>`
 
-Key collaboration: `<Who provides what it depends on; who depends on it; what they protect together>`.
-Implementation anchors: `<Actual files, symbols, or registration entry points; not an inventory of all members>`.
+Implementation location: `<Actual file and function/class/interface/registration symbol; add lines and snapshot when useful>`.
+Producers and consumers: `<Who provides what; who calls or consumes it; links to collaborators' implementation or explanations>`.
+State and coupling: `<Shared data ownership and readers/writers, shared constraints, and actual hidden inputs, initialization/call ordering, and lifecycle requirements>`.
+Connecting contracts: `<Specific call/interface/event/table/adapter, data translation, contract ownership, and side-effect locations>`.
+Change impact and verification: `<Affected consumers, behavior that must remain intact, and relevant test/evidence references>`.
 Basis for the boundary: `<Actual changes, shared constraints, or resource differences>`.
 Evidence / unknowns: `<Actual materials and scope supporting specific claims>`.
 
@@ -41,13 +44,13 @@ Evidence: `<Actual locations and applicable scope>`.
 
 ### `<Decision ID> · <Dispute to resolve>`
 
-Status and time: `<Explicitly choose "proposed (not accepted)", "accepted", "superseded", or "withdrawn"; do not invent an unknown date>`.
-Acceptance basis and scope: `<Only for an accepted decision, state the specific content, scope, and verifiable basis; proposals do not become accepted by default; a separate field is not mandatory>`.
+Current status: `<Proposed (not accepted) or accepted; include a date only when useful and known>`.
+Acceptance basis and scope: `<Accepted content, scope, and basis; proposals do not become accepted by default>`.
 Context: `<Facts, constraints, and unconfirmed conditions>`.
 Choice and rationale: `<Why this choice is preferable to actual alternatives; do not merely list pattern names>`.
 Costs and boundaries: `<What it commits to; when it does not apply; what evidence would refute it>`.
 Implementation and verification: `<Implemented, unimplemented, or partly implemented; evidence references, distinct from approval>`.
-Relationships: `<Which decision it supersedes and which event, task, or current explanation it relates to>`.
+Key turning point: `<If it has lasting value, briefly state the earlier judgment, evidence that changed it, and correction; delete redundant text of the superseded decision>`.
 
 ## Evidence description
 
@@ -67,4 +70,4 @@ Location: `<Source, log, or result file; do not copy secret data>`.
 Existing basis: `<Different accounts and their sources; clearly mark inferences>`.
 Impact: `<Why it could change a decision; whether it restricts current actions>`.
 Minimum check: `<What to observe at which actual location to make progress>`.
-Status: `<Still unknown, confirmed, or refuted; link evidence and events>`.
+Once resolved, merge the conclusion into the relevant explanation and delete this item. Retain a brief turning point and evidence reference only when they have lasting value.

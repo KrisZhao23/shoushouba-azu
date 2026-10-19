@@ -10,7 +10,7 @@ First distinguish a new change, execution of an already reviewed operation, and 
 
 When the project requires independent review, a reviewer other than the executor and the relevant decision-maker performs it. The executor's own checks and tests do not replace it. Pure documentation changes or repeated operations on the same reviewed object with unchanged relevant premises can usually reuse an existing conclusion, subject to the project's requirements.
 
-Before reusing a conclusion, verify the content, configuration, and side effects that will actually be executed. The same task name does not establish unchanged content or risk. Address new unreviewed changes and material risks within the relevant scope. A rule update does not automatically revoke existing authorization or silently reorder work in progress; unresolved conflicts limit only the affected actions.
+Before reuse, verify the actual content, configuration, side effects, and whether old blocking conditions still apply. Delete expired conditions instead of inheriting them with the conclusion. Review new changes and material risks within their scope. Rule updates do not automatically revoke authorization or reorder ongoing work; unresolved conflicts limit only affected actions.
 
 ## Start with the goal of this step
 
@@ -24,13 +24,15 @@ When evidence is missing, explain the risk it creates for this step. Incomplete 
 
 Check the relevant producers, writers, and final consumers, including unchanged entry points, defaults, input formats, combined conditions, versions, and failure meanings. A shared input dependency in the code still needs a necessity check; it cannot be treated directly as a business prerequisite.
 
+Compare the affected implementation explanations with the actual code relationships. Identify missing or incorrect explanations to correct in place under [reference 03, section 3](../skills/clear-engineering/references/03-ledger-and-timeline.md#implementation-map); prose alone does not prove those relationships.
+
 Look for counterexamples that discriminate between correct and incorrect behavior for the current risk, such as old objects, another entry point, repeated operations, mixed versions, or a lost acknowledgment. Every review does not need to audit every risk category. Distinguish static reading, simulated checks, and results from the actual environment; do not expand one type of evidence into a different guarantee.
 
 ## Produce one sufficient conclusion
 
-In an existing record, identify the exact object, applicable baseline, coverage, conclusion, grounds for any block, and important unverified matters. Retain a way to identify the reviewer for independent reviews. Content identifiers or hashes identify an object; they do not by themselves establish correct behavior.
+Briefly update the existing record with the object, baseline, coverage, conclusion, blocking grounds, and important unknowns; identify the independent reviewer. Delete useless outdated content, retaining necessary reasoning turns under [reference 03](../skills/clear-engineering/references/03-ledger-and-timeline.md). Identifiers or hashes locate an object; they do not prove its behavior.
 
-Separate blocking issues from non-blocking suggestions. Preferences for directories, patterns, or style do not make one of several reasonable implementations uniquely correct. After a correction, review the original issue and its necessary impact. Reuse valid results when the object has not changed and there is no new failure or contradictory evidence; a small change does not always need a new full review report.
+Separate blocks from suggestions. After correction, review the original issue and its necessary impact, reuse valid results, and avoid another full report for a small change. Follow the [coordination handbook](coordination.md) for reporting and acknowledgment; no online waiting is needed.
 
 ## Respect deliverable and authorization boundaries
 

@@ -10,7 +10,7 @@ Establish the current goal, the relevant overall understanding, and the task's c
 
 The executor may decide how to organize local, reversible implementation details that preserve shared meaning. When changing shared interfaces, state interpretation, authorization, resource lifecycles, or external effects, make the differences visible to the affected participants and adjust the relevant plans and verification.
 
-If a new script, wrapper, or abstraction is needed, identify the specific gap in the existing mechanism. A need to preserve results in a record does not automatically require generating code to perform an ordinary operation.
+A new script, wrapper, or abstraction must fill a specific gap in existing capabilities; recordkeeping alone does not justify generating code.
 
 ## Separate prerequisites from results
 
@@ -26,7 +26,7 @@ When review is required or an existing review conclusion is reused, ensure the a
 
 Order preparation, any necessary quiescence, release, startup, and acceptance checks according to actual dependencies. Whether a backup requires quiescence depends on consistency needs and the writers involved; service interruption must be within the authorized scope. Instructions sent to an external executor must be self-contained and cannot depend on local files or conversations that executor cannot see.
 
-Verify instruction dispatch, receipt, actual execution, the effect taking place, and the result acknowledgment separately. A designated owner follows up with downstream executors; other participants avoid sending competing instructions. Use available feedback events or checkpoints instead of repeatedly polling unchanged state.
+Verify dispatch, receipt, execution, and actual effect separately. A designated owner follows downstream work; avoid competing instructions. Follow the [coordination handbook](coordination.md) for reporting, valid acknowledgment, and scheduled follow-up.
 
 ## Handle failure, uncertainty, and recovery
 
@@ -40,6 +40,6 @@ Reverting code, restoring data, and undoing external effects are different actio
 
 Verify the behavior that should change and the behavior that must remain unchanged. Check actual consumers' formats, defaults, combined conditions, and state meanings. Tests need precise expectations; comparing two entry points with each other can pass when both are wrong.
 
-Preserve necessary implementation locations, keywords, actual checks, and results in the task's existing documentation, and reference that record elsewhere. Distinguish proposals, implementation, verified results, effects in force, and unconfirmed matters. Do not create a separate document for every role or ordinary edit.
+When implementation or understanding changes, update the relevant implementation explanation in its existing location under [reference 03, section 3](../skills/clear-engineering/references/03-ledger-and-timeline.md#implementation-map); a completion status alone is insufficient. Link it from the task record, retaining checks and results and distinguishing proposals, implementation, verification, effects in force, and unknowns. Delete useless outdated content instead of appending every round.
 
-Once sufficient evidence supports the current commitment, deliver and stop. If work is incomplete, leave the next entry point, the actual owner, and actions that must not be repeated. Do not promise background continuation unless it has been arranged.
+Once sufficient evidence supports the current commitment, deliver and stop. For unfinished work, leave the next action, owner, and non-repeatable actions; arrange continuation under the coordination handbook.

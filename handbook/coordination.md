@@ -6,36 +6,32 @@ Use this handbook when work requires coordinating multiple tasks, participants, 
 
 ## Organize work around the current outcome
 
-First establish the current goal, the sequence the user has accepted, the authorized scope, and the stopping point. Distinguish completed work, work that can proceed independently, and work that depends on other results. Separate prerequisites for an operation from acceptance results produced afterward; do not require evidence that can only exist after execution.
+Establish the current goal, accepted sequence, authorization, and stopping point. Distinguish completed, independent, and dependent work. Establish prerequisites and verification methods before an operation; obtain its result evidence afterward.
 
 When assigning work, provide the required outcome, scope, necessary evidence, available resources, and stopping boundaries. Reuse existing tasks and understanding when they still apply. Participants must be able to access the relevant basis for the work; do not assume other chats, tools, or services inherit the local context.
 
-Choose roles and tools to meet actual needs. Projects may configure their own models, execution methods, and resource budgets. These choices do not change the responsibilities or become a universally required combination. Creating new chats, parallel tasks, or replacing participants remains subject to the current environment and user authorization.
+For changes across boundaries, link the relevant implementation explanations and identify who updates the affected relationships. Use [reference 03, section 3](../skills/clear-engineering/references/03-ledger-and-timeline.md#implementation-map) instead of copying them into each assignment.
+
+Choose roles and tools for actual needs. Creating chats, parallel work, or replacing participants follows the environment's rules and user authorization.
 
 ## Assess dependencies and resources separately
 
-Establish who is actually responsible for an outcome, then who may use the corresponding files, state, processes, or release resources. An available participant does not automatically own another task's resources. Assign a clear operator for a shared mutable resource at any given time; a change of role does not automatically release that resource.
+Identify the outcome owner and available resources. Assign a clear operator for each shared mutable resource at any given time; availability or a role change does not automatically confer access.
 
 Run work in parallel only when it is authorized, has independent resources, and can preserve its results. A critical unknown limits only the actions that depend on it; safe, independent investigation and preparation can continue. If supporting work keeps displacing the current goal, reassess whether it is necessary.
 
-For external effects or service interruptions, verify the target, the actual writers, and the authorized scope. Complete preparation that does not require interruption in advance wherever possible. Consistency may require quiescing the actual writers, but a need to update something does not by itself authorize stopping all services.
+For external effects or interruption, verify the target, actual writers, and authorization; complete preparation that needs no interruption first. Consistency may require quiescing actual writers, but an update does not authorize stopping all services.
 
-## Monitor observable progress
+## Scheduled checks and handoff
 
-Agree on feedback events or reasonable checkpoints around the next meaningful result. Short conversations do not need precise timing; specify the timezone when work crosses timezones or sequence matters. If event waiting or reminders are unavailable, state that limitation and do not promise background supervision that has not been arranged.
+When assigning work, agree on the recipient and check-in time, and actually schedule the reminder. Report early completion, blockers, or decision needs immediately. Once the sender has scheduled an acknowledgment check, they can leave instead of polling online. Claim background follow-up only after scheduling succeeds; if tooling is unavailable, state the limitation and arrange a workable continuation.
 
-Intervene when work completes, fails, is blocked, drifts from the goal, or needs a decision. Elapsed time alone does not establish that a task is out of control. There is no need to repeatedly read unchanged status, full histories, or raw logs.
+Root (the overall coordinator) first updates the existing pending item with a brief disposition: next action, owner, and time or triggering event. Then acknowledge with that arrangement or its link; "received" alone is insufficient. Deferral needs a reason and resumption condition. Without a valid acknowledgment, the sender checks current status when due, reminds the recipient, and reschedules until acknowledged or explicitly paused or canceled by the user. Persistent silence calls for investigating the cause and who can take over; mark an unknown cause as unknown. Notifying the user alone does not end follow-up, and already executed business actions must not be repeated.
 
-Identify the cause of a blockage, then make the smallest effective adjustment. After repeated failures, reassess the goal, dependencies, capabilities, and scope while retaining valid results. Renaming tasks or extending checks indefinitely does not constitute progress. The user's pauses, stops, and permission boundaries remain in force.
+After a valid acknowledgment, the sender closes its reminder; Root follows the work through. Reuse, update, or close the relevant reminder instead of stacking reminders. Apply this to deliverables needing receipt or handoff, not every message, and never require acknowledgment of an acknowledgment. Receipt does not replace review approval or operational authorization.
 
-## Preserve the current facts
-
-Use the project's existing entry point or coordination checkpoint to record the current goal, actual owners, relevant resources, valid authorization, results obtained, and next step. Refer to the original task evidence rather than copying every implementation detail. One paragraph can suffice for a simple project.
-
-When handing over responsibility, establish what the recipient has actually accepted; sending a message alone does not complete a handoff. An ordinary progress report does not automatically introduce an approval wait. External actions with unknown outcomes and operations that must not be repeated should be visible at the current checkpoint.
-
-When context is insufficient, first fill in the records and differences relevant to the next step. If a different participant or work context is truly needed, follow the environment's handoff rules. Do not replace participants mechanically after a fixed number of exchanges.
+Keep pending items brief and current: replace outdated content, and remove finished items. Link original evidence. Keep useful facts and key reasoning turns that locate mistakes in the ledger; delete useless wrong directions, expired conditions, duplicate explanations, and routine logs. Non-repeatable actions and external effects with unknown outcomes must remain visible. See [reference 03](../skills/clear-engineering/references/03-ledger-and-timeline.md) for record selection.
 
 ## Know when to stop
 
-The executor verifies the actual execution result; the reviewer performs the relevant review; the overall coordinator uses those results to manage scope, resources, and next steps. Without a new failure, a changed object, or contradictory evidence, do not repeat verification at the same level. Once the goal is met and sufficient direct evidence exists, deliver the result and stop.
+Complete the checks belonging to each responsibility. Once the goal is met and sufficient direct evidence exists, deliver and stop; arrange any handoff under the section above. Without a new failure, changed object, or contradictory evidence, do not repeat verification.

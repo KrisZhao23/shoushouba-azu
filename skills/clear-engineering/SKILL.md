@@ -62,17 +62,9 @@ See [planning, review, and handoff](references/04-planning-review-and-handoff.md
 
 ## Accumulate understanding through work without creating a second codebase
 
-Keep records sufficient for someone to continue: facts, reasons, and unknowns that would otherwise cause misunderstanding, omission, repeated investigation, or repeated execution. Update the existing primary explanation and link to it elsewhere. Do not create another deliverable when the existing record is sufficient.
+Within the actual scope of the current work, each distinct responsibility and behavior that crosses boundaries must have a written explanation: implementation location, purpose and inputs/outputs, dependencies and state ownership, connecting contracts, and change impact and verification. Maintain it with the relevant implementation and link existing explanations. See [ledger method, section 3](references/03-ledger-and-timeline.md#implementation-map) for granularity.
 
-The current explanation should tell a successor what governs work today. Key history explains how the project reached this point. A task record explains progress, what has been verified, and where to resume. All three may share one file; no directory system is mandatory.
-
-Record important changes in understanding, results that are hard to reconstruct, and unknown external effects promptly. Flag differences at the original explanation when it is no longer reliable. At completion or handoff, fill only gaps that affect continuity. A few sentences may suffice for an ordinary edit; no long-term event is needed if project understanding has not changed. Check the relevant location after saving. State when something was not saved rather than claiming continuity based on model memory.
-
-A timeline records important changes in facts and judgment, not every thought or tool call. Distinguish decision, implementation, verification, effect, and recording times when needed. If an event date is unknown, record that or a supported interval. Use event relationships and snapshots for orientation; timestamps alone do not prove causation.
-
-When records and code disagree, determine whether the explanation is stale, the implementation violates an agreement, or an accepted design change was not recorded. Correct significant errors and retain necessary correction history rather than treating the last editor as authoritative. Compare and merge actual files during parallel work without overwriting others' shared facts.
-
-See [ledgers and timelines](references/03-ledger-and-timeline.md) for record units, stale information, and history.
+Update existing records using [ledgers and timelines](references/03-ledger-and-timeline.md): replace current arrangements, delete incorrect or expired content, and retain only brief reasons and necessary evidence that locate key turning points; unknown external effects and still-valid constraints are not obsolete material to discard.
 
 ## Use this package as needed
 
