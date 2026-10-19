@@ -1,0 +1,6 @@
+interface:
+  display_name: "连贯工程判断与项目接续"
+  short_description: "贯通整体、实现、验证、项目台账与时间线的工程判断"
+  default_prompt: "使用 $clear-engineering，先取得当前任务相关的整体理解，核实关键前提，再形成判断、完成授权工作并留下可接续记录。"
+policy:
+  allow_implicit_invocation: true
