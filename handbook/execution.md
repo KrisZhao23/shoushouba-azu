@@ -2,7 +2,7 @@
 
 [English](execution.md) | [简体中文](execution.zh-CN.md)
 
-Use this handbook for design, coding, debugging, tool operations, and the project's existing delivery and recovery work. Follow the actual environment's authorization boundaries and project agreements first; see the [main Skill](../skills/clear-engineering/SKILL.md) for the general method. Use the [review handbook](review.md) when review is needed and the [coordination handbook](coordination.md) for work involving multiple participants.
+Use this handbook for design, coding, debugging, tool operations, and the project's existing delivery and recovery work. Follow the actual environment's authorization boundaries and project agreements first; see the [main Skill](../skills/clear-engineering/SKILL.md) for the general method. Use the [review handbook](review.md) when review is needed.
 
 ## Trace the real entry point to the smallest complete change
 
@@ -26,7 +26,7 @@ When review is required or an existing review conclusion is reused, ensure the a
 
 Order preparation, any necessary quiescence, release, startup, and acceptance checks according to actual dependencies. Whether a backup requires quiescence depends on consistency needs and the writers involved; service interruption must be within the authorized scope. Instructions sent to an external executor must be self-contained and cannot depend on local files or conversations that executor cannot see.
 
-Verify dispatch, receipt, execution, and actual effect separately. A designated owner follows downstream work; avoid competing instructions. Follow the [coordination handbook](coordination.md) for reporting, valid acknowledgment, and scheduled follow-up.
+Verify dispatch, receipt, execution, and actual effect separately. A designated owner follows downstream work; avoid competing instructions. For reporting, valid acknowledgment, and scheduled follow-up, use only [Scheduled checks and handoff](coordination.md#scheduled-checks-and-handoff); no need to read the whole coordination handbook.
 
 ## Handle failure, uncertainty, and recovery
 
@@ -42,4 +42,4 @@ Verify the behavior that should change and the behavior that must remain unchang
 
 When implementation or understanding changes, update the relevant implementation explanation in its existing location under [reference 03, section 3](../skills/clear-engineering/references/03-ledger-and-timeline.md#implementation-map); a completion status alone is insufficient. Link it from the task record, retaining checks and results and distinguishing proposals, implementation, verification, effects in force, and unknowns. Delete useless outdated content instead of appending every round.
 
-Once sufficient evidence supports the current commitment, deliver and stop. For unfinished work, leave the next action, owner, and non-repeatable actions; arrange continuation under the coordination handbook.
+Once sufficient evidence supports the current commitment, deliver and stop. For unfinished work, leave the next action, owner, and non-repeatable actions; arrange continuation under the agreement above.

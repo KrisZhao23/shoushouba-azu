@@ -8,7 +8,7 @@ Scope: the public `0.1.3-candidate`. Maintain this record with the relevant file
 
 - Ledgers retain current engineering understanding, consequential reasoning turns, and necessary evidence while deleting incorrect, obsolete, or duplicate text; pending items contain only current arrangements. Within the actual work scope, implementation location, purpose, dependencies and coupling, connecting contracts, impact, and verification must be documented in writing and maintained with the relevant implementation; the scope limit precedes the requirement.
 - Retention and reading have separate scopes: first handoffs use the overview and relevant navigation, continuation adds changes, and implementation work checks affected relationships. Read long documents by section and reuse valid understanding rather than reading everything each time.
-- The coordination handbook defines scheduled checks, effective acknowledgments, and continued ownership; execution and review handbooks reference it. The Skill, references, starters, and both language versions were shortened together.
+- The coordination handbook defines scheduled checks, effective acknowledgments, and continued ownership; execution and review handbooks link directly to the needed section and explicitly require no full read. Both language versions use matching entry points. The shared rules themselves are unchanged.
 - Skill format validation passed; local links resolve; native PowerShell UTF-8 and Python reads of changed files match, and diff formatting checks pass. Scans found no matches for known private identifiers, personal paths, or host addresses.
 
 ## Evidence that still applies
