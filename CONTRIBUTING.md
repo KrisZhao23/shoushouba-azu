@@ -4,7 +4,7 @@
 
 ## 分享一次具体经历
 
-可以在仓库 Issues 中[提交使用经历或反例](https://github.com/KrisZhao23/CLEAR-ENGINEERING/issues/new?template=use-case.md)，也可以自由描述。[案例反馈模板](.github/ISSUE_TEMPLATE/use-case.md)的四个提示只是帮助回忆，不必全部填写；没有修复方案、试到一半卡住或没有观察到改善，都可以提交。尚未实际使用的设想请标明。
+可以在仓库 Issues 中[提交使用经历或反例](https://github.com/KrisZhao23/shoushouba-azu/issues/new?template=use-case.md)，也可以自由描述。[案例反馈模板](.github/ISSUE_TEMPLATE/use-case.md)的四个提示只是帮助回忆，不必全部填写；没有修复方案、试到一半卡住或没有观察到改善，都可以提交。尚未实际使用的设想请标明。
 
 已有任务记录时，概括与问题有关的几句话即可，不用为反馈再建一套台账。有助于理解时，可补充 Skill 版本、使用的工具以及哪些内容确认被读取；不知道就写不知道，不要求为反馈重跑任务或补造对照实验。局部差异与其他规则、人工提醒的作用也可以一起说清。
 

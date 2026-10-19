@@ -1,4 +1,4 @@
-# CLEAR-ENGINEERING：仓库维护说明
+# 收手吧阿祖：仓库维护说明
 
 本文件所在目录是仓库根目录。仓库维护通用工程判断 Skill、调度/执行/审核手册、示例与记录起始稿；当前工程理解入口为 [README.md](README.md)，文件核对结果见 [VALIDATION.md](VALIDATION.md)。
 

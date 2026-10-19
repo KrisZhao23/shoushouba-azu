@@ -1,4 +1,6 @@
-# CLEAR-ENGINEERING
+# 收手吧阿祖
+
+把事情做清楚，做到足够就停。
 
 一套用于 AI 辅助软件工作的工程判断 Skill 与配套手册。帮助理解目标与现有实现、明确职责和状态、追踪真实消费者、验证变化，并留下足以接续的记录。
 
@@ -32,7 +34,7 @@ Practical engineering judgment for AI-assisted software work: understand the goa
 
 我们尤其想听到：“我照着做了，事情反而更难推进了。”帮助、遗漏、误触发、重复工作和删减建议都值得记录。请尽量讲清哪句话影响了什么行动，以及实际发生了什么；结果还没出来或尚未实际使用，也可以如实说明。
 
-欢迎[提交使用经历或反例](https://github.com/KrisZhao23/CLEAR-ENGINEERING/issues/new?template=use-case.md)，也可以只写几句话。[案例反馈模板](.github/ISSUE_TEMPLATE/use-case.md)可按需删减。无需公开源码、公司信息、完整台账或聊天，也不要求先准备补丁。反馈的处理与案例收录方式见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+欢迎[提交使用经历或反例](https://github.com/KrisZhao23/shoushouba-azu/issues/new?template=use-case.md)，也可以只写几句话。[案例反馈模板](.github/ISSUE_TEMPLATE/use-case.md)可按需删减。无需公开源码、公司信息、完整台账或聊天，也不要求先准备补丁。反馈的处理与案例收录方式见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 研究与许可状态
 
