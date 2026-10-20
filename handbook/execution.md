@@ -40,6 +40,6 @@ Reverting code, restoring data, and undoing external effects are different actio
 
 Verify the behavior that should change and the behavior that must remain unchanged. Check actual consumers' formats, defaults, combined conditions, and state meanings. Tests need precise expectations; comparing two entry points with each other can pass when both are wrong.
 
-When implementation or understanding changes, update the relevant implementation explanation in its existing location under [reference 03, section 3](../skills/clear-engineering/references/03-ledger-and-timeline.md#implementation-map); a completion status alone is insufficient. Link it from the task record, retaining checks and results and distinguishing proposals, implementation, verification, effects in force, and unknowns. Delete useless outdated content instead of appending every round.
+Keep changes, checks, and results in the existing task record. When explanations of responsibilities, dependencies, state contracts, or other implementation relationships change or prove inaccurate, correct them at their source under [maintenance triggers in reference 03](../skills/clear-engineering/references/03-ledger-and-timeline.md#record-updates); leave accurate references unchanged. Delete useless outdated content instead of appending every round.
 
 Once sufficient evidence supports the current commitment, deliver and stop. For unfinished work, leave the next action, owner, and non-repeatable actions; arrange continuation under the agreement above.

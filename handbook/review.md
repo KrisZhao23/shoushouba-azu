@@ -30,7 +30,7 @@ Look for counterexamples that discriminate between correct and incorrect behavio
 
 ## Produce one sufficient conclusion
 
-Briefly update the existing record with the object, baseline, coverage, conclusion, blocking grounds, and important unknowns; identify the independent reviewer. Delete useless outdated content, retaining necessary reasoning turns under [reference 03](../skills/clear-engineering/references/03-ledger-and-timeline.md). Identifiers or hashes locate an object; they do not prove its behavior.
+Briefly update the existing record with the object, baseline, coverage, conclusion, blocking grounds, and important unknowns; identify the independent reviewer. The review record holds review judgments; subsequent arrangements belong in the existing pending item, not appended dispatches, reminders, or progress logs. On re-review, correct affected conclusions and evidence in place, retaining necessary reasoning turns under [reference 03](../skills/clear-engineering/references/03-ledger-and-timeline.md). Identifiers or hashes locate an object; they do not prove its behavior.
 
 Separate blocks from suggestions. After correction, review the original issue and its necessary impact, reuse valid results, and avoid another full report for a small change. For reporting and acknowledgment, use only [Scheduled checks and handoff](coordination.md#scheduled-checks-and-handoff); no need to read the whole coordination handbook or wait online.
 

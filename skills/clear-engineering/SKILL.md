@@ -64,7 +64,7 @@ See [planning, review, and handoff](references/04-planning-review-and-handoff.md
 
 Within the actual scope of the current work, each distinct responsibility and behavior that crosses boundaries must have a written explanation: implementation location, purpose and inputs/outputs, dependencies and state ownership, connecting contracts, and change impact and verification. Maintain it with the relevant implementation and link existing explanations. See [ledger method, section 3](references/03-ledger-and-timeline.md#implementation-map) for granularity.
 
-Update existing records using [ledgers and timelines](references/03-ledger-and-timeline.md): replace current arrangements, delete incorrect or expired content, and retain only brief reasons and necessary evidence that locate key turning points; unknown external effects and still-valid constraints are not obsolete material to discard.
+For a small task, record the change, result, and necessary evidence in its existing task record. Reuse accurate implementation explanations; correct them at their source when they change or prove inaccurate. Replace old arrangements and delete incorrect or expired text; retain key turning points, valid constraints, and unknown external effects. See [maintenance triggers](references/03-ledger-and-timeline.md#record-updates).
 
 ## Use this package as needed
 

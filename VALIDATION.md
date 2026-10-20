@@ -4,12 +4,11 @@
 
 Scope: the public `0.1.3-candidate`. Maintain this record with the relevant files; published commits define the online version.
 
-## Current revision and checks (2026-10-19)
+## Current revision and checks (2026-10-20)
 
-- Ledgers retain current engineering understanding, consequential reasoning turns, and necessary evidence while deleting incorrect, obsolete, or duplicate text; pending items contain only current arrangements. Within the actual work scope, implementation location, purpose, dependencies and coupling, connecting contracts, impact, and verification must be documented in writing and maintained with the relevant implementation; the scope limit precedes the requirement.
-- Retention and reading have separate scopes: first handoffs use the overview and relevant navigation, continuation adds changes, and implementation work checks affected relationships. Read long documents by section and reuse valid understanding rather than reading everything each time.
-- The coordination handbook defines scheduled checks, effective acknowledgments, and continued ownership; execution and review handbooks link directly to the needed section and explicitly require no full read. Both language versions use matching entry points. The shared rules themselves are unchanged.
-- Skill format validation passed; local links resolve; native PowerShell UTF-8 and Python reads of changed files match, and diff formatting checks pass. Scans found no matches for known private identifiers, personal paths, or host addresses.
+- Small tasks keep changes, results, and necessary evidence in the existing task record. Correct explanations at their source when responsibilities, dependencies, state meanings, contracts, or other documented relationships change or prove inaccurate; routine verification results do not trigger updates in multiple places. Required implementation explanations, prompt recording of unknown external effects, and scoped reading remain intact.
+- Both languages of the three role handbooks and task starter were aligned: reference original reports for results and the existing pending item for current arrangements; adjust reminders only when relevant continuation conditions change, and keep dispatch and progress logs out of review records. Receipt checks reuse reminders that explicitly cover the delivery's valid acknowledgment and identify a follow-up owner; shared reminders retain unfinished follow-up. No templates, files, or review steps were added.
+- Skill format and diff formatting checks passed. Changed text was read back as UTF-8, bilingual counterparts were present, and 112 local links plus the new anchors resolved. Added text had no matches for known private identifiers, personal paths, or host addresses. An independent reading found no conflicts in bilingual meaning or existing protections. The receipt-reuse clarification passed readback, installed coordination Skill validation, diff formatting, and a focused independent reading; it changed no links.
 
 ## Evidence that still applies
 
@@ -18,4 +17,4 @@ Scope: the public `0.1.3-candidate`. Maintain this record with the relevant file
 
 ## Limits
 
-These checks support file contents, format, and references, not task efficiency, automatic host loading, or cross-project effectiveness. No scheduled task was enabled in this revision. Update this record when real use yields relevant evidence; do not accumulate a log of every editing round.
+These checks support file contents, format, and references, not task efficiency, automatic host loading, or cross-project effectiveness. The locally installed method now uses the same maintenance semantics; fixed-version evaluation copies remain unchanged, and no scheduled tasks were enabled. File updates do not establish that open conversations have reread them. Update this record when real use yields relevant evidence; do not accumulate a log of every editing round.

@@ -17,6 +17,6 @@ Current arrangement: `<Link the existing Pending item; otherwise briefly state o
 
 ## At completion or handoff
 
-`<Result and the actual location taking over unfinished work; place stable understanding in its original primary explanation and link elsewhere; delete finished pending items and useless process detail. State restricted or partial saves honestly.>`
+`<Result and the actual location taking over unfinished work; correct primary explanations at their source when they change or prove inaccurate, and reference them elsewhere; delete finished pending items and useless process detail. State restricted or partial saves honestly.>`
 
 External actions that must not be repeated or whose effects remain unknown must stay visible where they still need handling; pruning a record does not complete them.

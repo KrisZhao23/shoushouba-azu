@@ -72,9 +72,12 @@ Distinguish incorrect or stale records, implementation that violates a valid agr
 
 Update locations after symbol moves, check affected consumers when meaning changes, and update applicability when scope changes. Delete disproved claims. For unresolved disputes, retain only the necessary evidence and open question, without presenting either side as settled fact.
 
+<a id="record-updates"></a>
 ## 8. Maintenance triggers and current pending work
 
-When responsibilities, dependencies, state, or connecting contracts are added or changed, update the original explanation with the implementation. Also update it when investigation finds a significant discrepancy or verification produces a new result. Promptly record unknown external effects to prevent repeated execution. Before handoff, fill only gaps that affect continuation; check the saved content and state restrictions or partial saves honestly.
+For a small task, record the change, result, and necessary evidence in its existing task or delivery record. Update the relevant explanation when responsibilities, dependencies, state meanings, or connecting contracts are added or changed, or an explanation proves inaccurate; leave accurate content unchanged. Routine verification results belong in the task record; update an existing conclusion at its source when evidence changes it. Leave accurate entry-point links unchanged and do not create sections just to close a task.
+
+Promptly record unknown external effects to prevent repeated execution. Before handoff, fill only gaps that affect continuation; check the saved content and state restrictions or partial saves honestly.
 
 Pending contains only the current arrangement: item, owner, next action, check time or trigger, and necessary record links. Replace old values when updating and delete completed items; do not copy full reports or retain old arrangements. Reuse an existing pending section in the ledger rather than creating another list. Waiting or deferred items need a reason and a resumption condition; renaming unfinished work does not complete it.
 
