@@ -10,6 +10,14 @@ Practical engineering judgment for AI-assisted software work: understand the goa
 
 **当前状态：** `0.1.3-candidate` 公开候选版。维护者公开署名为 **KZ**，自有内容采用 [MIT](LICENSE)。当前只有少量使用反馈与说明性案例，跨项目、跨使用者的长期效果仍待检验。
 
+## 60 秒认识阿祖
+
+[![观看收手吧阿祖介绍视频](media/shoushouba-azu-intro-cover.jpg)](media/shoushouba-azu-intro-60s.mp4)
+
+[▶ 观看视频](media/shoushouba-azu-intro-60s.mp4) · 中文 · 60 秒 · [音频素材署名与许可](media/HUASHU-DESIGN-LICENSE.txt)
+
+改个人标签，为什么会影响另一个用户登录？看一个在隔离测试中复现并修复的真实案例，以及怎样借助台账定位代码、接续工作。
+
 ## 两套完整阅读路径
 
 英文文档使用 `.md`，简体中文对应稿使用 `.zh-CN.md`。Skill、角色手册、台账模板、示例、参考资料和反馈说明均提供两种语言，每份文档都可切换到对应版本。

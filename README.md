@@ -8,6 +8,14 @@ A reusable engineering-judgment Skill and companion handbooks for AI-assisted so
 
 **Status:** Public candidate `0.1.3-candidate`. Maintained under the public name **KZ**; project-owned content is licensed under [MIT](LICENSE). We have limited usage feedback and illustrative examples. Long-term results across projects and users still need to be tested.
 
+## Watch the 60-second intro
+
+[![Watch the Shoushouba Azu introduction](media/shoushouba-azu-intro-cover.jpg)](media/shoushouba-azu-intro-60s.mp4)
+
+[▶ Watch the video](media/shoushouba-azu-intro-60s.mp4) · Chinese · 60 seconds · [Audio credits and license](media/HUASHU-DESIGN-LICENSE.txt)
+
+A hidden link between saving personal tags and another user's login, reproduced and fixed in isolated tests; plus a look at using project records to find code and resume work.
+
 ## Two complete reading paths
 
 English files use `.md`; their Simplified Chinese counterparts use `.zh-CN.md`. The Skill, role handbooks, ledger templates, examples, references, and feedback guidance are available in both languages. Each document links to its counterpart.
