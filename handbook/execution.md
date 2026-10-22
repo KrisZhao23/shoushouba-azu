@@ -6,7 +6,7 @@ Use this handbook for design, coding, debugging, tool operations, and the projec
 
 ## Trace the real entry point to the smallest complete change
 
-Establish the current goal, the relevant overall understanding, and the task's current checkpoint. Then trace the entry point to the implementation, the source of state, and the actual consumers. Reuse known relationships that still apply and add only what this change requires. Identify the key facts, constraints, and places where changes belong; use existing capabilities when they are sufficient.
+Establish the current goal, relevant overall understanding, and task checkpoint. Trace the entry point to the implementation, source of state, and actual consumers. Reuse the plan's valid explanations of purpose, dependencies, and constraints; add only actual differences and implementation locations. Use sufficient existing capabilities.
 
 The executor may decide how to organize local, reversible implementation details that preserve shared meaning. When changing shared interfaces, state interpretation, authorization, resource lifecycles, or external effects, make the differences visible to the affected participants and adjust the relevant plans and verification.
 
@@ -20,11 +20,11 @@ When a prerequisite is missing, identify the specific error this step could caus
 
 ## Deliver through the project's actual mechanism
 
-The project determines the delivery mechanism: build artifacts, a platform release, controlled file updates, or another existing method. Identify the exact target and applicable version, preserving the current environment's configuration, business data, and unrelated changes.
+Use the project's existing delivery mechanism. Reference the original exact manifest for objects, versions, and content identifiers rather than copying full hash and size tables. If no manifest exists, identify the objects sufficiently in an existing record. Preserve the environment's configuration, business data, and unrelated changes.
 
 When review is required or an existing review conclusion is reused, ensure the actual deliverable matches the reviewed object. If the project requires prior review and it has not been obtained, do not activate that new change. Authorized, independent preparation that does not change the running instance can still proceed. See the [review handbook](review.md) for the full boundaries.
 
-Order preparation, any necessary quiescence, release, startup, and acceptance checks according to actual dependencies. Whether a backup requires quiescence depends on consistency needs and the writers involved; service interruption must be within the authorized scope. Instructions sent to an external executor must be self-contained and cannot depend on local files or conversations that executor cannot see.
+Order preparation, necessary quiescence, release, startup, and acceptance checks by actual dependencies. Backup quiescence depends on consistency needs and active writers; service interruption requires authorization. External instructions must state this operation's actions and conditions, with references the recipient can read.
 
 Verify dispatch, receipt, execution, and actual effect separately. A designated owner follows downstream work; avoid competing instructions. For reporting, valid acknowledgment, and scheduled follow-up, use only [Scheduled checks and handoff](coordination.md#scheduled-checks-and-handoff); no need to read the whole coordination handbook.
 
@@ -40,6 +40,6 @@ Reverting code, restoring data, and undoing external effects are different actio
 
 Verify the behavior that should change and the behavior that must remain unchanged. Check actual consumers' formats, defaults, combined conditions, and state meanings. Tests need precise expectations; comparing two entry points with each other can pass when both are wrong.
 
-Keep changes, checks, and results in the existing task record. When explanations of responsibilities, dependencies, state contracts, or other implementation relationships change or prove inaccurate, correct them at their source under [maintenance triggers in reference 03](../skills/clear-engineering/references/03-ledger-and-timeline.md#record-updates); leave accurate references unchanged. Delete useless outdated content instead of appending every round.
+Keep actual differences, valid conclusions, and important unknowns in the existing task record. Reference original test output; if the recipient has no stable readable source for it, first preserve enough original evidence to verify the result once in an existing record or evidence location. Correct missing, changed, or inaccurate implementation explanations at their source under [maintenance triggers in reference 03](../skills/clear-engineering/references/03-ledger-and-timeline.md#record-updates); reuse valid explanations and references instead of appending every round.
 
-Once sufficient evidence supports the current commitment, deliver and stop. For unfinished work, leave the next action, owner, and non-repeatable actions; arrange continuation under the agreement above.
+Once sufficient evidence supports the current commitment, deliver and stop. Link an existing pending item if available; do not wait for Root to update or create one before reporting. Root arranges continuation for unfinished work under the agreement above, identifying actions that must not be repeated.

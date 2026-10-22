@@ -15,7 +15,7 @@ Research influences, authors, and licenses are in the [case and source notes](06
 | What needs doing now | Brief pending item: owner, next action, check time or trigger |
 | How far a conclusion can be trusted | Actual source, applicable object, verification result, and unknowns |
 
-Maintain each fact in one place and reference it elsewhere. These purposes may share a file; no fixed directory layout or set of documents is required.
+Maintain each fact once: exact file identities in the original manifest, runtime evidence in the original output, and each executor's or reviewer's conclusions and reasoning in their own record. References must identify the applicable object and be readable by the recipient. If the recipient has no stable readable source for the output, first preserve enough original evidence to verify the result once in an existing record or evidence location, then reference that copy. These purposes may share existing files; no new manifest or document is mandatory.
 
 ## 2. Identify the project, create an entry point when needed, and bind it to the working context
 

@@ -4,10 +4,10 @@
 
 Scope: the public `0.1.3-candidate`. Maintain this record with the relevant files; published commits define the online version.
 
-## Current revision and checks (2026-10-21)
+## Current revision and checks (2026-10-22)
 
-- Clarified that current explanations are corrected directly, while audit originals explicitly frozen by the project retain their original content. Corrections and re-review conclusions update an existing editable record, reference the original, and remain reachable from the existing entry point. Both review handbooks reflect this distinction; expired conditions are removed from current conclusions. Reuse wording now sits beside the written-explanation requirement; hidden-dependency documentation explicitly covers the current work. Only missing, changed, or inaccurate explanations need updating. No templates, files, or review steps were added.
-- Changed text was read back as UTF-8 and checked for bilingual consistency. Skill format checks passed for the public package and the installed method and coordination Skills; diff formatting passed and local links in the changed method and handbooks resolved. Added text had no matches for known private identifiers, personal paths, or host addresses. The clarification adds no links.
+- Executors and reviewers reference original manifests and outputs while retaining their own conclusions; current arrangements belong in Pending. Senders arrange receipt follow-up, and reporting does not wait for Pending updates. Evidence without a stable readable source is preserved once for reference. Frozen audit originals, scoped re-review, and continued follow-up remain in place. Existing paragraphs were replaced; no templates, files, or review steps were added.
+- Changed text was read back as UTF-8 and checked for bilingual consistency. Format checks passed for the public Skill and the installed method, coordination, and delivery Skills. Diff formatting, local reference targets, and scans for known private identifiers, personal paths, and host addresses passed. Static scenario feedback led to local delivery clarifications: necessary evidence may travel in staging only, and each runtime target comes from the approved batch manifest. These are wording checks, not measured savings from a completed delivery.
 
 ## Evidence that still applies
 
