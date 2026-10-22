@@ -62,7 +62,7 @@ See [planning, review, and handoff](references/04-planning-review-and-handoff.md
 
 ## Accumulate understanding through work without creating a second codebase
 
-Within the actual scope of the current work, each distinct responsibility and behavior that crosses boundaries must have a written explanation: implementation location, purpose and inputs/outputs, dependencies and state ownership, connecting contracts, and change impact and verification. Maintain it with the relevant implementation and link existing explanations. See [ledger method, section 3](references/03-ledger-and-timeline.md#implementation-map) for granularity.
+Within the actual scope of the current work, each distinct responsibility and behavior that crosses boundaries must have a written explanation; reference sufficient existing explanations and add or correct only missing, changed, or inaccurate parts. Cover implementation location, purpose and inputs/outputs, dependencies and state ownership, connecting contracts, and change impact and verification. See [ledger method, section 3](references/03-ledger-and-timeline.md#implementation-map) for granularity.
 
 For a small task, record the change, result, and necessary evidence in its existing task record. Reuse accurate implementation explanations; correct them at their source when they change or prove inaccurate. Replace old arrangements and delete incorrect or expired text; retain key turning points, valid constraints, and unknown external effects. See [maintenance triggers](references/03-ledger-and-timeline.md#record-updates).
 

@@ -44,7 +44,7 @@ The project ledger or existing explanations it links must document each distinct
 | Connections | The call, interface, event, table, or adapter connecting the parts; where data is translated, who guarantees which contract, and where side effects occur. |
 | Change and verification | Which consumers or constraints a change affects, which behavior must remain intact, and where relevant tests or actual evidence live; identify unverified scope. |
 
-Document hidden dependencies that actually exist, including environment or current-user reads, global or shared mutable state, import side effects, initialization/call ordering, and transaction or resource lifecycles. Name the objects and relationships rather than merely listing technologies; an unexamined relationship cannot be described as "no dependency."
+Document hidden dependencies that actually exist and are relevant to the current work, including environment or current-user reads, global or shared mutable state, import side effects, initialization/call ordering, and transaction or resource lifecycles. Name the objects and relationships rather than merely listing technologies; an unexamined relationship cannot be described as "no dependency."
 
 A small project may cover this in one paragraph; related helpers may share an explanation rather than requiring a record per function or line. Link sufficient existing code comments or design notes. In a large project, explain overall relationships at the entry point and link the relevant details. Stop expanding when readers can locate the implementation, understand cooperation and impact, and find the basis for verification.
 
@@ -68,7 +68,9 @@ Distinguish occurrence, recording, implementation, or verification times when re
 
 ## 7. Correct the original explanation when a discrepancy appears
 
-Distinguish incorrect or stale records, implementation that violates a valid agreement, and an accepted design not yet reflected in the record. Correct the original using evidence rather than automatically deferring to code or old review, and notify those who actually depend on the claim.
+Distinguish incorrect or stale records, implementation that violates a valid agreement, and an accepted design not yet reflected in the record. Correct the current explanation directly using evidence rather than automatically deferring to code or old review, and notify those who actually depend on the claim.
+
+Preserve audit originals that the project explicitly requires to remain frozen. Update corrections or re-review conclusions in an existing editable record and reference the original; keep the current conclusion reachable from the original entry point without copying process history.
 
 Update locations after symbol moves, check affected consumers when meaning changes, and update applicability when scope changes. Delete disproved claims. For unresolved disputes, retain only the necessary evidence and open question, without presenting either side as settled fact.
 

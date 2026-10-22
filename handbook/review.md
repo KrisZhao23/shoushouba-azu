@@ -10,7 +10,7 @@ First distinguish a new change, execution of an already reviewed operation, and 
 
 When the project requires independent review, a reviewer other than the executor and the relevant decision-maker performs it. The executor's own checks and tests do not replace it. Pure documentation changes or repeated operations on the same reviewed object with unchanged relevant premises can usually reuse an existing conclusion, subject to the project's requirements.
 
-Before reuse, verify the actual content, configuration, side effects, and whether old blocking conditions still apply. Delete expired conditions instead of inheriting them with the conclusion. Review new changes and material risks within their scope. Rule updates do not automatically revoke authorization or reorder ongoing work; unresolved conflicts limit only affected actions.
+Before reuse, verify the actual content, configuration, side effects, and whether old blocking conditions still apply. Remove expired conditions from the current conclusion instead of inheriting them. Review new changes and material risks within their scope. Rule updates do not automatically revoke authorization or reorder ongoing work; unresolved conflicts limit only affected actions.
 
 ## Start with the goal of this step
 
@@ -30,7 +30,7 @@ Look for counterexamples that discriminate between correct and incorrect behavio
 
 ## Produce one sufficient conclusion
 
-Briefly update the existing record with the object, baseline, coverage, conclusion, blocking grounds, and important unknowns; identify the independent reviewer. The review record holds review judgments; subsequent arrangements belong in the existing pending item, not appended dispatches, reminders, or progress logs. On re-review, correct affected conclusions and evidence in place, retaining necessary reasoning turns under [reference 03](../skills/clear-engineering/references/03-ledger-and-timeline.md). Identifiers or hashes locate an object; they do not prove its behavior.
+Briefly update the existing record with the object, baseline, coverage, conclusion, blocking grounds, and important unknowns; identify the independent reviewer. The review record holds review judgments; subsequent arrangements belong in the existing pending item, not appended dispatches, reminders, or progress logs. On re-review, correct affected conclusions and evidence in an existing editable record; preserve and reference audit originals explicitly frozen by the project, retaining necessary reasoning turns under [reference 03](../skills/clear-engineering/references/03-ledger-and-timeline.md). Identifiers or hashes locate an object; they do not prove its behavior.
 
 Separate blocks from suggestions. After correction, review the original issue and its necessary impact, reuse valid results, and avoid another full report for a small change. For reporting and acknowledgment, use only [Scheduled checks and handoff](coordination.md#scheduled-checks-and-handoff); no need to read the whole coordination handbook or wait online.
 
