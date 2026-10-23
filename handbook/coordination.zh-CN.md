@@ -30,7 +30,7 @@ Root（总协调者）先在原待办简写处理安排——下一步、负责�
 
 有效回执后结束回执跟进；共用提醒仍有后续工作就保留，否则关闭。Root继续跟进处理结果。此约定只用于需要接收或交接的交付，不对每条消息索要回执，也不对回执再要回执；回执不代替审核通过或操作授权。
 
-Root 的原待办只维护当前安排并引用原报告；协调接续入口保存当前人员、资源、授权及相关记录引用，不转抄结果和证据。提醒引用原待办，仅在接收人、跟进人、查收时间或完成、阻塞等接续状态变化时调整。记录取舍见[参考 03 的维护时点](../skills/clear-engineering/references/03-ledger-and-timeline.zh-CN.md#record-updates)。
+派单和回执引用[当前报告与证据](../skills/clear-engineering/references/03-ledger-and-timeline.zh-CN.md#frozen-audit-records)，只补本次动作、变化及接续安排。Root 的原待办只维护当前安排并引用当前报告；协调接续入口保存当前人员、资源、授权及相关记录引用，不转抄结果和证据。提醒引用原待办，仅在接收人、跟进人、查收时间或完成、阻塞等接续状态变化时调整。记录取舍见[参考 03 的维护时点](../skills/clear-engineering/references/03-ledger-and-timeline.zh-CN.md#record-updates)。
 
 ## 到哪里停止
 

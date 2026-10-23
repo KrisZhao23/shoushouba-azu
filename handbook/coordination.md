@@ -30,7 +30,7 @@ Root (the overall coordinator) first updates the existing pending item with a br
 
 After a valid acknowledgment, end receipt tracking; retain a shared reminder if other follow-up remains, otherwise close it. Root follows the work through. Apply this to deliverables needing receipt or handoff, not every message, and never require acknowledgment of an acknowledgment. Receipt does not replace review approval or operational authorization.
 
-Root's existing pending item holds only the current arrangement and references the original report. The coordination entry point holds current people, resources, authorizations, and record references, without copying results or evidence. Reminders reference the pending item; adjust them only when the recipient, follow-up owner, check time, or continuation state, such as completion or blockage, changes. See [maintenance triggers in reference 03](../skills/clear-engineering/references/03-ledger-and-timeline.md#record-updates).
+Assignments and acknowledgments reference the [current report and evidence](../skills/clear-engineering/references/03-ledger-and-timeline.md#frozen-audit-records), adding only the actions, changes, and continuation arrangements for this step. Root's existing pending item holds only the current arrangement and references the current report. The coordination entry point holds current people, resources, authorizations, and record references, without copying results or evidence. Reminders reference the pending item; adjust them only when the recipient, follow-up owner, check time, or continuation state, such as completion or blockage, changes. See [maintenance triggers in reference 03](../skills/clear-engineering/references/03-ledger-and-timeline.md#record-updates).
 
 ## Know when to stop
 

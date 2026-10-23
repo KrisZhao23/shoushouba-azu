@@ -4,10 +4,10 @@
 
 Scope: the public `0.1.3-candidate`. Maintain this record with the relevant files; published commits define the online version.
 
-## Current revision and checks (2026-10-22)
+## Current revision and checks (2026-10-23)
 
-- Executors and reviewers reference original manifests and outputs while retaining their own conclusions; current arrangements belong in Pending. Senders arrange receipt follow-up, and reporting does not wait for Pending updates. Evidence without a stable readable source is preserved once for reference. Frozen audit originals, scoped re-review, and continued follow-up remain in place. Existing paragraphs were replaced; no templates, files, or review steps were added.
-- Changed text was read back as UTF-8 and checked for bilingual consistency. Format checks passed for the public Skill and the installed method, coordination, and delivery Skills. Diff formatting, local reference targets, and scans for known private identifiers, personal paths, and host addresses passed. Static scenario feedback led to local delivery clarifications: necessary evidence may travel in staging only, and each runtime target comes from the approved batch manifest. These are wording checks, not measured savings from a completed delivery.
+- Review evidence references frozen materials in the existing batch; the current task report remains editable and assignments and acknowledgments reference it. Old report bindings must be connected to the same verifiable evidence before shortening the report. Frozen originals remain intact; substantive changes receive scoped re-review under the existing requirements. The shared method is maintained in reference 03 and linked from role handbooks. No templates or review rounds were added.
+- Changed text was read back as UTF-8 and checked for bilingual consistency. Format checks passed for the public Skill and the installed engineering and coordination Skills. Diff formatting, local reference targets, and scans for known private identifiers, personal paths, and host addresses passed. The installed shared rule matches the public Chinese rule. These checks validate the wording and references, not migration of active project records or measured time savings.
 
 ## Evidence that still applies
 

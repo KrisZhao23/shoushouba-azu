@@ -70,7 +70,12 @@ Distinguish occurrence, recording, implementation, or verification times when re
 
 Distinguish incorrect or stale records, implementation that violates a valid agreement, and an accepted design not yet reflected in the record. Correct the current explanation directly using evidence rather than automatically deferring to code or old review, and notify those who actually depend on the claim.
 
-Preserve audit originals that the project explicitly requires to remain frozen. Update corrections or re-review conclusions in an existing editable record and reference the original; keep the current conclusion reachable from the original entry point without copying process history.
+<a id="frozen-audit-records"></a>
+Preserve audit originals that the project explicitly requires to remain frozen. Reference the existing batch's frozen manifest, plan, or original output as review evidence; do not use an evolving task report or shifting line numbers as the sole frozen basis. The current report may be shortened to valid current conclusions, new issues, and evidence links, retaining applicability, unverified items, and authorization boundaries. Assignments and acknowledgments reference these locations without copying process history.
+
+If an existing review is bound only to an evolving report, first use an existing editable record to point to the same verifiable frozen evidence. Only when no copy exists, preserve the necessary reviewed original text once in the original batch and verify its original identity. Never substitute the current revision for old evidence. If recovery is impossible, state the gap rather than claiming the binding is restored; do not create a new snapshot for every record update.
+
+Maintain subsequent corrections or re-review conclusions in an existing editable record and reference the original, keeping the current conclusion reachable from the original entry point. Only substantive changes to actual objects, behavior, risk, or a conclusion's applicability trigger scoped re-review under the existing review requirements; merely shortening records or updating locations does not.
 
 Update locations after symbol moves, check affected consumers when meaning changes, and update applicability when scope changes. Delete disproved claims. For unresolved disputes, retain only the necessary evidence and open question, without presenting either side as settled fact.
 
