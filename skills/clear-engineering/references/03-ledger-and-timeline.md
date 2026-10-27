@@ -101,6 +101,23 @@ For long documents, search headings, symbols, or task identifiers first and read
 
 Stop expanding when you can explain where this change belongs, whom it affects, what must be protected, and how to verify it, with no important relationship affecting this step left unresolved. Further reading should answer a specific question. An interruption is not completion. When an outcome is unknown, verify actual external effects before repeating an action merely because its success was not recorded.
 
+### Optional local navigation
+
+When an automatic directory is wanted, use the standard-library [navigation script](../scripts/build_navigation.py). It reads the existing entry plus explicitly selected scopes, without Git, network requests, model calls, or source edits:
+
+```text
+python <skill>/scripts/build_navigation.py build --entry <project>/PROJECT-LEDGER.md --scope . --scope design --output <project>/navigation.json
+python <skill>/scripts/build_navigation.py locate --index <project>/navigation.json --file design/current.md --heading "Current decision"
+```
+
+Each `--scope` is a directory's immediate Markdown files or one Markdown file, relative to the entry's parent (absolute paths also work). Repeat it for existing material directories; no separate file list is needed. Hidden/linked paths and the two output files are excluded; `--exclude` optionally omits a path. Links are listed, not followed. Entry-linked files and additionally discovered files are distinguished without declaring either current or accepted.
+
+One extraction produces JSON and sibling Markdown: file fingerprints, heading hierarchy and line ranges, links, and document-opening/ancestor introduction locations. The opening is candidate context, not a proven global constraint; it follows the initial descending title chain through its first body. Heading titles link to absolute source paths and line numbers in Codex. Outputs are disposable; unchanged builds do not rewrite them. `locate` rereads only the selected source, reports whole-file changes and current positions, and never guesses a moved file or duplicate title. Repeat `--heading` from ancestor to child to disambiguate. A changed file's unique title match is a current locator, not proof of the old section's identity or meaning. Use the returned context and relevant source qualifications before relying on it; rebuild saved links after source positions change.
+
+With a unique heading match, `links` contains only that section (including descendants) and the returned opening/context ranges; without a heading it remains file-wide.
+
+Build again when discovery of new files/chapters is needed; locating an old hit does not check that coverage. Read/discovery failures, missing targets and ambiguity return a nonzero exit code; a partial build still lists failures. Common ATX/Setext headings and ordinary Markdown links are supported, not full CommonMark/HTML semantics. Use source search for unsupported syntax or other context dependencies. Frozen sources stay untouched; the tool neither summarizes content nor determines status, authorization or evidence applicability. Script regression: `python <skill>/scripts/test_build_navigation.py`.
+
 ## 9. Multiple roles and concurrent updates
 
 Each task maintains its own scope and checkpoint; shared facts have one primary location. Follow existing coordination rules. When concurrent overwrites are possible, identify who will serially merge the relevant sections rather than letting the last writer win. Compare the baseline before saving and merge again if it changes. Retain necessary evidence for unresolved disputes without overwriting other tasks' valid facts.
