@@ -15,7 +15,7 @@ Research influences, authors, and licenses are in the [case and source notes](06
 | What needs doing now | Brief pending item: owner, next action, check time or trigger |
 | How far a conclusion can be trusted | Actual source, applicable object, verification result, and unknowns |
 
-Maintain each fact once: exact file identities in the original manifest, runtime evidence in the original output, and each executor's or reviewer's conclusions and reasoning in their own record. References must identify the applicable object and be readable by the recipient. If the recipient has no stable readable source for the output, first preserve enough original evidence to verify the result once in an existing record or evidence location, then reference that copy. These purposes may share existing files; no new manifest or document is mandatory.
+Maintain each fact where it belongs: exact file identities in the original manifest and runtime evidence in the original output. Other records retain only their role's conclusions, necessary boundaries, and references, without repeating the implementation history. References must identify the applicable object and be readable by the recipient. If the recipient has no stable readable source for the output, first preserve enough original evidence to verify the result once in an existing record or evidence location, then reference that copy. These purposes may share existing files; no new manifest or document is mandatory.
 
 ## 2. Identify the project, create an entry point when needed, and bind it to the working context
 
@@ -71,7 +71,7 @@ Distinguish occurrence, recording, implementation, or verification times when re
 Distinguish incorrect or stale records, implementation that violates a valid agreement, and an accepted design not yet reflected in the record. Correct the current explanation directly using evidence rather than automatically deferring to code or old review, and notify those who actually depend on the claim.
 
 <a id="frozen-audit-records"></a>
-Preserve audit originals that the project explicitly requires to remain frozen. Reference the existing batch's frozen manifest, plan, or original output as review evidence; do not use an evolving task report or shifting line numbers as the sole frozen basis. The current report may be shortened to valid current conclusions, new issues, and evidence links, retaining applicability, unverified items, and authorization boundaries. Assignments and acknowledgments reference these locations without copying process history.
+Preserve audit originals that the project explicitly requires to remain frozen, including what they meant at that time. Reference the existing batch's frozen manifest, plan, or original output as review evidence; do not use an evolving task report or shifting line numbers as the sole frozen basis. The current report may be shortened to valid current conclusions, new issues, and evidence links, retaining applicability, unverified items, and authorization boundaries. Assignments and acknowledgments reference these locations without copying process history.
 
 If an existing review is bound only to an evolving report, first use an existing editable record to point to the same verifiable frozen evidence. Only when no copy exists, preserve the necessary reviewed original text once in the original batch and verify its original identity. Never substitute the current revision for old evidence. If recovery is impossible, state the gap rather than claiming the binding is restored; do not create a new snapshot for every record update.
 
@@ -86,7 +86,7 @@ For a small task, record the change, result, and necessary evidence in its exist
 
 Promptly record unknown external effects to prevent repeated execution. Before handoff, fill only gaps that affect continuation; check the saved content and state restrictions or partial saves honestly.
 
-Pending contains only the current arrangement: item, owner, next action, check time or trigger, and necessary record links. Replace old values when updating and delete completed items; do not copy full reports or retain old arrangements. Reuse an existing pending section in the ledger rather than creating another list. Waiting or deferred items need a reason and a resumption condition; renaming unfinished work does not complete it.
+Pending contains only the current arrangement: item, owner, next action, check time or trigger, and necessary record links. Replace old values when updating. Completion removes only the current arrangement; retain still-valid system explanations and important unknowns. Do not copy full reports or retain old arrangements. Reuse an existing pending section in the ledger rather than creating another list. Waiting or deferred items need a reason and a resumption condition; renaming unfinished work does not complete it.
 
 <a id="scoped-reading"></a>
 **Required retention does not mean reading everything every time.** Read in layers according to the current question:

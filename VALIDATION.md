@@ -4,10 +4,10 @@
 
 Scope: the public `0.1.3-candidate`. Maintain this record with the relevant files; published commits define the online version.
 
-## Current revision and checks (2026-10-23)
+## Current revision and checks (2026-10-26)
 
-- Review evidence references frozen materials in the existing batch; the current task report remains editable and assignments and acknowledgments reference it. Old report bindings must be connected to the same verifiable evidence before shortening the report. Frozen originals remain intact; substantive changes receive scoped re-review under the existing requirements. The shared method is maintained in reference 03 and linked from role handbooks. No templates or review rounds were added.
-- Changed text was read back as UTF-8 and checked for bilingual consistency. Format checks passed for the public Skill and the installed engineering and coordination Skills. Diff formatting, local reference targets, and scans for known private identifiers, personal paths, and host addresses passed. The installed shared rule matches the public Chinese rule. These checks validate the wording and references, not migration of active project records or measured time savings.
+- Reference 03 clarifies that facts are maintained where they belong, while other records keep their role's conclusions, boundaries, and references. Completion removes the current arrangement while preserving valid explanations and important unknowns. Frozen evidence retains its meaning at the original time; current conclusions remain editable under the existing review requirements. No templates, required metadata, or review rounds were added.
+- UTF-8 read-back, bilingual consistency, public and installed Skill format checks, local link targets, diff formatting, and scans for known private identifiers and paths passed. The changed installed paragraphs match the public Chinese paragraphs; the main Skill and installed coordination instructions still route to the shared reference. These checks validate wording and references, not automatic rereading by active conversations, project-record migration, navigation tooling, or measured time savings.
 
 ## Evidence that still applies
 
