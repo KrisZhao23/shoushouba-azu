@@ -30,7 +30,9 @@ Verify important claims that affect the current choice. Distinguish proposals, a
 
 ## Use judgment to shape design
 
-Start from user-observable outcomes and constraints that must hold. Explain how the parts cooperate rather than dividing modules by departments, directories, or terminology first. Shared constraints need coordination; genuinely independent changes need understandable places to occur. Coordination does not require a single module, and an independent place to change does not require a new interface or service.
+Establish the intended result, what counts as achieving it, and the constraints that must hold from the user's requirements and the reported problem. Once there is a candidate approach, check it against the actual usage conditions affected by this change: **could it follow its design and still fail those commitments?** Use the answer to confirm or revise the approach and how it is verified. Do not derive completion criteria from your repair checklist or what the implementation already happens to do.
+
+Explain how the parts cooperate rather than dividing modules by departments, directories, or terminology first. Shared constraints need coordination; genuinely independent changes need understandable places to occur. Coordination does not require a single module, and an independent place to change does not require a new interface or service.
 
 Reuse sufficient existing capabilities and choose the smallest complete change for the current need. A new script, abstraction, service, or process should address a concrete gap; use an existing operation directly when it is enough. Compare the costs of understanding, changing, running, failing, and replacing a design. Protect affected entry points and retain the validation required at distinct trust boundaries.
 
@@ -44,7 +46,7 @@ First identify what is changing: representation, business meaning, authoritative
 
 At the relevant boundaries, compare producers' actual guarantees with consumers' assumptions, including identity, format, defaults, versions, ordering, and failure semantics. Test examples must satisfy the real constraints of the final consumer too. Unchanged public parameters or directories alone do not prove an unchanged contract.
 
-Stop expanding in a direction when relevant consumer assumptions have proportionate support and no significant counterexample remains unaddressed. State what was not covered. If further investigation or blocking is necessary, explain which gap affects which outcome of this step. Incomplete materials alone do not justify blocking all work.
+Stop expanding in a direction when relevant consumer assumptions have proportionate support and no unresolved concrete counterexample undermines this step's commitment. New facts can reopen affected conclusions; unsupported possibilities alone do not justify further expansion. State what was not covered. If further investigation or blocking is necessary, explain which gap affects which outcome of this step. Incomplete materials alone do not justify blocking all work.
 
 See [impact and verification](references/02-impact-and-evidence.md) for evidence and stopping criteria.
 
