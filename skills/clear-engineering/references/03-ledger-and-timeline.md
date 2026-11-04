@@ -82,7 +82,7 @@ Update locations after symbol moves, check affected consumers when meaning chang
 <a id="record-updates"></a>
 ## 8. Maintenance triggers and current pending work
 
-For a small task, record the change, result, and necessary evidence in its existing task or delivery record. Update the relevant explanation when responsibilities, dependencies, state meanings, or connecting contracts are added or changed, or an explanation proves inaccurate; leave accurate content unchanged. Routine verification results belong in the task record; update an existing conclusion at its source when evidence changes it. Leave accurate entry-point links unchanged and do not create sections just to close a task.
+For a small task, record the change, result, and necessary evidence in its existing task or delivery record. Update the relevant explanation when responsibilities, dependencies, state meanings, or connecting contracts are added or changed, or an explanation proves inaccurate; leave accurate content unchanged. Update the corresponding verification conclusion and original-evidence references for the actual object and conditions. When later results change the conclusion, revise it in place rather than appending another account of how the results were obtained. Leave accurate entry-point links unchanged and do not create sections just to close a task.
 
 Promptly record unknown external effects to prevent repeated execution. Before handoff, fill only gaps that affect continuation; check the saved content and state restrictions or partial saves honestly.
 

@@ -6,6 +6,7 @@
 
 ## 当前依据
 
+- 方法修订 `CE-RECORD-IN-PLACE-20261103` 更新双语[主文](skills/clear-engineering/SKILL.zh-CN.md)和[维护说明](skills/clear-engineering/references/03-ledger-and-timeline.zh-CN.md#record-updates)：合并相关信息、原位修正说明，按实际对象与条件更新验证结论和原证引用，不按消息或操作逐条追加。独立双语差量审核未发现维护时点或证据保留边界改变。公开及本机安装 Skill 的 `quick_validate.py` 均通过；四个变更文本一致，安装版英文前置信息保留。这些检查不证明实际工作量减少或接续改善。
 - 方法修订 `CE-COMMITMENT-CHECK-20261031`（2026-10-31）更新双语[主文](skills/clear-engineering/SKILL.zh-CN.md)、[场景选择说明](skills/clear-engineering/references/01-judgment.zh-CN.md)及[虚构发布示例](skills/clear-engineering/examples/composed-publication.zh-CN.md)。关键词：原承诺、真实使用条件、反例、有限停止。修订以原需求作为判断方案的依据，并取消固定场景数量。
 - 独立双语审核发现并修正了“经过审核”与“审核通过”的歧义。公开及本机安装 Skill 的 `quick_validate.py` 均通过；六个变更文件的 UTF-8 文本一致，保留安装版入口既有的双语描述。相对链接及新增文本的私人标识检查通过。
 - 两个独立、无前文背景的情境检查使用更新后的入口：批量重命名方案因重新枚举已变化目录而违背确认预览，被否决并提出保留预览映射、处理目标名冲突；页面专用间距修改在已有充分 Chrome 证据时被接受，未扩大到无关测试。它们是虚构输入的推理检查，没有运行产品，也未与旧版 Skill 比较。
