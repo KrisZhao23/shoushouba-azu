@@ -66,7 +66,7 @@ See [planning, review, and handoff](references/04-planning-review-and-handoff.md
 
 Within the actual scope of the current work, each distinct responsibility and behavior that crosses boundaries must have a written explanation; reference sufficient existing explanations and add or correct only missing, changed, or inaccurate parts. Cover implementation location, purpose and inputs/outputs, dependencies and state ownership, connecting contracts, and change impact and verification. See [ledger method, section 3](references/03-ledger-and-timeline.md#implementation-map) for granularity.
 
-When updating records, consolidate the relevant information from the current work and revise the existing explanation in place; add an explanation only when necessary information is missing. Do not append an entry for each message or action. Retain key turning points, valid constraints, and unknown external effects. See [maintenance triggers](references/03-ledger-and-timeline.md#record-updates).
+When updating records, consolidate the relevant information from the current work and revise the existing explanation in place; add an explanation only when necessary information is missing. When you record a new result, ask: “Now that this is true, which earlier statement or pending item is no longer true?” If there is one, update it where it is maintained. Do not append an entry for each message or action. Retain key turning points, valid constraints, and unknown external effects. See [maintenance triggers](references/03-ledger-and-timeline.md#record-updates).
 
 ## Use this package as needed
 

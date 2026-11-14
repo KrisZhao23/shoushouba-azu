@@ -6,6 +6,12 @@
 
 ## 当前依据
 
+- 已读回中英文关于整份审单第一行、复审范围、操作结果、固定原件引用、单写与共写的选择、条目归属、会话 ID 和共享文档局部修改的条文，并与安装版逐段核对。仓库及本机安装版均通过 `quick_validate.py`。
+
+- 核对了[台账说明](skills/clear-engineering/references/03-ledger-and-timeline.zh-CN.md)里审核报告、交接缺口、待办、停止扩读和多人写域五处新正文。中英各五处与拟写内容一致，两份安装文本与对应仓库文本一致，三个原有锚点均保留，两处 Skill 均通过 `quick_validate.py`。
+
+- 在[主文](skills/clear-engineering/SKILL.zh-CN.md)及[台账参考](skills/clear-engineering/references/03-ledger-and-timeline.zh-CN.md#frozen-audit-records)补入两句自问，分别解释如何识别过时说明、判断证据链接能否定位当时版本。核对确认中英四处段落均保留原文，本机安装版正文一致，两处 Skill 均通过 `quick_validate.py`。
+
 - 方法修订 `CE-RECORD-IN-PLACE-20261103` 更新双语[主文](skills/clear-engineering/SKILL.zh-CN.md)和[维护说明](skills/clear-engineering/references/03-ledger-and-timeline.zh-CN.md#record-updates)：合并相关信息、原位修正说明，按实际对象与条件更新验证结论和原证引用，不按消息或操作逐条追加。独立双语差量审核未发现维护时点或证据保留边界改变。公开及本机安装 Skill 的 `quick_validate.py` 均通过；四个变更文本一致，安装版英文前置信息保留。这些检查不证明实际工作量减少或接续改善。
 - 方法修订 `CE-COMMITMENT-CHECK-20261031`（2026-10-31）更新双语[主文](skills/clear-engineering/SKILL.zh-CN.md)、[场景选择说明](skills/clear-engineering/references/01-judgment.zh-CN.md)及[虚构发布示例](skills/clear-engineering/examples/composed-publication.zh-CN.md)。关键词：原承诺、真实使用条件、反例、有限停止。修订以原需求作为判断方案的依据，并取消固定场景数量。
 - 独立双语审核发现并修正了“经过审核”与“审核通过”的歧义。公开及本机安装 Skill 的 `quick_validate.py` 均通过；六个变更文件的 UTF-8 文本一致，保留安装版入口既有的双语描述。相对链接及新增文本的私人标识检查通过。
