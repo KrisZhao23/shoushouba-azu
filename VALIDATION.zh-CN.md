@@ -6,11 +6,7 @@
 
 ## 当前依据
 
-- 已读回中英文关于整份审单第一行、复审范围、操作结果、固定原件引用、单写与共写的选择、条目归属、会话 ID 和共享文档局部修改的条文，并与安装版逐段核对。仓库及本机安装版均通过 `quick_validate.py`。
-
-- 核对了[台账说明](skills/clear-engineering/references/03-ledger-and-timeline.zh-CN.md)里审核报告、交接缺口、待办、停止扩读和多人写域五处新正文。中英各五处与拟写内容一致，两份安装文本与对应仓库文本一致，三个原有锚点均保留，两处 Skill 均通过 `quick_validate.py`。
-
-- 在[主文](skills/clear-engineering/SKILL.zh-CN.md)及[台账参考](skills/clear-engineering/references/03-ledger-and-timeline.zh-CN.md#frozen-audit-records)补入两句自问，分别解释如何识别过时说明、判断证据链接能否定位当时版本。核对确认中英四处段落均保留原文，本机安装版正文一致，两处 Skill 均通过 `quick_validate.py`。
+- 双语[主文](skills/clear-engineering/SKILL.zh-CN.md)和[台账说明](skills/clear-engineering/references/03-ledger-and-timeline.zh-CN.md#frozen-audit-records)的既有检查覆盖审单首行与复审范围、操作结果与固定原证、待办与交接缺口、停止扩读、单写与共写的选择、条目归属和会话 ID。本轮核对覆盖当前结果与后续安排、撤下失效说明、审核引用与冻结原件、哈希用途、版本比较与依据复用、部分保存失败，以及兼顾截图附件引用的局部文字修改。八个源文与安装文件的替换文字均已核对，新句无重复、被替代旧段已移除，三个原有锚点保留。源文与安装版相关正文一致，安装入口既有双语描述保留；UTF-8 读取、`git diff --check` 和两处 Skill 的 UTF-8 模式 `quick_validate.py` 均通过。具体写入工具和工程哈希范围未作规定；使用效果留待试行。
 
 - 方法修订 `CE-RECORD-IN-PLACE-20261103` 更新双语[主文](skills/clear-engineering/SKILL.zh-CN.md)和[维护说明](skills/clear-engineering/references/03-ledger-and-timeline.zh-CN.md#record-updates)：合并相关信息、原位修正说明，按实际对象与条件更新验证结论和原证引用，不按消息或操作逐条追加。独立双语差量审核未发现维护时点或证据保留边界改变。公开及本机安装 Skill 的 `quick_validate.py` 均通过；四个变更文本一致，安装版英文前置信息保留。这些检查不证明实际工作量减少或接续改善。
 - 方法修订 `CE-COMMITMENT-CHECK-20261031`（2026-10-31）更新双语[主文](skills/clear-engineering/SKILL.zh-CN.md)、[场景选择说明](skills/clear-engineering/references/01-judgment.zh-CN.md)及[虚构发布示例](skills/clear-engineering/examples/composed-publication.zh-CN.md)。关键词：原承诺、真实使用条件、反例、有限停止。修订以原需求作为判断方案的依据，并取消固定场景数量。
