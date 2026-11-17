@@ -58,7 +58,7 @@ When shared state or contracts change, examine affected existing objects, older 
 
 Verify the promised change and the behavior that must remain intact, using actual entry points and precise assertions. Select necessary rule, contract, composed-behavior, or failure checks according to risk; inspect the actual presentation when display behavior changes. Distinguish static reading from execution results. Reuse evidence while the object and relevant assumptions remain valid; do not apply old results to different conditions.
 
-At the start of a review, ask: “What did the user originally set out to do? Will the approach under review give the user the expected result?” Before investigating another concern, ask: “If this concern is valid, which step in the original task would go wrong? What fact connects the concern to that step?”
+At the start of a review, ask: “What did the user originally set out to do? Will the approach under review give the user the expected result?” Before investigating another concern, ask: “If this concern is valid, which step in the original task would go wrong? What fact connects the concern to that step?” When recording a pass, ask: “Have I said exactly what passed? Can the reader tell where my check began and where it ended?”
 
 Review whether the step is necessary, whether the dependency order is valid, and what state failure would leave before examining implementation and evidence. Locally correct code may expose a flaw in the original plan. If shared assumptions change, adjust affected plans rather than retaining invalid assumptions.
 
