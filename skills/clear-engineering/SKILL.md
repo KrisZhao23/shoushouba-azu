@@ -58,6 +58,8 @@ When shared state or contracts change, examine affected existing objects, older 
 
 Verify the promised change and the behavior that must remain intact, using actual entry points and precise assertions. Select necessary rule, contract, composed-behavior, or failure checks according to risk; inspect the actual presentation when display behavior changes. Distinguish static reading from execution results. Reuse evidence while the object and relevant assumptions remain valid; do not apply old results to different conditions.
 
+At the start of a review, ask: “What did the user originally set out to do? Will the current approach give them the result they need?” Before investigating another concern, ask: “If this concern is valid, which step in the original task would go wrong? What fact connects the concern to that step?”
+
 Review whether the step is necessary, whether the dependency order is valid, and what state failure would leave before examining implementation and evidence. Locally correct code may expose a flaw in the original plan. If shared assumptions change, adjust affected plans rather than retaining invalid assumptions.
 
 See [planning, review, and handoff](references/04-planning-review-and-handoff.md) for responsibilities.
