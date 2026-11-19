@@ -8,6 +8,8 @@ Use this handbook when work requires coordinating multiple tasks, participants, 
 
 Establish the current goal, accepted sequence, authorization, and stopping point. Distinguish completed, independent, and dependent work. Establish prerequisites and verification methods before an operation; obtain its result evidence afterward.
 
+Before agreeing to a proposal, if you are still unclear about what it will actually do, ask, “Which specific step will we use it for? When we use it, what else will it do?” If the existing explanation answers that, compare it with what was agreed. If it does not, look at the step in the proposed call that is still unclear before deciding.
+
 When assigning work, provide the required outcome, scope, necessary evidence, available resources, and stopping boundaries. Reuse existing tasks and understanding when they still apply. Participants must be able to access the relevant basis for the work; do not assume other chats, tools, or services inherit the local context.
 
 For changes across boundaries, link the relevant implementation explanations and identify who updates the affected relationships. Use [reference 03, section 3](../skills/clear-engineering/references/03-ledger-and-timeline.md#implementation-map) instead of copying them into each assignment.
